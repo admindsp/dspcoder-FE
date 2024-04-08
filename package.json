@@ -1,6 +1,10 @@
 {
   "name": "DSPCoder-Turbo",
   "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
