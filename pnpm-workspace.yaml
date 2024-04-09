@@ -1,4 +1,4 @@
 packages:
   - "apps/*"
   - "packages/*"
-  - "django-server/*"
+  - "server/*"
