@@ -1,12 +1,11 @@
-# DSPCoder 
+# DSPCoder
 
-:3 :3 
-
+:3 :3
 
 # TO-DO:
+
 - Build the basic first page
 - Bring in the online compiler to the platform
-
 
 ### Apps and Packages
 
@@ -17,7 +16,6 @@
 - `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
 
 ### Build
 
@@ -51,5 +49,7 @@ npx turbo login
 This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
 
 Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+
+```
 
 ```

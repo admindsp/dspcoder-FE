@@ -10,7 +10,7 @@ const CodeEditor = (props: Props) => {
       <Editor
         className="border border-gray-500"
         height="50vh"
-        defaultLanguage="cpp"
+        defaultLanguage="javascript"
         defaultValue="// some comment"
       />
     </div>
