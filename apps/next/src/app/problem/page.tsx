@@ -1,5 +1,5 @@
 import React from "react";
-import CodeEditor from "../components/CodeEditor/CodeEditor";
+import CodeEditor from "@/components/CodeEditor/CodeEditor";
 
 type Props = {};
 

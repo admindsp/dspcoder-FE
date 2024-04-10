@@ -1,10 +1,11 @@
 {
-  "name": "DSPCoder-Turbo",
+  "name": "@dspcoder",
   "private": true,
   "workspaces": [
     "packages/*",
     "apps/*",
-    "server/*"
+    "server/*",
+    "tooling/*"
   ],
   "scripts": {
     "build": "turbo build",
@@ -13,12 +14,9 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
-    "autoprefixer": "^10.4.19",
-    "postcss": "^8.4.38",
+    "@dspcoder/eslint-config": "workspace:*",
+    "@dspcoder/tsconfig": "workspace:*",
     "prettier": "^3.2.5",
-    "tailwindcss": "^3.4.3",
     "turbo": "latest"
   },
   "packageManager": "pnpm@8.9.0",
