@@ -1,0 +1,40 @@
+{
+  "name": "@dspcoder/logger",
+  "private": true,
+  "version": "0.1.0",
+  "exports": {
+    ".": "./index.ts",
+    "./server": "./index.server.ts",
+    "./client": "./index.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "src/*"
+      ]
+    }
+  },
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules",
+    "lint": "eslint .",
+    "format": "prettier --check \"**/*.{mjs,ts,md,json}\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "@dspcoder/eslint-config": "workspace:*",
+    "@dspcoder/prettier-config": "workspace:*",
+    "@dspcoder/tsconfig": "workspace:*",
+    "eslint": "^8.50.0",
+    "typescript": "^5.2.2"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@dspcoder/eslint-config/base"
+    ]
+  },
+  "prettier": "@dspcoder/prettier-config"
+}
