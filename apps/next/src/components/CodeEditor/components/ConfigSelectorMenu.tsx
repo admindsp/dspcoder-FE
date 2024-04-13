@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import LANGUAGE_VERSIONS from "../constants";
 
 type Props = {

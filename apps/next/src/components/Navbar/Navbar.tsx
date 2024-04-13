@@ -1,15 +1,20 @@
 import Link from "next/link";
 import React from "react";
+import CgProfile from "@dspcoder/ui/icons";
 
 type Props = {};
 
 const Navbar = (props: Props) => {
   return (
-    <div className="bg-[#1d241d] py-2 text-white px-2 flex gap-10">
+    <div className="bg-[#1e1031] py-3 text-white px-4 flex gap-10">
       <Link href="/">DSPCoder</Link>
-      <div className="flex justify-between w-full">
+      <div className="flex justify-between w-full items-center">
         <Link href="/problem">Problems</Link>
-        <div>icons</div>
+        <div className="icons">
+          <Link href={"/"}>
+            <CgProfile className="scale-125" />
+          </Link>
+        </div>
       </div>
     </div>
   );
