@@ -19,7 +19,7 @@ const CodeEditor = (props: Props) => {
   };
 
   return (
-    <div className="w-full min-w-[400px]">
+    <div className="w-full min-w-[400px] px-1">
       <div>
         <ConfigSelectorMenu
           selectedLanguage={selectedLanguage}
@@ -27,7 +27,7 @@ const CodeEditor = (props: Props) => {
           setValue={setValue}
         />
         <Editor
-          className="border border-t-0 border-gray-700 h-[50vh]  mb-0 pb-0"
+          className="border border-t-0 border-gray-700 h-[50vh] mb-0 pb-0"
           theme="vs-dark"
           language={selectedLanguage}
           value={value}
