@@ -5,8 +5,8 @@ type Props = {};
 
 const Problem = (props: Props) => {
   return (
-    <div className="flex justify-between">
-      <div className="w-full min-w-[400px]">Problem Description</div>
+    <div className="flex flex-col md:flex-row justify-between">
+      <div className="w-[55%] min-w-[400px]">Problem Description</div>
       <CodeEditor />
     </div>
   );

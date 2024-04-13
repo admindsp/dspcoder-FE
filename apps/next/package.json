@@ -9,19 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@monaco-editor/react": "^4.6.0",
-    "@dspcoder/ui": "workspace:*",
     "@dspcoder/tailwind-config": "workspace:*",
+    "@dspcoder/ui": "workspace:*",
+    "@monaco-editor/react": "^4.6.0",
+    "axios": "^1.6.8",
     "next": "14.1.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-spinners": "^0.13.8"
   },
   "devDependencies": {
+    "@dspcoder/eslint-config": "workspace:*",
+    "@dspcoder/prettier-config": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "@dspcoder/eslint-config": "workspace:*",
-    "@dspcoder/prettier-config": "workspace:*",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
     "typescript": "^5"
