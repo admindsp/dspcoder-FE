@@ -55,13 +55,13 @@ const CodeOutput = ({ editorRef, language }: Props) => {
       </div>
       <div className="output-window bg-slate-100 h-full text-sm">
         <p className="font-bold px-2 py-1">STDOUT</p>
-        <div className="stdout bg-stone-100 border border-gray-400 border-opacity-60 h-20 px-2 py-2 text-wrap overflow-y-scroll">
+        <div className="stdout bg-stone-100 border border-gray-400 border-opacity-60 h-20 px-2 py-2 text-wrap overflow-y-scroll rounded">
           {stdout}
         </div>
       </div>
       <div className="output-window bg-slate-100 h-full text-sm">
         <p className="font-bold px-2 py-1">Code Output</p>
-        <div className="output bg-stone-100 border border-gray-400 border-opacity-60 h-20 px-2 py-2 text-wrap overflow-y-scroll">
+        <div className="output bg-stone-100 border border-gray-400 border-opacity-60 h-20 px-2 py-2 text-wrap overflow-y-scroll rounded">
           {stderr ? stderr : output}
         </div>
       </div>
