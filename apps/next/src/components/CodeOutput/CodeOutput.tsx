@@ -1,6 +1,5 @@
 "use client";
 import { executeCode } from "@/api/executeCode";
-import { LANGUAGE_VERSIONS } from "@/constants/constants";
 import React, { MutableRefObject, use, useState } from "react";
 import { ClipLoader } from "react-spinners";
 
@@ -28,7 +27,7 @@ const CodeOutput = ({ editorRef, language }: Props) => {
       if (result?.output) setOutput(result.output);
       if (result?.stderr) setStderr(result.stderr);
     } catch (error) {
-      console.log(error);
+      //   console.log(error);
       alert("Error");
     } finally {
       setIsLoading(false);
@@ -55,15 +54,15 @@ const CodeOutput = ({ editorRef, language }: Props) => {
       </div>
       <div className="output-window bg-slate-100 h-full text-sm">
         <p className="font-bold px-2 py-1">STDOUT</p>
-        <div className="stdout bg-stone-100 border border-gray-400 border-opacity-60 h-20 px-2 py-2 text-wrap overflow-y-scroll rounded">
+        <pre className="stdout bg-stone-100 border border-gray-400 border-opacity-60 h-20 px-2 py-2 text-wrap overflow-y-scroll rounded">
           {stdout}
-        </div>
+        </pre>
       </div>
       <div className="output-window bg-slate-100 h-full text-sm">
         <p className="font-bold px-2 py-1">Code Output</p>
-        <div className="output bg-stone-100 border border-gray-400 border-opacity-60 h-20 px-2 py-2 text-wrap overflow-y-scroll rounded">
+        <pre className="output bg-stone-100 border border-gray-400 border-opacity-60 h-20 px-2 py-2 text-wrap overflow-y-scroll rounded">
           {stderr ? stderr : output}
-        </div>
+        </pre>
       </div>
     </div>
   );
