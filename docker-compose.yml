@@ -1,0 +1,12 @@
+version: "3.7"
+
+services:
+  # Define the app service
+  next:
+    context: .
+    build: .
+    dockerfile: ./apps/next/Dockerfile
+    ports:
+      - "3000:300"
+    volumes:
+      - .:/app
