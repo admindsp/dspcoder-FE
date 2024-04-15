@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "@dspcoder/tailwind-config/globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 
 export const metadata: Metadata = {

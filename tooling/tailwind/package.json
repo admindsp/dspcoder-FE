@@ -2,39 +2,17 @@
   "name": "@dspcoder/tailwind-config",
   "version": "0.1.0",
   "private": true,
-  "main": "index.js",
-  "license": "MIT",
-  "files": [
-    "index.js",
-    "postcss.js"
-  ],
   "exports": {
-    ".": "./index.js",
-    "./postcss": "./postcss.js"
-  },
-  "scripts": {
-    "clean": "rm -rf .turbo node_modules",
-    "format": "prettier --check \"**/*.{mjs,ts,md,json}\"",
-    "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "autoprefixer": "^10.4.16",
-    "postcss": "8.4.31",
-    "postcss-import": "^15.1.0",
-    "postcss-nested": "^6.0.1",
-    "tailwindcss": "3.3.2"
+    "./tailwind.config.js": "./tailwind.config.js",
+    "./postcss.config.js": "./postcss.config.js",
+    "./globals.css":"./globals.css"
   },
   "devDependencies": {
-    "@dspcoder/eslint-config": "workspace:*",
-    "@dspcoder/prettier-config": "workspace:*",
-    "@dspcoder/tsconfig": "workspace:*",
-    "eslint": "^8.50.0",
-    "prettier": "^3.0.3",
-    "tailwindcss-animate": "^1.0.7",
-    "typescript": "^5.2.2"
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3"
   },
-  "prettier": "@dspcoder/prettier-config",
-  "volta": {
-    "extends": "../../package.json"
+  "dependencies": {
+    "tailwindcss-animate": "^1.0.7"
   }
 }
