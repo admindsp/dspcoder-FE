@@ -35,7 +35,7 @@ const CodeEditor = (props: Props) => {
             CODE_SNIPPETS[selectedLanguage as keyof typeof CODE_SNIPPETS]
           }
           onMount={onMount}
-          onChange={(value) => setValue(value || "")}
+          onChange={(value: any) => setValue(value || "")}
         />
       </div>
 
