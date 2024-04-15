@@ -1,5 +1,5 @@
 {
-  "extends": "@wakefit/tsconfig/base.json",
+  "extends": "@dspcoder/tsconfig/base.json",
   "compilerOptions": {
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
   },
