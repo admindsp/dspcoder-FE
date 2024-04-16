@@ -4,12 +4,11 @@
   "private": true,
   "files": [
     "tailwind.config.js",
-    "postcss.config.js",
-    "globals.css"],
+    "postcss.config.js"
+  ],
   "exports": {
     "./tailwind.config.js": "./tailwind.config.js",
-    "./postcss.config.js": "./postcss.config.js",
-    "./globals.css":"./globals.css"
+    "./postcss.config.js": "./postcss.config.js"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
