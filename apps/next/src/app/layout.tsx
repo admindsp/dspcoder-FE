@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import "@dspcoder/tailwind-config/globals.css";
 import Navbar from "@/components/Navbar/Navbar";
+import "@dspcoder/ui/globals.css";
 
 export const metadata: Metadata = {
   title: "DSPCoder",

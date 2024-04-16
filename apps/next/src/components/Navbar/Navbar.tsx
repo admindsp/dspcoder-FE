@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import CgProfile from "@dspcoder/ui/icons";
+import { CgProfile } from "react-icons/cg";
 
 type Props = {};
 
