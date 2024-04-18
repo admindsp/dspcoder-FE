@@ -1,12 +1,18 @@
-version: "3.7"
+version: "3.8"
 
 services:
-  # Define the app service
-  next:
-    context: .
-    build: .
-    dockerfile: ./apps/next/Dockerfile
+  # Django service (if needed)
+  dspserver:
+    build: server/DSPserver
     ports:
-      - "3000:300"
+      - "8000:8000"
     volumes:
-      - .:/app
+      - ./server/DSPserver:/app
+
+  # Next.js service (if needed)
+  nextjs:
+    build: apps/next
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./apps/next:/app
