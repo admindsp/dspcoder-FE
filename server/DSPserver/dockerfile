@@ -1,0 +1,10 @@
+FROM python:3.9 
+WORKDIR /app
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+RUN npm install
+COPY . .
+CMD [ "python", "manage.py", "runserver"]
