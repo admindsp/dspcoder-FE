@@ -12,7 +12,7 @@ const Navbar = (props: Props) => {
         <Link href="/problem">Problems</Link>
         <div className="icons">
           <Link href={"/"}>
-            <CgProfile className="scale-125" />
+            <CgProfile className="scale-150" />
           </Link>
         </div>
       </div>
