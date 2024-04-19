@@ -9,7 +9,7 @@ const Home = (props: Props) => {
       <div className="border-b-2 border-spacing-2 border-gray-200 px-4 py-4 ">
         <HomeCards />
       </div>
-      <div className="w-full">Dashboard test</div>
+      <div className="w-full">Dashboard</div>
     </div>
   );
 };
