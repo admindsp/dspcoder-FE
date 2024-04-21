@@ -39,4 +39,3 @@ yarn-error.log*
 
 db.sqlite3
 
-__pycache__/

@@ -1,8 +1,8 @@
 {
-  "name": "@dspcoder/user_mangement_service",
+  "name": "@dspcoder/user_management_service",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "python manage.py runserver"
+    "dev": "python manage.py runserver 8000"
   }
 }
