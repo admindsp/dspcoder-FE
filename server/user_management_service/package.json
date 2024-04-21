@@ -1,0 +1,8 @@
+{
+  "name": "@dspcoder/user_mangement_service",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "python manage.py runserver"
+  }
+}
