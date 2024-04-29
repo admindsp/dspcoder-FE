@@ -3,7 +3,7 @@ import React from "react";
 type Props = {};
 
 const HomeCards = (props: Props) => {
-  return <div>HomeCards</div>;
+  return <div className="h-80">HomeCards</div>;
 };
 
 export default HomeCards;
