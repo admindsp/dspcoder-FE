@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar/Navbar";
 import "@dspcoder/ui/globals.css";
+import Footer from "@/components/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "DSPCoder",
@@ -13,10 +14,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body>
         <Navbar />
-        {children}
+        <div className="dark:bg-[#1e1e1e] dark:text-white">{children}</div>
+        <Footer />
       </body>
     </html>
   );

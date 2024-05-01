@@ -17,6 +17,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.0.1",
+    "react-simple-typewriter": "^5.0.1",
     "react-spinners": "^0.13.8",
     "tailwind-merge": "^1.14.0",
     "tailwind-variants": "^0.2.1",

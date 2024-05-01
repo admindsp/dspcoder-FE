@@ -1,17 +1,14 @@
 import HomeCards from "@/components/HomeCards/HomeCards";
 import React from "react";
+import HomePageTitle from "./HomePageTitle/HomePageTitle";
 
 type Props = {};
 
 const Home = (props: Props) => {
-  const dynamicStrings = [
-    "selected DSA Questions.",
-    "Embedded System Questions.",
-  ];
   return (
-    <div className="bg-[#1e1e1e] text-white">
-      <div className="px-4 py-4 ">
-        <HomeCards />
+    <div className="h-screen p-4">
+      <div className="">
+        <HomePageTitle />
       </div>
       <div className="w-full">Dashboard</div>
     </div>

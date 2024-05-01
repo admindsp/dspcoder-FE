@@ -13,7 +13,7 @@ mongoose.connect(process.env.MONGO_URI, {
 
 app.use(bodyParser.json());
 
-app.get("/", async (req, res) => {
+app.get("/xyz", async (req, res) => {
   try {
     res.status(200).json({ message: "CHOLCHE" });
   } catch (error) {
