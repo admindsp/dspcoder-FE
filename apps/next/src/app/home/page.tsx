@@ -1,4 +1,3 @@
-import HomeCards from "@/components/HomeCards/HomeCards";
 import React from "react";
 import HomePageTitle from "./HomePageTitle/HomePageTitle";
 
@@ -10,7 +9,6 @@ const Home = (props: Props) => {
       <div className="">
         <HomePageTitle />
       </div>
-      <div className="w-full">Dashboard</div>
     </div>
   );
 };
