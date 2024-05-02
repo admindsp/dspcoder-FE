@@ -38,7 +38,7 @@ const CodeOutput = ({ editorRef, language }: Props) => {
     <div className="flex flex-col gap-2 pr-2 my-2">
       <div className="flex justify-end items-center gap-3 transition-all">
         <button
-          className=" transition-all hover:bg-gray-100 min-w-24 text-black border border-gray-500 h-8 px-4 py-1 rounded"
+          className=" transition-all hover:bg-black min-w-24 border border-gray-500 h-8 px-4 py-1 rounded "
           onClick={runCode}
         >
           {isLoading ? <ClipLoader color="#00000" size="20" /> : "Run"}
@@ -53,14 +53,14 @@ const CodeOutput = ({ editorRef, language }: Props) => {
         </button>
       </div>
       <div className="output-window bg-slate-100 h-full text-sm">
-        <p className="font-bold px-2 py-1">STDOUT</p>
-        <pre className="stdout bg-stone-100 border border-gray-400 border-opacity-60 h-20 px-2 py-2 text-wrap overflow-y-scroll rounded">
+        <p className="font-bold px-2 py-1 text-black">STDOUT</p>
+        <pre className="stdout bg-stone-100 border border-gray-400 border-opacity-60 h-20 px-2 py-2 text-wrap overflow-y-scroll rounded text-black">
           {stdout}
         </pre>
       </div>
       <div className="output-window bg-slate-100 h-full text-sm">
-        <p className="font-bold px-2 py-1">Code Output</p>
-        <pre className="output bg-stone-100 border border-gray-400 border-opacity-60 h-20 px-2 py-2 text-wrap overflow-y-scroll rounded">
+        <p className="font-bold px-2 py-1 text-black">CODE OUTPUT</p>
+        <pre className="output bg-stone-100 border border-gray-400 border-opacity-60 h-20 px-2 py-2 text-wrap overflow-y-scroll rounded text-black">
           {stderr ? stderr : output}
         </pre>
       </div>

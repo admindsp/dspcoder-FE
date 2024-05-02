@@ -17,7 +17,9 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body>
         <Navbar />
-        <div className="dark:bg-darkish dark:text-white">{children}</div>
+        <div className="dark:bg-darkish dark:text-white text-black bg-[#c5c5c5]">
+          {children}
+        </div>
         <Footer />
       </body>
     </html>

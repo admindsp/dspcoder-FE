@@ -5,10 +5,8 @@ type Props = {};
 
 const Problem = (props: Props) => {
   return (
-    <div className="flex flex-col md:flex-row justify-between">
-      <div className="min-w-[400px] border-r-2 border-opacity-45">
-        Problem Description
-      </div>
+    <div className="flex flex-col md:flex-row justify-between h-screen">
+      <div className="min-w-[400px]  bg-darkish">Problem Description</div>
       <CodeEditor />
     </div>
   );
