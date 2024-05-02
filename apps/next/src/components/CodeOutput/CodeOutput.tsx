@@ -38,7 +38,7 @@ const CodeOutput = ({ editorRef, language }: Props) => {
     <div className="flex flex-col gap-2 pr-2 my-2">
       <div className="flex justify-end items-center gap-3 transition-all">
         <button
-          className=" transition-all hover:bg-black min-w-24 border border-gray-500 h-8 px-4 py-1 rounded "
+          className=" transition-all bg-green-600 text-white hover:bg-green-800 min-w-24 border border-gray-500 h-8 px-4 py-1 rounded "
           onClick={runCode}
         >
           {isLoading ? <ClipLoader color="#00000" size="20" /> : "Run"}
