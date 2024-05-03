@@ -1,8 +1,9 @@
 "use client";
+
 import React from "react";
 import { Typewriter } from "react-simple-typewriter";
-import homepagelottie from "../../../../public/Lotties/HomePageTitleLottie.json";
-
+import Lottie from "lottie-react";
+import homepageRobot from "../../../../public/Lotties/HomepageRobot.json";
 type Props = {};
 
 const HomePageTitle = (props: Props) => {
@@ -11,16 +12,20 @@ const HomePageTitle = (props: Props) => {
     "Selected DSA Questions.",
   ];
   return (
-    <div className="h-80 flex justify-between">
-      <div className="font-bold text-xl flex justify-center items-center">
-        <p className="w-1/2 text-3xl">
-          Elevate Your Embedded Programming: Dive into Engaging Problems,
-          Elevate Your Skills!
-        </p>
+    <div className="min-h-80 flex flex-col md:flex-row  justify-between items-center">
+      <div className=" w-full md:w-3/4">
+        <div className="font-bold text-xl flex flex-col justify-center w-3/4 mx-auto mt-12">
+          <p className="text-4xl">Coding platform for</p>
+          <p className="text-5xl w-full">Embedded Systems Interviews</p>
+          <p className="mt-12 text-gray-400 w-full md:w-3/4">
+            Practice company wise and topic wise questions along with firmware
+            design, RTOS, Drivers and much more
+          </p>
+        </div>
       </div>
-      <div className="font-bold w-3/4 text-xl flex justify-center items-center">
-        {/* <Lottie options={{ animationData: { homepagelottie } }} /> */}
-        <div className="text-center">
+      <div className="font-bold w-full md:w-2/4 text-xl flex flex-col justify-center items-center">
+        <Lottie animationData={homepageRobot} />
+        <div className="">
           Practice{" "}
           <span className="text-yellow-600">
             <Typewriter words={dynamicStrings} loop={false} />
