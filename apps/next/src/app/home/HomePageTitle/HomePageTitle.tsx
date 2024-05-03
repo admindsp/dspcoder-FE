@@ -24,7 +24,7 @@ const HomePageTitle = (props: Props) => {
         </div>
       </div>
       <div className="font-bold w-full md:w-2/4 text-xl flex flex-col justify-center items-center">
-        <Lottie animationData={homepageRobot} />
+        <Lottie className="w-[525px]" animationData={homepageRobot} />
         <div className="">
           Practice{" "}
           <span className="text-yellow-600">
