@@ -37,10 +37,26 @@ const Navbar = (props: Props) => {
           Problems
         </Link>
         <div className="icons">
-          <button className="flex items-center justify-center gap-2 px-2 py-1 bg-purple-700 rounded-md font-semibold text-sm hover:bg-purple-800 transition-all">
-            Sign In
-            {/* <CgProfile className="scale-150" /> */}
-          </button>
+          <Dialog>
+            <DialogTrigger className="flex items-center justify-center gap-2 px-2 py-1 bg-purple-700 rounded-md font-semibold text-sm hover:bg-purple-800 transition-all">
+              Sign In
+            </DialogTrigger>
+            <DialogContent className="bg-darkish">
+              <DialogHeader>
+                <DialogTitle>Sign Up / Sign In</DialogTitle>
+                <form className="flex flex-col gap-3">
+                  <input type="email"></input>
+                  <input type="password"></input>
+                  <button
+                    type="submit"
+                    className="bg-red-500 px-2 py-1 rounded"
+                  >
+                    Sign Up
+                  </button>
+                </form>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </div>
