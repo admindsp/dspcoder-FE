@@ -4,8 +4,7 @@
   "workspaces": [
     "packages/*",
     "apps/*",
-    "server/*",
-    "tooling/*"
+    "server/*"
   ],
   "scripts": {
     "build": "turbo build",
@@ -15,7 +14,7 @@
   },
   "devDependencies": {
     "@dspcoder/eslint-config": "workspace:*",
-    "@dspcoder/tsconfig": "workspace:*",
+    "@dspcoder/typescript-config": "workspace:*",
     "prettier": "^3.2.5",
     "turbo": "latest"
   },

@@ -4,6 +4,7 @@ import React from "react";
 import { Typewriter } from "react-simple-typewriter";
 import Lottie from "lottie-react";
 import homepageRobot from "../../../../public/Lotties/HomepageRobot.json";
+
 type Props = {};
 
 const HomePageTitle = (props: Props) => {

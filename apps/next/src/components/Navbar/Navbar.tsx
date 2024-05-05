@@ -1,9 +1,18 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { CgProfile } from "react-icons/cg";
+
 import DSPCoder from "../../../public/DSPCoder.svg";
 import Image from "next/image";
+import { Button } from "@dspcoder/ui/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@dspcoder/ui/components/ui/dialog";
 
 type Props = {};
 
@@ -30,7 +39,7 @@ const Navbar = (props: Props) => {
         <div className="icons">
           <button className="flex items-center justify-center gap-2 px-2 py-1 bg-purple-700 rounded-md font-semibold text-sm hover:bg-purple-800 transition-all">
             Sign In
-            <CgProfile className="scale-150" />
+            {/* <CgProfile className="scale-150" /> */}
           </button>
         </div>
       </div>
