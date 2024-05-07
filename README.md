@@ -1,55 +1,17 @@
-# DSPCoder
+## Local Project Setup
 
-:3 :3
+- Install Node v21.7.3 (https://nodejs.org/en/download) (See guide for setting up in windows/linux/macosx)
+- Install PNPM 8.15.7 (https://pnpm.io/installation) `npm install -g pnpm`
+- Install Python 3.12.3 (https://www.python.org/downloads/)
+- Verify if pip has been installed and it is pip > 24.0. if not install or upgrade it. (https://pip.pypa.io/en/stable/installation/)
+- Open repository root folder. You can see a package.json file there. Open a TERMINAL here and enter the following command. `pnpm install`
+- Open repository root folder. Go inside server directory. You can see a requirements.txt file there. Open TERMINAL in this directory and write the following command: `pip install -r requirements.txt or pip3 install -r requirements.txt`
+- create/update a ".env" file in root dir and server/problem_management_service dir and set parameters for connections
+  (there is a sample .env.sample file where actually parameters need to be set)
+- Go back to root folder, type the following command: `pnpm run dev`
 
-# TO-DO:
+## DOCKER Setup
 
-- Build the basic first page
-- Bring in the online compiler to the platform
+-- TBD
 
-### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-
-```
