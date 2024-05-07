@@ -4,7 +4,7 @@ import React from "react";
 
 import DSPCoder from "../../../public/DSPCoder.svg";
 import Image from "next/image";
-import { Button } from "@dspcoder/ui/components/ui/button";
+
 import {
   Dialog,
   DialogContent,
