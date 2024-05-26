@@ -31,7 +31,7 @@ const Navbar = (props: Props) => {
 
       <div className="flex justify-between w-full items-center">
         <Link
-          href="/problem"
+          href="/problems"
           className="font-sans font-semibold hover:text-gray-300 transition-all"
         >
           Problems

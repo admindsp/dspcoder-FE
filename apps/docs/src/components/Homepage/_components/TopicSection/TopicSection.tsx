@@ -30,14 +30,21 @@ const TopicSection: React.FC<Props> = () => {
 
   return (
     <div className="w-[30%] px-2">
-      <Accordion type="single" collapsible>
+      <Accordion type="single" collapsible defaultValue="item-0">
         {topics.map((topic, topicIndex) => (
-          <AccordionItem key={topic._id} value={`item-${topicIndex}`}>
+          <AccordionItem
+            key={topic._id}
+            value={`item-${topicIndex}`}
+            className="text-lg"
+          >
             <AccordionTrigger>{topic.name}</AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="list-decimal list-item">
               {topic.subtopics.map(
                 (subtopic: Subtopic, subtopicIndex: number) => (
-                  <div key={subtopicIndex}>
+                  <div
+                    key={subtopicIndex}
+                    className="text-base py-1 list-item list-decimal"
+                  >
                     <h3>{subtopic.name}</h3>
                   </div>
                 )
