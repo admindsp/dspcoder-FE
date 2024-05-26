@@ -1,6 +1,8 @@
-from django.contrib import admin
-from django.urls import path
+
+from django.urls import re_path
+from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    re_path('api/login', views.login),
+    re_path('api/signup', views.login)
 ]
