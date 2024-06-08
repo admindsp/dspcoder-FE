@@ -17,8 +17,8 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body>
         <Navbar />
-        <div className="dark:bg-darkish dark:text-white text-black bg-[#c5c5c5]">
-          {children}
+        <div className="dark:bg-darkish dark:text-white text-black bg-[#c5c5c5] min-h-screen flex flex-col">
+          <div className="w-[80%] mx-auto flex-grow">{children}</div>
         </div>
         <Footer />
       </body>

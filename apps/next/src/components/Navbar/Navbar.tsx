@@ -19,11 +19,11 @@ type Props = {};
 const Navbar = (props: Props) => {
   return (
     <div className="bg-[#2b2b2b] py-2 text-white px-4 flex gap-6 overflow-hidden max-h-16">
-      <div className="w-24 relative">
+      <div className="w-24 flex justify-center items-center object-contain">
         <Link href="/">
           <Image
             src={DSPCoder}
-            className="absolute max-w-28 -top-[43px] -left-4 hover:scale-105 transition-all"
+            className="max-w-28  hover:scale-105 transition-all"
             alt="logo"
           ></Image>
         </Link>
