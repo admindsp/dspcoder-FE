@@ -9,9 +9,9 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
-    "@dspcoder/ui": "workspace:*",
     "@dspcoder/nextauth": "workspace:*",
     "@dspcoder/prisma": "workspace:*",
+    "@dspcoder/ui": "workspace:*",
     "@monaco-editor/react": "^4.6.0",
     "@tanstack/react-query": "^5.39.0",
     "axios": "^1.6.8",
@@ -19,6 +19,7 @@
     "next": "^14.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.51.5",
     "react-simple-typewriter": "^5.0.1",
     "react-spinners": "^0.13.8"
   },
