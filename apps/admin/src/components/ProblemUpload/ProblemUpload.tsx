@@ -14,7 +14,7 @@ type ProblemFormInputs = {
   description: string;
   difficulty: string;
   questionType: string;
-  keywords?: string[];
+  keywords: string[];
   questionImages?: FileList;
   examples: Example[];
 };
@@ -29,6 +29,7 @@ const ProblemUpload: React.FC = () => {
   } = useForm<ProblemFormInputs>({
     defaultValues: {
       examples: [{ input: "", output: "", image: undefined }],
+      keywords: [""],
     },
   });
 
