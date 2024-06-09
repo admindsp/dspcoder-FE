@@ -1,26 +1,52 @@
-require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+const multer = require("multer");
+const cors = require("cors");
+const dbConnect = require("./utils/dbConnect");
+const Problem = require("./models/Problem");
 
 const app = express();
-const port = 8001;
+const PORT = process.env.PORT || 5000;
 
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+app.use(cors());
+app.use(express.json());
 
-app.use(bodyParser.json());
+dbConnect();
 
-app.get("/xyz", async (req, res) => {
-  try {
-    res.status(200).json({ message: "CHOLCHE" });
-  } catch (error) {
-    res.status(500).json({ message: "GG" });
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+app.post(
+  "/api/upload",
+  upload.fields([{ name: "questionImages" }, { name: "examples[].image" }]),
+  async (req, res) => {
+    try {
+      const data = req.body;
+      const files = req.files;
+
+      const problem = new Problem({
+        title: data.title,
+        description: data.description,
+        difficulty: data.difficulty,
+        questionType: data.questionType,
+        keywords: data.keywords || [],
+        questionImages: files["questionImages"] || [],
+        examples: data.examples.map((example, index) => ({
+          input: example.input,
+          output: example.output,
+          image: files[`examples[${index}].image`] || [],
+        })),
+      });
+      console.log(problem);
+      await problem.save();
+      res.status(200).json({ message: "Problem uploaded successfully" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Server error" });
+    }
   }
-});
+);
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
