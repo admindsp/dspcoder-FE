@@ -1,18 +1,14 @@
-version: "3.8"
-
 services:
-  # Django service (if needed)
-  dspserver:
-    build: server/DSPserver
-    ports:
-      - "8000:8000"
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: dspcoder
+      POSTGRES_PASSWORD: dspcoder
+      POSTGRES_DB: dspcoder
     volumes:
-      - ./server/DSPserver:/app
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
-  # Next.js service (if needed)
-  nextjs:
-    build: apps/next
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./apps/next:/app
+volumes:
+  postgres-data:
