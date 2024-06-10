@@ -14,7 +14,7 @@ type ProblemFormInputs = {
   description: string;
   difficulty: string;
   questionType: string;
-  keywords: string[];
+  keywords?: string[];
   questionImages?: FileList;
   examples: Example[];
 };
@@ -44,7 +44,7 @@ const ProblemUpload: React.FC = () => {
     remove: removeKeyword,
   } = useFieldArray({
     control,
-    name: "keywords",
+    name: "examples",
   });
 
   const onSubmit: SubmitHandler<ProblemFormInputs> = async (data) => {
