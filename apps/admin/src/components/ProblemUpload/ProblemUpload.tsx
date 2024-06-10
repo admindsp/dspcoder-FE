@@ -220,7 +220,7 @@ const ProblemUpload: React.FC = () => {
             </div>
             <button
               type="button"
-              onClick={() => appendKeyword("")}
+              onClick={() => appendKeyword({ input: "", output: "" })}
               className="mt-2 bg-green-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
             >
               Add Keyword
@@ -258,7 +258,7 @@ const ProblemUpload: React.FC = () => {
                       Example Input
                     </label>
                     <textarea
-                      {...register(`examples[${index}].input`, {
+                      {...register(`examples.${index}.input`, {
                         required: "Input is required",
                       })}
                       id={`examples[${index}].input`}
@@ -266,7 +266,7 @@ const ProblemUpload: React.FC = () => {
                     />
                     {errors.examples?.[index]?.input && (
                       <span className="text-red-500 text-sm">
-                        {errors.examples[index].input?.message}
+                        {errors?.examples[index]?.input?.message}
                       </span>
                     )}
                   </div>
@@ -279,7 +279,7 @@ const ProblemUpload: React.FC = () => {
                       Example Output
                     </label>
                     <textarea
-                      {...register(`examples[${index}].output`, {
+                      {...register(`examples.${index}.output`, {
                         required: "Output is required",
                       })}
                       id={`examples[${index}].output`}
@@ -287,7 +287,7 @@ const ProblemUpload: React.FC = () => {
                     />
                     {errors.examples?.[index]?.output && (
                       <span className="text-red-500 text-sm">
-                        {errors.examples[index].output?.message}
+                        {errors?.examples[index]?.output?.message}
                       </span>
                     )}
                   </div>
@@ -300,7 +300,7 @@ const ProblemUpload: React.FC = () => {
                         Example Image
                       </label>
                       <input
-                        {...register(`examples[${index}].image`)}
+                        {...register(`examples.${index}.image`)}
                         id={`examples[${index}].image`}
                         type="file"
                         className="mt-1 block w-full text-gray-300"
