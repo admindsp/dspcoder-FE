@@ -379,6 +379,8 @@ importers:
         specifier: ^8.3.2
         version: 8.4.1
 
+  server/dspcoder_mono: {}
+
   server/problem_management_service:
     dependencies:
       body-parser:
