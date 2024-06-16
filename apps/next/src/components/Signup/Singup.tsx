@@ -5,6 +5,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@dspcoder/ui/components/ui/dialog";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -20,9 +21,11 @@ const Signup = () => {
           password,
         }
       );
+      toast.success("Registration successfull. Kindly login to continue.");
       console.log("User registered:", response.data);
     } catch (error) {
       console.error("Error registering user:", error);
+      toast.error("Something went wrong.");
     }
   };
 

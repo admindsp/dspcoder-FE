@@ -5,10 +5,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@dspcoder/ui/components/ui/dialog";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -17,9 +20,12 @@ const Login = () => {
         email,
         password,
       });
+      toast.success("Successfully logged in.");
       console.log("User logged in:", response.data);
+      router.push("/problems");
     } catch (error) {
       console.error("Error logging in:", error);
+      toast.error("Either username or password is wrong.");
     }
   };
 
