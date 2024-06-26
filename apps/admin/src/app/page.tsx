@@ -1,12 +1,13 @@
+"use client";
+
+import React from "react";
 import Dashboard from "@/components/Dashboard/Dashboard";
 import ProblemUpload from "@/components/ProblemUpload/ProblemUpload";
-import React from "react";
+import AuthGuard from "@/components/AuthGuard/AuthGuard";
 
-type Props = {};
-
-const page = (props: Props) => {
+const AdminPage = () => {
   return (
-    <>
+    <AuthGuard>
       <div className="font-bold text-2xl border-b-2 py-4 border-gray-600">
         Admin Portal
       </div>
@@ -14,8 +15,8 @@ const page = (props: Props) => {
         <Dashboard />
         <ProblemUpload />
       </div>
-    </>
+    </AuthGuard>
   );
 };
 
-export default page;
+export default AdminPage;
