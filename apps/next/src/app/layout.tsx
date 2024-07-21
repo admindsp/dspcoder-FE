@@ -15,11 +15,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="white">
       <body>
         <Toaster position="bottom-center" />
         <Navbar />
-        <div className="dark:bg-darkish dark:text-white text-black bg-[#c5c5c5] min-h-screen flex flex-col">
+        <div className="dark:bg-black dark:text-white text-black bg-white min-h-screen flex flex-col">
           <div className="w-[80%] mx-auto flex-grow">{children}</div>
         </div>
         <Footer />

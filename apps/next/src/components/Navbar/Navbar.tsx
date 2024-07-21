@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Dialog, DialogTrigger } from "@dspcoder/ui/components/ui/dialog";
 import Signup from "../Signup/Singup";
 import Login from "../Login/Login";
+import { WiMoonAltFirstQuarter } from "react-icons/wi";
 
 const Navbar = () => {
   return (
@@ -29,6 +30,7 @@ const Navbar = () => {
           Problems
         </Link>
         <div className="icons flex gap-3 items-center">
+          <WiMoonAltFirstQuarter />
           <Dialog>
             <DialogTrigger className="flex items-center justify-center gap-2 px-2 py-1 bg-purple-700 rounded-md font-semibold text-sm hover:bg-purple-800 transition-all">
               Sign Up

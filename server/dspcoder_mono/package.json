@@ -1,8 +1,0 @@
-{
-  "name": "@dspcoder/dspcoder_mono",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "python manage.py runserver 8005"
-  }
-}
