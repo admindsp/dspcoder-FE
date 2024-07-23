@@ -1,3 +1,13 @@
+import HomePageBanners from "@/components/HomePageBanners/HomePageBanners";
+import HomePageTestimonials from "@/components/HomePageTestimonials/HomePageTestimonials";
+
 export default function Home() {
-  return <main className="flex justify-between">Loading..</main>;
+  return (
+    <div className="min-h-screen p-4">
+      <div className="">
+        <HomePageBanners />
+        <HomePageTestimonials />
+      </div>
+    </div>
+  );
 }
