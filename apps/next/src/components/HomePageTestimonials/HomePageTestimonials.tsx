@@ -5,7 +5,7 @@ type Props = {};
 
 const HomePageTestimonials = (props: Props) => {
   return (
-    <div className="max-w-[760px] mx-auto py-10 text-center flex flex-col gap-4">
+    <div className="max-w-[760px] mx-auto py-10 text-center flex flex-col gap-7">
       <span className="text-4xl font-bold">
         Built by engineers working at the world’s best companies
       </span>

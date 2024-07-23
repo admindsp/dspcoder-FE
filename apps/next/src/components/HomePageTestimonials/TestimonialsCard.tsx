@@ -4,7 +4,7 @@ type Props = {};
 
 const TestimonialsCard = (props: Props) => {
   return (
-    <div className="w-[130px] h-[130px] aspect-square bg-gray-500 rounded-lg"></div>
+    <div className="w-[130px] mx-auto h-[130px] aspect-square bg-gray-500 rounded-lg"></div>
   );
 };
 

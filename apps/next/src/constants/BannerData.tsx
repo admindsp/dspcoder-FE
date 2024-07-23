@@ -9,3 +9,21 @@ export const SecondaryBannerData = {
   description:
     "From RTOS, device drivers, Linux drivers, low level programming, Communication protocols ",
 };
+
+export const HomePageFeatures = [
+  {
+    id: 0,
+    title: "AI Based Interview",
+    img: "",
+  },
+  {
+    id: 1,
+    title: "Company Specific Questions",
+    img: "",
+  },
+  {
+    id: 2,
+    title: "BAGCHI BOKACHODA",
+    img: "",
+  },
+];
