@@ -21,25 +21,34 @@ const BannerCard = ({
   return (
     <div
       className={cn(
-        "min-h-80 flex flex-col justify-between items-center md:flex-row-reverse",
+        "min-h-80 flex flex-col justify-between items-center md:flex-row-reverse ",
         className
       )}
     >
-      <div className=" w-full md:w-3/4">
-        <div className="text-xl flex flex-col justify-center w-3/4 mx-auto mt-12">
-          <span className="text-4xl font-bold">{title}</span>
-          <span className="mt-12 font-semibold text-gray-400 w-full md:w-3/4">
+      <div className="w-full md:w-3/4">
+        <div className="flex flex-col justify-center gap-4 w-3/4 mx-auto mt-12">
+          <span className="text-2xl md:text-3xl font-bold text-center md:text-left">
+            {title}
+          </span>
+          <span className="text-base text-center md:text-left md:text-lg font-semibold text-gray-400 w-full md:w-3/4">
             {description}
           </span>
         </div>
       </div>
       {!img ? (
         <div className="font-bold w-full md:w-2/4 text-xl flex flex-col justify-center items-center">
-          <Lottie className="w-[525px]" animationData={homepageRobot} />
+          <Lottie
+            className="max-w-[525px] mx-auto"
+            animationData={homepageRobot}
+          />
         </div>
       ) : (
         <div className="font-bold w-full md:w-2/4 text-xl flex flex-col justify-center items-center">
-          <img src={img} alt="img" className="object-contain max-w-[350px]" />
+          <img
+            src={img}
+            alt="img"
+            className="object-contain max-w-[350px] mx-auto"
+          />
         </div>
       )}
     </div>
