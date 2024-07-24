@@ -27,7 +27,7 @@ const BannerCard = ({
         className
       )}
     >
-      <div className={`w-full  order-${order}`}>
+      <div className={`w-full  !order-${order}`}>
         <div className="flex flex-col justify-center gap-4 w-3/4 mx-auto mt-12">
           <span className="text-2xl md:text-3xl font-bold text-center md:text-left">
             {title}

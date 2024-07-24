@@ -37,12 +37,12 @@ const Navbar = () => {
             </DialogTrigger>
             <Signup />
           </Dialog>
-          <button
+          <Link
             className="inline-flex justify-center items-center gap-2 bg-[#616828] hover:bg-[#4d531f] px-2 py-1 rounded-md transition-all duration-300"
-            onClick={() => alert("Blog creation under progress !!!")}
+            href="/blog"
           >
             Blog <FaBlog />
-          </button>
+          </Link>
         </div>
       </div>
     </div>
