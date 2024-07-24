@@ -10,6 +10,7 @@ type BannerCardProps = {
   description: string;
   className?: string;
   img?: string;
+  order?: string;
 };
 
 const BannerCard = ({
@@ -17,40 +18,39 @@ const BannerCard = ({
   description,
   img,
   className,
+  order = "first",
 }: BannerCardProps) => {
   return (
     <div
       className={cn(
-        "min-h-80 flex flex-col justify-between items-center md:flex-row-reverse ",
+        "min-h-80 grid grid-cols-1 sm:grid-cols-2 justify-between items-center sm:w-[80%] mx-auto",
         className
       )}
     >
-      <div className="w-full md:w-3/4">
+      <div className={`w-full  order-${order}`}>
         <div className="flex flex-col justify-center gap-4 w-3/4 mx-auto mt-12">
           <span className="text-2xl md:text-3xl font-bold text-center md:text-left">
             {title}
           </span>
-          <span className="text-base text-center md:text-left md:text-lg font-semibold text-gray-400 w-full md:w-3/4">
+          <span className="text-base text-center md:text-left md:text-lg font-semibold text-gray-400 w-full">
             {description}
           </span>
         </div>
       </div>
-      {!img ? (
-        <div className="font-bold w-full md:w-2/4 text-xl flex flex-col justify-center items-center">
+      <div className="font-bold w-full  text-xl flex flex-col justify-center items-center order-500">
+        {!img ? (
           <Lottie
             className="max-w-[525px] mx-auto"
             animationData={homepageRobot}
           />
-        </div>
-      ) : (
-        <div className="font-bold w-full md:w-2/4 text-xl flex flex-col justify-center items-center">
+        ) : (
           <img
             src={img}
             alt="img"
             className="object-contain max-w-[350px] mx-auto"
           />
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
