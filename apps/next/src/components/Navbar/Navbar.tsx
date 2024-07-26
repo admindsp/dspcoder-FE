@@ -1,12 +1,9 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
-
-import { Dialog, DialogTrigger } from "@dspcoder/ui/components/ui/dialog";
-import Signup from "../Signup/Singup";
+import React from "react";
 
 import { WiMoonAltFirstQuarter } from "react-icons/wi";
-import { FaBlog, FaRegUserCircle, FaUserCircle } from "react-icons/fa";
+import { FaBlog } from "react-icons/fa";
 import AuthPopupContent from "../AuthPopupContent/AuthPopupContent";
 
 const Navbar = () => {
