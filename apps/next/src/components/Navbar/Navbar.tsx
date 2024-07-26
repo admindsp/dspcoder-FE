@@ -1,12 +1,10 @@
 "use client";
 import Link from "next/link";
 import React, { useState } from "react";
-import DSPCoder from "@/assets/DSPCoder.svg";
-import Image from "next/image";
 
 import { Dialog, DialogTrigger } from "@dspcoder/ui/components/ui/dialog";
 import Signup from "../Signup/Singup";
-import Login from "../Login/Login";
+
 import { WiMoonAltFirstQuarter } from "react-icons/wi";
 import { FaBlog, FaRegUserCircle, FaUserCircle } from "react-icons/fa";
 
@@ -31,12 +29,9 @@ const Navbar = () => {
             <WiMoonAltFirstQuarter className="h-[20px] w-[20px]" />
           </button>
 
-          <Dialog>
-            <DialogTrigger className="flex items-center justify-center gap-2 px-2 py-1  rounded-md font-semibold text-sm  transition-all ">
-              <FaRegUserCircle className="h-[20px] w-[20px]" />
-            </DialogTrigger>
-            <Signup />
-          </Dialog>
+          <Link href="/auth">
+            <FaRegUserCircle className="h-[20px] w-[20px]" />
+          </Link>
           <Link
             className="inline-flex justify-center items-center gap-2 bg-[#616828] hover:bg-[#4d531f] px-2 py-1 rounded-md transition-all duration-300"
             href="/blog"
