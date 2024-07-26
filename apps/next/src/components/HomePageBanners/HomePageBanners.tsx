@@ -10,6 +10,7 @@ const HomePageBanners = (props: Props) => {
       <BannerCard
         title={PrimaryBannerData.title}
         description={PrimaryBannerData.description}
+        img="https://as1.ftcdn.net/v2/jpg/01/64/53/30/1000_F_164533043_VSZCEPwHV8HtZUUqw5ZpBUBjplUffww0.jpg"
       />
       <BannerCard
         title={SecondaryBannerData.title}

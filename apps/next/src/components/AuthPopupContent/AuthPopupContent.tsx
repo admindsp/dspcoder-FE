@@ -1,43 +1,25 @@
 import {
+  Dialog,
   DialogContent,
   DialogHeader,
-  DialogTitle,
+  DialogTrigger,
 } from "@dspcoder/ui/components/ui/dialog";
-import React from "react";
+import { FaRegUserCircle } from "react-icons/fa";
+import GithubLogin from "./GithubLogin";
 
-type Props = {};
-
-const AuthPopupContent = (props: Props) => {
+const AuthPopupContent = () => {
   return (
-    <DialogContent className="bg-darkish">
-      <DialogHeader>
-        <DialogTitle>Login</DialogTitle>
-        <form onSubmit={() => alert("hello")} className="flex flex-col gap-4">
-          <input
-            type="email"
-            // value={email}
-            // onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            required
-            className="text-black border border-gray-300 rounded-md p-2"
-          />
-          <input
-            type="password"
-            // value={password}
-            // onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-            required
-            className="text-black border border-gray-300 rounded-md p-2"
-          />
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md"
-          >
-            Log In
-          </button>
-        </form>
-      </DialogHeader>
-    </DialogContent>
+    <Dialog>
+      <DialogTrigger>
+        <FaRegUserCircle />
+      </DialogTrigger>
+      <DialogContent className="flex flex-col gap-2 justify-center items-center w-full">
+        <DialogHeader className="text-lg font-semibold ">
+          Signup / Login
+        </DialogHeader>
+        <GithubLogin />
+      </DialogContent>
+    </Dialog>
   );
 };
 

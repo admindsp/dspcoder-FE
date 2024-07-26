@@ -1,6 +1,5 @@
 "use client";
 
-import Lottie from "lottie-react";
 import React from "react";
 import homepageRobot from "@/assets/Lotties/HomepageRobot.json";
 import { cn } from "@dspcoder/ui/lib/utils";
@@ -39,10 +38,7 @@ const BannerCard = ({
       </div>
       <div className="font-bold w-full  text-xl flex flex-col justify-center items-center order-500">
         {!img ? (
-          <Lottie
-            className="max-w-[525px] mx-auto"
-            animationData={homepageRobot}
-          />
+          <div>img</div>
         ) : (
           <img
             src={img}

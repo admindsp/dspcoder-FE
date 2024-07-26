@@ -9,8 +9,8 @@ const HomePageFeatureContent = (props: Props) => {
     <div className="max-w-[900px] mx-auto py-10 text-center flex flex-col gap-7">
       <span className="text-4xl font-bold">Why DSPCoder?</span>
       <div className="grid grid-cols-1  gap-5 justify-between sm:grid-cols-3">
-        {HomePageFeatures.map((feature) => (
-          <FeatureCard feature={feature} />
+        {HomePageFeatures.map((feature, idx) => (
+          <FeatureCard key={idx} feature={feature} />
         ))}
       </div>
     </div>

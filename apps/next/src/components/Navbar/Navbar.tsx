@@ -7,6 +7,7 @@ import Signup from "../Signup/Singup";
 
 import { WiMoonAltFirstQuarter } from "react-icons/wi";
 import { FaBlog, FaRegUserCircle, FaUserCircle } from "react-icons/fa";
+import AuthPopupContent from "../AuthPopupContent/AuthPopupContent";
 
 const Navbar = () => {
   return (
@@ -29,9 +30,7 @@ const Navbar = () => {
             <WiMoonAltFirstQuarter className="h-[20px] w-[20px]" />
           </button>
 
-          <Link href="/auth">
-            <FaRegUserCircle className="h-[20px] w-[20px]" />
-          </Link>
+          <AuthPopupContent />
           <Link
             className="inline-flex justify-center items-center gap-2 bg-[#616828] hover:bg-[#4d531f] px-2 py-1 rounded-md transition-all duration-300"
             href="/blog"
