@@ -1,20 +1,19 @@
-import React from 'react'
+import React from "react";
 
-type BlogRecommendedQuestionsProps={
-    question: string;
+type BlogRecommendedQuestionsProps = {
+  question: string;
 };
 
-
 const BlogRecommendedQuestions = ({
-    question,
-}:BlogRecommendedQuestionsProps) => {
+  question,
+}: BlogRecommendedQuestionsProps) => {
   return (
-    <div className=''>
+    <div>
       <ul>
-        <li className=''>{question}</li>
+        <li>{question}</li>
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default BlogRecommendedQuestions
+export default BlogRecommendedQuestions;
