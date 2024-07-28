@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar/Navbar";
 import "@dspcoder/ui/globals.css";
 import Footer from "@/components/Footer/Footer";
+import AuthProvider from "@/contenxt/AuthProvider";
 
 export const metadata: Metadata = {
   title: "DSPCoder",
@@ -15,11 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="relative">
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
+      <AuthProvider>
+        <body className="relative">
+          <Navbar />
+          {children}
+          <Footer />
+        </body>
+      </AuthProvider>
     </html>
   );
 }
