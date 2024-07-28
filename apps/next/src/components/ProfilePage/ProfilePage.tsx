@@ -28,9 +28,10 @@ const ProfilePage = (props: Props) => {
             alt="profile-picture"
             width={25}
             height={25}
+            className="rounded-full"
           />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="min-w-[300px]">
+        <DropdownMenuContent className="">
           <DropdownMenuLabel>
             Hi, <span className="font-semibold">{session?.user?.name}</span>
           </DropdownMenuLabel>

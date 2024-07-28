@@ -2,7 +2,7 @@ import { LANGUAGE_VERSIONS } from "@/constants/constants";
 import axios from "axios";
 
 const codeExecuteAPI = axios.create({
-  baseURL: "https://emkc.org/api/v2/piston",
+  baseURL: process.env.CODE_EXECUTION_API_URL,
 });
 
 export const executeCode = async (language: string, sourceCode: string) => {

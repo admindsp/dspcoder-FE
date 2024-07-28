@@ -11,7 +11,7 @@ const AuthPopupContent = () => {
   return (
     <Dialog>
       <DialogTrigger>
-        <FaRegUserCircle />
+        <FaRegUserCircle className="w-[25px] h-[25px]" />
       </DialogTrigger>
       <DialogContent className="flex flex-col gap-2 justify-center items-center w-full">
         <DialogHeader className="text-lg font-semibold ">
