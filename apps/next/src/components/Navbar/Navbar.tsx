@@ -29,7 +29,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="bg-darkish text-white py-2 px-4 flex gap-6 overflow-hidden min-h-10 max-h-12 sticky">
+    <div className="bg-black text-white py-2 px-4 flex gap-6 overflow-hidden min-h-10 max-h-12 sticky">
       <div className="w-24 flex justify-center items-center object-contain">
         <Link href="/">
           <span className="font-bold">DSPCODER</span>
