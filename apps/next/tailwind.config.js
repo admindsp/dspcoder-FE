@@ -7,8 +7,8 @@ module.exports = {
       colors: {
         whitish: "#c5c5c5",
         purplish: "#3f3cbb",
-        darkish: "#1e1e1e",
-        grayish: "#262626bf",
+        darkish: "#1A1A1A",
+        grayish: "#3b3939",
       },
     },
   },

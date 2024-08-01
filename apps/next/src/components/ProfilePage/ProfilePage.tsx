@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@dspcoder/ui/components/ui/button";
 import {
   DropdownMenu,

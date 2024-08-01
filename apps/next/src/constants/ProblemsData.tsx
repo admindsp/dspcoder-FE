@@ -1,4 +1,4 @@
-const ProblemsData = [
+export const ProblemsData = [
   {
     id: 1105,
     title: "Filling Bookcase Shelves",
@@ -118,4 +118,14 @@ const ProblemsData = [
   },
 ];
 
-export default ProblemsData;
+export const difficultyOptions = [
+  { value: "easy", label: "Easy" },
+  { value: "medium", label: "Medium" },
+  { value: "hard", label: "Hard" },
+];
+
+export const statusOptions = [
+  { value: "to-do", label: "To-do" },
+  { value: "attempted", label: "Attempted" },
+  { value: "solved", label: "Solved" },
+];
