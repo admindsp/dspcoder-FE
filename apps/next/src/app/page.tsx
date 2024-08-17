@@ -20,7 +20,7 @@ export default function Home() {
             <PrepareCodingInterview/> {/*✅*/}
             <AiInterviewBasedSection/> {/*✅*/}
             <FirmwareSection/> {/*✅*/}
-            <PracticeEverySection/>
+            {/*<PracticeEverySection/>*/}
             <CompaniesSection/>
           </div>
     </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import Card from './Card';
-import data from './FirmwareData';
-
+import data from '@/constants/HomePageData';
 const FirmwareSection = () => {
     return (
         <div className="flex flex-col lg:flex-row justify-between mt-20">
@@ -12,9 +11,9 @@ const FirmwareSection = () => {
                     Learn how to develop firmware for a variety of simulated hardware platforms powered by Renode, sensors, and actuators
                 </span>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6 lg:gap-x-24">
-                {data.map((obj, index) => (
-                    <Card key={index} color={obj.color} language={obj.language} icon={obj.icon} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-2 lg:gap-x-8">
+                {data.LogoArray.map((obj,index)=>(
+                    <Card src={obj.src} title={obj.title} alt={obj.alt}/>
                 ))}
             </div>
         </div>

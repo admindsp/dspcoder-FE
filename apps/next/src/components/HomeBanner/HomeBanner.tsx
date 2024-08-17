@@ -1,4 +1,6 @@
+import Image from "next/image";
 import React from "react";
+import bannerImage from '@/assets/board.png'
 
 type props = {};
 
@@ -30,13 +32,15 @@ const HomeBanner = () => {
                         MCUs.
                     </span>
                 </div>
-                <button className="text-white bg-red-600 py-1 px-4 rounded-sm mt-4 md:mt-7 font-bold">
+                <button className="text-black bg-white py-1 px-4 rounded-sm mt-4 md:mt-7 font-bold">
                     Try Now
                 </button>
             </div>
             <div className="flex justify-center md:justify-end md:w-1/2 mt-8 md:mt-0">
                 {/* Div for the image */}
-                <div className="w-full max-w-xs md:max-w-[36rem] h-64 md:h-[30rem] bg-[#d9d9d9] rounded-[2rem]"></div>
+                <div className="w-full flex align-middle justify-center max-w-xs md:max-w-[36rem] h-64 md:h-[30rem]">
+                    <Image src={bannerImage} alt="Banner Image" />
+                </div>
             </div>
         </div>
     );

@@ -1,17 +1,23 @@
+import Image, { StaticImageData } from 'next/image';
 import React from 'react';
-import { IconType } from 'react-icons';
 
-interface Language {
-    icon: IconType;
-    language: string;
-    color: string;
+interface ImageItem {
+    src?: StaticImageData;
+    alt?: string;
+    title:string;
 }
 
-const Card = (prop: Language) => {
+const Card = (prop: ImageItem) => {
     return (
         <div className="flex items-center gap-2 lg:gap-3">
-            <prop.icon color={prop.color} className="text-xl lg:text-2xl" />
-            <p className="text-[#9aa3b3] text-base lg:text-[1.3rem]">{prop.language}</p>
+            {
+            prop.src ? (
+                <Image src={prop.src} alt={prop.alt||''}/>
+            ):(
+                <></>
+            )
+            }
+            <span className='text-[#9a9a9a] text-xl font-bold w-28'>{prop.title}</span>
         </div>
     );
 };
