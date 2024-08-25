@@ -5,6 +5,7 @@ import Editor from "@monaco-editor/react";
 import ConfigSelectorMenu from "./components/ConfigSelectorMenu";
 import CodeOutput from "../CodeOutput/CodeOutput";
 import { CODE_SNIPPETS } from "@/constants/constants";
+import CodeTerminal from "../CodeTerminal/CodeTerminal.";
 
 type Props = {};
 
@@ -38,7 +39,7 @@ const CodeEditor = (props: Props) => {
           onChange={(value: any) => setValue(value || "")}
         />
       </div>
-
+      <CodeTerminal />
       <CodeOutput editorRef={editorRef} language={selectedLanguage} />
     </div>
   );
