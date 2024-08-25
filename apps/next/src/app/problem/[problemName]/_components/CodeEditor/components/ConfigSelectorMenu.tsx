@@ -1,5 +1,8 @@
 import React from "react";
-import { CODE_SNIPPETS, LANGUAGE_VERSIONS } from "../../../constants/constants";
+import {
+  CODE_SNIPPETS,
+  LANGUAGE_VERSIONS,
+} from "../../../../../../constants/constants";
 
 type Props = {
   selectedLanguage: string;
@@ -13,7 +16,7 @@ const ConfigSelectorMenu = ({
   setValue,
 }: Props) => {
   const handleLanguageChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
+    event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setSelectedLanguage(event.target.value);
     setValue(CODE_SNIPPETS[event.target.value as keyof typeof CODE_SNIPPETS]);
