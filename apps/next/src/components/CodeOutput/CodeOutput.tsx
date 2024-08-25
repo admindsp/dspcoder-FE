@@ -1,5 +1,5 @@
 "use client";
-import { executeCode } from "@/api/executeCode";
+import { executeCode } from "@/app/api/executeCode";
 import React, { MutableRefObject, use, useState } from "react";
 import { ClipLoader } from "react-spinners";
 
