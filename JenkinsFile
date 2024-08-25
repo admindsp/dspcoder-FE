@@ -1,0 +1,79 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_REGISTRY = 'dspcoder-registry'
+        DOCKER_IMAGE = "${DOCKER_REGISTRY}/dspcoder-turbo"
+        GIT_REPO = 'https://github.com/your-username/DSPCoder-Turbo.git'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: "${env.GIT_REPO}"
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    sh 'docker-compose build'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                script {
+                    sh 'docker-compose run --rm next npm test'
+                    sh 'docker-compose run --rm blog npm test'
+                    sh 'docker-compose run --rm next_prod npm test'
+                }
+            }
+        }
+
+        stage('Push to Registry') {
+            when {
+                branch 'main'
+            }
+            steps {
+                script {
+                    sh 'docker tag dspcoder_next:latest ${DOCKER_IMAGE}_next:latest'
+                    sh 'docker push ${DOCKER_IMAGE}_next:latest'
+
+                    sh 'docker tag dspcoder_blog:latest ${DOCKER_IMAGE}_blog:latest'
+                    sh 'docker push ${DOCKER_IMAGE}_blog:latest'
+
+                    sh 'docker tag dspcoder_next_prod:latest ${DOCKER_IMAGE}_next_prod:latest'
+                    sh 'docker push ${DOCKER_IMAGE}_next_prod:latest'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            when {
+                branch 'main'
+            }
+            steps {
+                script {
+                    sh 'docker stack deploy -c docker-compose.yml dspcoder_turbo_stack'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+            sh 'docker system prune -f'
+        }
+
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
