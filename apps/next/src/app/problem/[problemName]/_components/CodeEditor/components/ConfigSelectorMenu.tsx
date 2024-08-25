@@ -23,7 +23,7 @@ const ConfigSelectorMenu = ({
   };
 
   return (
-    <div className="bg-[#000000] text-white flex px-4 py-2 ">
+    <div className="bg-[#0e0e14] text-white flex px-4 py-2 ">
       <div className=" text-sm language-selector-menu w-full flex gap-3 items-center justify-end">
         <p className="text-gray-400 font-bold text-xs">Language</p>
         <select
