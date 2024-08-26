@@ -10,14 +10,10 @@ const CodeTerminal = () => {
       cursorBlink: true,
       rows: 30,
       cols: 80,
-      theme: {
-        background: "#1e1e1e", // Dark background
-        foreground: "#ffffff", // White text
-      },
     });
     xterm.open(terminalRef.current);
 
-    xterm.write("Type something:\r\n");
+    xterm.write("DSP Coder Terminal:\r\n");
 
     xterm.onData((data) => {
       xterm.write(data);
@@ -26,7 +22,7 @@ const CodeTerminal = () => {
     return () => xterm.dispose();
   }, []);
 
-  return <div ref={terminalRef} className="w-full bg-black"></div>;
+  return <div ref={terminalRef} className="w-full h-full bg-darkish"></div>;
 };
 
 export default CodeTerminal;

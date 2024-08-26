@@ -5,12 +5,14 @@ import Editor from "@monaco-editor/react";
 import ConfigSelectorMenu from "./components/ConfigSelectorMenu";
 import CodeOutput from "../CodeOutput/CodeOutput";
 import { CODE_SNIPPETS } from "@/constants/constants";
-import CodeTerminal from "../CodeTerminal/CodeTerminal.";
+import CodeTerminal from "../CodeTerminal/CodeTerminal";
+import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+import { GrDrag } from "react-icons/gr";
 
 type Props = {};
 
-const CodeEditor = (props: Props) => {
-  const editorRef = useRef();
+const CodeEditor: React.FC<Props> = () => {
+  const editorRef = useRef<any>(null);
   const [value, setValue] = useState<string>("");
   const [selectedLanguage, setSelectedLanguage] = useState<string>("cpp");
 
@@ -20,15 +22,15 @@ const CodeEditor = (props: Props) => {
   };
 
   return (
-    <div className="w-full min-w-[400px] px-1">
-      <div>
+    <PanelGroup direction="vertical" tagName="editor-output">
+      <Panel minSize={20} defaultSize={70}>
         <ConfigSelectorMenu
           selectedLanguage={selectedLanguage}
           setSelectedLanguage={setSelectedLanguage}
           setValue={setValue}
         />
         <Editor
-          className="border border-t-0 border-gray-700 h-[50vh] mb-0 pb-0"
+          className="border border-t-0 border-gray-700 min-h-[400px] mb-0 pb-0"
           theme="vs-dark"
           language={selectedLanguage}
           value={value}
@@ -38,10 +40,14 @@ const CodeEditor = (props: Props) => {
           onMount={onMount}
           onChange={(value: any) => setValue(value || "")}
         />
-      </div>
-      <CodeTerminal />
-      <CodeOutput editorRef={editorRef} language={selectedLanguage} />
-    </div>
+      </Panel>
+      <PanelResizeHandle className="w-full h-3 bg-black flex justify-center items-center">
+        <GrDrag className="w-full h-full text-white" />
+      </PanelResizeHandle>
+      <Panel minSize={20} defaultSize={30}>
+        <CodeOutput editorRef={editorRef} language={selectedLanguage} />
+      </Panel>
+    </PanelGroup>
   );
 };
 

@@ -35,7 +35,7 @@ const CodeOutput = ({ editorRef, language }: Props) => {
   };
 
   return (
-    <div className="flex flex-col gap-2 pr-2 my-2">
+    <div className="flex flex-col gap-2 bg-slate-300 px-2 py-4 h-full">
       <div className="flex justify-end items-center gap-3 transition-all">
         <button
           className=" transition-all bg-green-600 text-white hover:bg-green-800 min-w-24 border border-gray-500 h-8 px-4 py-1 rounded "
