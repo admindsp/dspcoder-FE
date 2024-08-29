@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Editor from "@monaco-editor/react";
 import ConfigSelectorMenu from "./components/ConfigSelectorMenu";
 import CodeOutput from "../CodeOutput/CodeOutput";
@@ -9,17 +9,23 @@ import CodeTerminal from "../CodeTerminal/CodeTerminal";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { GrDrag } from "react-icons/gr";
 
-type Props = {};
+type CodeEditorProps = {
+  fileContent: string;
+};
 
-const CodeEditor: React.FC<Props> = () => {
+const CodeEditor = ({ fileContent }: CodeEditorProps) => {
   const editorRef = useRef<any>(null);
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = useState<string>(fileContent);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("cpp");
 
   const onMount = (editor: any) => {
     editorRef.current = editor;
     editor.focus();
   };
+
+  useEffect(() => {
+    setValue(fileContent);
+  }, [fileContent]);
 
   return (
     <PanelGroup direction="vertical" tagName="editor-output">
@@ -34,9 +40,7 @@ const CodeEditor: React.FC<Props> = () => {
           theme="vs-dark"
           language={selectedLanguage}
           value={value}
-          defaultValue={
-            CODE_SNIPPETS[selectedLanguage as keyof typeof CODE_SNIPPETS]
-          }
+          defaultValue={fileContent}
           onMount={onMount}
           onChange={(value: any) => setValue(value || "")}
         />
