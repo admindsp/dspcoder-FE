@@ -52,13 +52,13 @@ const CodeOutput = ({ editorRef, language }: Props) => {
           {isLoading ? <ClipLoader color="#00000" size="20" /> : "Submit"}
         </button>
       </div>
-      <div className="output-window bg-slate-100 h-full text-sm">
+      <div className="output-window bg-slate-100  text-sm">
         <p className="font-bold px-2 py-1 text-black">STDOUT</p>
         <pre className="stdout bg-stone-100 border border-gray-400 border-opacity-60 h-20 px-2 py-2 text-wrap overflow-y-scroll rounded text-black">
           {stdout}
         </pre>
       </div>
-      <div className="output-window bg-slate-100 h-full text-sm">
+      <div className="output-window bg-slate-100  text-sm">
         <p className="font-bold px-2 py-1 text-black">CODE OUTPUT</p>
         <pre className="output bg-stone-100 border border-gray-400 border-opacity-60 h-20 px-2 py-2 text-wrap overflow-y-scroll rounded text-black">
           {stderr ? stderr : output}

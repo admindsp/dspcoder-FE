@@ -28,27 +28,30 @@ const CodeEditor = ({ fileContent }: CodeEditorProps) => {
   }, [fileContent]);
 
   return (
-    <PanelGroup direction="vertical" tagName="editor-output">
-      <Panel minSize={20} defaultSize={70}>
+    <PanelGroup direction="vertical">
+      <Panel minSize={20} defaultSize={60}>
         <ConfigSelectorMenu
           selectedLanguage={selectedLanguage}
           setSelectedLanguage={setSelectedLanguage}
           setValue={setValue}
         />
         <Editor
-          className="border border-t-0 border-gray-700 min-h-[400px] mb-0 pb-0"
+          className="border border-t-0 border-gray-700 mb-0 pb-0"
           theme="vs-dark"
           language={selectedLanguage}
           value={value}
           defaultValue={fileContent}
           onMount={onMount}
           onChange={(value: any) => setValue(value || "")}
+          options={{
+            scrollBeyondLastLine: false,
+          }}
         />
       </Panel>
       <PanelResizeHandle className="w-full h-3 bg-black flex justify-center items-center">
         <GrDrag className="w-full h-full text-white" />
       </PanelResizeHandle>
-      <Panel minSize={20} defaultSize={30}>
+      <Panel minSize={20} defaultSize={40}>
         <CodeOutput editorRef={editorRef} language={selectedLanguage} />
       </Panel>
     </PanelGroup>

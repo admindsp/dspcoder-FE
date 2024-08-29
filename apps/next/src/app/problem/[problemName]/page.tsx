@@ -68,7 +68,7 @@ const Problem: React.FC<Props> = () => {
       autoSaveId="problem-window"
       direction="horizontal"
     >
-      <Panel minSize={10} defaultSize={25}>
+      <Panel minSize={10} defaultSize={20}>
         <FileExplorer
           folderContents={folderContents}
           error={error}
@@ -78,13 +78,13 @@ const Problem: React.FC<Props> = () => {
       <PanelResizeHandle className="w-3 bg-black flex justify-center items-center">
         <GrDrag className="w-full h-full text-white" />
       </PanelResizeHandle>
-      <Panel minSize={30} defaultSize={50}>
+      <Panel minSize={30} defaultSize={45}>
         <CodeEditor fileContent={fileContent} />
       </Panel>
       <PanelResizeHandle className="w-3 bg-black flex justify-center items-center">
         <GrDrag className="w-full h-full text-white" />
       </PanelResizeHandle>
-      <Panel minSize={10} defaultSize={30}>
+      <Panel minSize={10} defaultSize={35}>
         <CodeTerminal />
       </Panel>
     </PanelGroup>
