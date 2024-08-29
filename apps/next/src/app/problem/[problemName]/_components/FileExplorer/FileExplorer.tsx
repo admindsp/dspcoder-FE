@@ -13,12 +13,14 @@ const FileExplorer = ({
   handleFileView,
 }: FileExplorerProps) => {
   return (
-    <div>
-      <p className="bg-darkish text-white py-2 font-semibold">File Explorer</p>
+    <div className="h-full">
+      <p className="bg-darkish text-white py-2 font-semibold border-b border-b-slate-500">
+        File Explorer
+      </p>
       {error ? (
         <div style={{ color: "red" }}>{error}</div>
       ) : (
-        <div className="bg-red-200 flex flex-col gap-2 px-2">
+        <div className="bg-darkish h-full py-4 text-white flex flex-col gap-2 px-2">
           {folderContents.map((item, index) => (
             <button
               className="text-start font-medium"

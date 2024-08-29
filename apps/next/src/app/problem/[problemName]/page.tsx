@@ -7,14 +7,23 @@ import CodeTerminal from "./_components/CodeTerminal/CodeTerminal.";
 import { GrDrag } from "react-icons/gr";
 import axios from "axios";
 
-type Props = {};
+type ProblemPageParamsProps = {
+  params: {
+    problemName: string;
+  };
+};
 
-const Problem: React.FC<Props> = () => {
+type ProblemPageSearchParamsProps = {
+  problemName: string;
+};
+
+const Problem = ({ params: { problemName } }: ProblemPageParamsProps) => {
   const [folderContents, setFolderContents] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [selectedFile, setSelectedFile] = useState("TestProblem/main.c");
-  const folderPath = "TestProblem"; // search param
+  const [selectedFile, setSelectedFile] = useState(`${problemName}/main.c`);
   const [fileContent, setFileContent] = useState<string>("");
+
+  const folderPath = problemName;
 
   const getSelectedFileContent = async (filePath: string) => {
     const response = await axios.get("http://127.0.0.1:8000/get-file-content", {
