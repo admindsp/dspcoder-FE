@@ -11,7 +11,7 @@ type MediaBannerProps = {
 
 const MediaBanner = ({ mediaData }: MediaBannerProps) => {
   return (
-    <div className="w-full gap-4">
+    <div className="w-full flex justify-center lg:block">
       {mediaData.map((media, idx) => {
         return (
           <div key={idx} className="w-[80%] h-auto">

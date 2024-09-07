@@ -13,7 +13,7 @@ const SecondaryBanner = ({ section, direction }: SecondaryBannerProps) => {
   return (
     <div
       className={cn(
-        "flex flex-col lg:flex-row justify-between items-center gap-10 text-white",
+        "flex flex-col lg:flex-row justify-between items-center gap-10 text-white border-b py-2 lg:py-0 lg:border-none",
         direction === 1 ? "lg:flex-row-reverse" : ""
       )}
     >

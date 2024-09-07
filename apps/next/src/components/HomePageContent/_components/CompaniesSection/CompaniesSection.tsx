@@ -13,7 +13,7 @@ const CompaniesSection = ({ CompanyBadges }: CompaniesSectionProp) => {
       </p>
 
       <div className="container">
-        <div className="flex justify-around gap-4 bg-[#181818] w-full h-[10rem]  rounded-[2rem]">
+        <div className="grid grid-cols-2 md:grid-cols-4 items-center gap-4 bg-[#181818] w-full h-[10rem]  rounded-[2rem]">
           {CompanyBadges.map((companyBadge, index) => (
             <Image
               src={companyBadge}
