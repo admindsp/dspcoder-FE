@@ -1,5 +1,5 @@
 "use client";
-import { executeCode } from "@/api/executeCode";
+import { executeCode } from "@/app/api/executeCode";
 import React, { MutableRefObject, use, useState } from "react";
 import { ClipLoader } from "react-spinners";
 
@@ -35,7 +35,7 @@ const CodeOutput = ({ editorRef, language }: Props) => {
   };
 
   return (
-    <div className="flex flex-col gap-2 pr-2 my-2">
+    <div className="flex flex-col gap-2 bg-slate-300 px-2 py-4 h-full">
       <div className="flex justify-end items-center gap-3 transition-all">
         <button
           className=" transition-all bg-green-600 text-white hover:bg-green-800 min-w-24 border border-gray-500 h-8 px-4 py-1 rounded "
@@ -52,13 +52,13 @@ const CodeOutput = ({ editorRef, language }: Props) => {
           {isLoading ? <ClipLoader color="#00000" size="20" /> : "Submit"}
         </button>
       </div>
-      <div className="output-window bg-slate-100 h-full text-sm">
+      <div className="output-window bg-slate-100  text-sm">
         <p className="font-bold px-2 py-1 text-black">STDOUT</p>
         <pre className="stdout bg-stone-100 border border-gray-400 border-opacity-60 h-20 px-2 py-2 text-wrap overflow-y-scroll rounded text-black">
           {stdout}
         </pre>
       </div>
-      <div className="output-window bg-slate-100 h-full text-sm">
+      <div className="output-window bg-slate-100  text-sm">
         <p className="font-bold px-2 py-1 text-black">CODE OUTPUT</p>
         <pre className="output bg-stone-100 border border-gray-400 border-opacity-60 h-20 px-2 py-2 text-wrap overflow-y-scroll rounded text-black">
           {stderr ? stderr : output}

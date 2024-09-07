@@ -1,5 +1,8 @@
 import React from "react";
-import { CODE_SNIPPETS, LANGUAGE_VERSIONS } from "../../../constants/constants";
+import {
+  CODE_SNIPPETS,
+  LANGUAGE_VERSIONS,
+} from "../../../../../../constants/constants";
 
 type Props = {
   selectedLanguage: string;
@@ -13,14 +16,14 @@ const ConfigSelectorMenu = ({
   setValue,
 }: Props) => {
   const handleLanguageChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
+    event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setSelectedLanguage(event.target.value);
     setValue(CODE_SNIPPETS[event.target.value as keyof typeof CODE_SNIPPETS]);
   };
 
   return (
-    <div className="bg-[#000000] text-white flex px-4 py-2 ">
+    <div className="bg-[#0e0e14] text-white flex px-4 py-2 ">
       <div className=" text-sm language-selector-menu w-full flex gap-3 items-center justify-end">
         <p className="text-gray-400 font-bold text-xs">Language</p>
         <select

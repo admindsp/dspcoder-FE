@@ -1,6 +1,68 @@
+version: "3.8"
+
 services:
+  nginx:
+    image: nginx:latest
+    container_name: dspcoder_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - next
+      - blog
+      - next_prod
+    networks:
+      - dspcoder_network
+
+  next:
+    build:
+      context: ./apps/next
+      dockerfile: Dockerfile
+    container_name: dspcoder_next
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgres://dspcoder:dspcoder@postgres:5432/dspcoder
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    networks:
+      - dspcoder_network
+
+  blog:
+    build:
+      context: ./apps/blog
+      dockerfile: Dockerfile
+    container_name: dspcoder_blog
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgres://dspcoder:dspcoder@postgres:5432/dspcoder
+    ports:
+      - "3001:3001"
+    depends_on:
+      - postgres
+    networks:
+      - dspcoder_network
+
+  next_prod:
+    build:
+      context: ./apps/next_prod
+      dockerfile: Dockerfile
+    container_name: dspcoder_next_prod
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgres://dspcoder:dspcoder@postgres:5432/dspcoder
+    ports:
+      - "3002:3002"
+    depends_on:
+      - postgres
+    networks:
+      - dspcoder_network
+
   postgres:
     image: postgres:latest
+    container_name: dspcoder_postgres
     environment:
       POSTGRES_USER: dspcoder
       POSTGRES_PASSWORD: dspcoder
@@ -9,6 +71,12 @@ services:
       - postgres-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - dspcoder_network
 
 volumes:
   postgres-data:
+
+networks:
+  dspcoder_network:
+    driver: bridge
