@@ -1,5 +1,4 @@
-import Card from "./Card"
-import data  from "@/constants/HomePageData"
+import CodingInterviewSideCard from "./CodingInterviewSideCard";
 
 const PrepareCodingInterview = () => {
   return (
@@ -15,20 +14,24 @@ const PrepareCodingInterview = () => {
         </div>
         <div className="w-full lg:w-[29rem] text-lg lg:text-xl mt-4 lg:mt-6 text-[#9ba3b4] font-[550]">
           <span>
-            On DSPCoder you can prepare for your embedded coding interviews with a tailored company-specific preparation guide
+            On DSPCoder you can prepare for your embedded coding interviews with
+            a tailored company-specific preparation guide
           </span>
         </div>
       </div>
       <div className="flex align-middle justify-center flex-col gap-10">
-        {data.cardData.map((obj,index)=>(
+        {data.cardData.map((obj, index) => (
           <>
-            <Card info={obj.info} title={obj.title}/>
-            <hr className="border-t-2 border-[#2b2b2b]"/>
+            <CodingInterviewSideCard info={obj.info} title={obj.title} />
+            <hr className="border-t-2 border-[#2b2b2b]" />
           </>
         ))}
-        <Card info="Learn software standards for aerospace, automobile. medical equipment and other domains." title="Domain Specific Question Bank"/>
+        <CodingInterviewSideCard
+          info="Learn software standards for aerospace, automobile. medical equipment and other domains."
+          title="Domain Specific Question Bank"
+        />
       </div>
     </div>
-  )
-}
-export default PrepareCodingInterview
+  );
+};
+export default PrepareCodingInterview;
