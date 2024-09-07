@@ -1,0 +1,33 @@
+import React from "react";
+import Image from "next/image";
+
+type MediaBannerProps = {
+  mediaData: {
+    path: string;
+    type: string;
+    alt_text: string;
+  }[];
+};
+
+const MediaBanner = ({ mediaData }: MediaBannerProps) => {
+  return (
+    <div className="w-full gap-4">
+      {mediaData.map((media, idx) => {
+        return (
+          <div key={idx} className="w-[80%] h-auto">
+            <Image
+              src={media.path}
+              alt={media.alt_text}
+              layout="responsive"
+              width={500}
+              height={300}
+              className="object-cover h-full"
+            />
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default MediaBanner;

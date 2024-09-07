@@ -7,6 +7,7 @@ import CapgeminiImage from "@/assets/capgemini.png";
 import HoneWellImage from "@/assets/honewell.png";
 import { HomePageDataType } from "@/types/HomePage";
 import bannerImage from "@/assets/board.png";
+import AIBasedInterviewImg from "@/assets/AIBasedInterviewImg.png";
 
 export const homePageData: HomePageDataType = {
   primary: {
@@ -32,13 +33,11 @@ export const homePageData: HomePageDataType = {
           title: "Data Structures & Algorithms",
           description:
             "Practice frequently asked questions tailored for constrained embedded system environments. ",
-          media: null,
         },
         {
           title: "Major Embedded Concepts",
           description:
             "Master low-level programming, communication protocols, driver development, OS concepts and MCU architectures.  ",
-          media: null,
         },
         {
           title: "Domain Specific Question Bank",
@@ -49,30 +48,22 @@ export const homePageData: HomePageDataType = {
     },
 
     {
-      title: "Embedded Boards",
-      description: "Explore popular embedded boards.",
+      title: "AI based interviewer",
+      description:
+        "Improve your knowledge with questions from datasheets, manuals, code snippets, and more.",
       media: [
         {
-          path: STlogo.src,
+          path: AIBasedInterviewImg.src,
           type: "image",
-          alt_text: "ST Logo",
-        },
-        {
-          path: NXPlogo.src,
-          type: "image",
-          alt_text: "NXP Logo",
-        },
-        {
-          path: EXPlogo.src,
-          type: "image",
-          alt_text: "EXP Logo",
+          alt_text: "Prepare_For_Coding",
         },
       ],
       content: null,
     },
     {
-      title: "Core Concepts",
-      description: "Strengthen your understanding of key concepts.",
+      title: "Learn firmware on range of hardwares",
+      description:
+        "Learn how to develop firmware for a variety of simulated hardware platforms powered by Renode, sensors and actuators  ",
       media: null,
       content: [
         {
