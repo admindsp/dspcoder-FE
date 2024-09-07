@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <AuthProvider>
-        <body className="relative">
+        <body className="relative bg-darkish">
           <Navbar />
           {children}
           <Footer />
