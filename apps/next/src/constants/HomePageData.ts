@@ -15,7 +15,7 @@ export const homePageData: HomePageDataType = {
       "Learn and practice advanced embedded system concepts with industry-leading boards and platforms.",
     media: [
       {
-        path: bannerImage,
+        path: bannerImage.src,
         type: "image",
         alt_text: "Main banner showing embedded systems",
       },
