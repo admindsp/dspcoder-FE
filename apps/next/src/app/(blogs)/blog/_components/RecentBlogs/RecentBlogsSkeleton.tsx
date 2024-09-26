@@ -8,19 +8,19 @@ const RecentBlogsSkeleton = () => {
         theme="light"
         width="500px"
         height="25px"
-        className="w-[648] h-[165px] rounded-md"
+        className="h-[120px] w-[648] md:h-[165px] rounded-md"
       />
       <Skeleton
         theme="light"
         width="500px"
         height="25px"
-        className="w-[648] h-[165px] rounded-md"
+        className="h-[120px] w-[648] md:h-[165px] rounded-md"
       />
       <Skeleton
         theme="light"
         width="500px"
         height="25px"
-        className="w-[648] h-[165px] rounded-md"
+        className="h-[120px] w-[648] md:h-[165px] rounded-md"
       />
     </div>
   );

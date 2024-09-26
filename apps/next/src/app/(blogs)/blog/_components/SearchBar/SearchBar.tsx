@@ -5,7 +5,7 @@ type Props = {};
 
 const SearchBar = (props: Props) => {
   return (
-    <div className="my-4">
+    <div className="my-4 ">
       <Input
         id="search-bar"
         type="search"

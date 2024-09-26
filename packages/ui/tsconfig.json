@@ -6,6 +6,10 @@
       "@ui/*": ["./src/*"]
     }
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "@dspcoder/ui/components/ui/button.tsx",
+    "@dspcoder/ui/components/ui/carousel.tsx"
+  ],
   "exclude": ["node_modules"]
 }

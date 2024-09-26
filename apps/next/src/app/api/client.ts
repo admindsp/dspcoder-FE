@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig } from "axios";
-
 export const client_call = () => {
   const client = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BACKEND_API_URL,
