@@ -11,5 +11,14 @@ module.exports = {
         grayish: "#3b3939",
       },
     },
+    keyframes: {
+      shimmer: {
+        "0%": { backgroundPosition: "-400px 0" },
+        "100%": { backgroundPosition: "400px 0" },
+      },
+    },
+    animation: {
+      shimmer: "shimmer 1.5s infinite ease-in-out",
+    },
   },
 };

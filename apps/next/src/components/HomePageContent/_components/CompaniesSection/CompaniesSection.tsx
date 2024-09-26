@@ -16,6 +16,7 @@ const CompaniesSection = ({ CompanyBadges }: CompaniesSectionProp) => {
         <div className="grid grid-cols-2 md:grid-cols-4 items-center gap-4 bg-[#181818] w-full h-[10rem]  rounded-[2rem]">
           {CompanyBadges.map((companyBadge, index) => (
             <Image
+              key={index}
               src={companyBadge}
               alt={`badge-${index}`}
               width={50}
