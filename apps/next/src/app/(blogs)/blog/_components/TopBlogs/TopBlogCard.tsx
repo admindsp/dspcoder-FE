@@ -1,4 +1,5 @@
 import { BlogType } from "@/types/Blog";
+import { timeAgo } from "@/utils/timeAgo";
 import React from "react";
 
 type TopBlogProps = {
@@ -7,8 +8,8 @@ type TopBlogProps = {
 
 const TopBlogCard = ({ data }: TopBlogProps) => {
   return (
-    <div className="w-[300px] lg:w-full h-[250px] lg:h-auto sm:min-w-[235px] bg-gray-100 rounded-md shadow-md hover:scale-95 transition-all duration-500 hover:shadow-lg">
-      <div className="p-1.5 relative  min-h-[126px] max-h-[198px] overflow-clip">
+    <div className="w-[300px] flex flex-col justify-between pb-2 lg:w-full h-[250px] lg:h-auto sm:min-w-[235px] bg-gray-100 rounded-md shadow-md hover:scale-95 transition-all duration-500 hover:shadow-lg">
+      <div className="p-1.5 relative min-h-[126px] max-h-[198px] overflow-clip">
         <img
           src="https://viso.ai/wp-content/uploads/2024/01/Virtual-Reality-Headset.png"
           className="rounded-md min-h-[126px] max-h-[198px] object-cover"
@@ -37,8 +38,20 @@ const TopBlogCard = ({ data }: TopBlogProps) => {
           })}
         </div>
       </div>
-      <div className="px-2 py-1">
-        <p className="font-bold text-base capitalize">{data.title}</p>
+      <div className="py-1 px-2 flex-grow">
+        <p className="font-bold text-base capitalize line-clamp-2">
+          {data.title}
+        </p>
+      </div>
+      <div className="flex flex-col justify-between px-2">
+        <div className="flex justify-between">
+          <p className="text-xs text-[#777777] font-semibold capitalize">
+            {data.username}
+          </p>
+          <p className="text-[#777777] text-xs font-semibold">
+            {timeAgo(data.updated_at)}
+          </p>
+        </div>
       </div>
     </div>
   );
