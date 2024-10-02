@@ -1,100 +1,59 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import CodeEditor from "@/app/problem/[problemName]/_components/CodeEditor/CodeEditor";
-import FileExplorer from "./_components/FileExplorer/FileExplorer";
-import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
-import CodeTerminal from "./_components/CodeTerminal/CodeTerminal.";
+
+import { useEffect, useState } from "react";
+import { Button } from "@dspcoder/ui/components/ui/button";
 import { GrDrag } from "react-icons/gr";
-import axios from "axios";
+import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
-type ProblemPageParamsProps = {
-  params: {
-    problemName: string;
-  };
-};
-
-type ProblemPageSearchParamsProps = {
-  problemName: string;
-};
-
-const Problem = ({ params: { problemName } }: ProblemPageParamsProps) => {
-  const [folderContents, setFolderContents] = useState<string[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [selectedFile, setSelectedFile] = useState(`${problemName}/main.c`);
-  const [fileContent, setFileContent] = useState<string>("");
-
-  const folderPath = problemName;
-
-  const getSelectedFileContent = async (filePath: string) => {
-    const response = await axios.get("http://127.0.0.1:8000/get-file-content", {
-      params: { file_path: filePath },
-    });
-    console.log(response);
-    if (response) setFileContent(response?.data?.content);
-  };
+const Problem = () => {
+  const [markdownContent, setMarkdownContent] = useState("");
 
   useEffect(() => {
-    const fetchFolderContents = async () => {
-      if (!folderPath) {
-        setError("Folder path is missing.");
-        return;
-      }
-
-      try {
-        const response = await axios.get(
-          "http://127.0.0.1:8000/list-folder-contents/",
-          {
-            params: { folder_path: folderPath },
-          }
-        );
-        setFolderContents(response.data.contents);
-        setError(null);
-      } catch (err) {
-        setError("Error fetching folder contents");
-        setFolderContents([]);
-      }
+    const fetchMarkdown = async () => {
+      const response = await fetch("/test.md"); // Make sure test.md is placed under /public directory
+      const text = await response.text();
+      setMarkdownContent(text);
     };
 
-    fetchFolderContents();
-  }, [folderPath]);
-
-  useEffect(() => {
-    try {
-      getSelectedFileContent(selectedFile);
-    } catch (err) {
-      console.log("Unable to set file");
-      setFileContent("Unable to fetch file content.");
-    }
-  }, [selectedFile]);
-
-  const handleFileView = (filePath: string) => {
-    setSelectedFile(filePath);
-  };
+    fetchMarkdown();
+  }, []);
 
   return (
     <PanelGroup
-      className="min-h-screen "
+      className="min-h-[90vh]"
       autoSaveId="problem-window"
       direction="horizontal"
     >
       <Panel minSize={10} defaultSize={20}>
-        <FileExplorer
-          folderContents={folderContents}
-          error={error}
-          handleFileView={handleFileView}
-        />
+        <div className="markdown-content p-4 text-white">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {markdownContent}
+          </ReactMarkdown>
+        </div>
       </Panel>
+
       <PanelResizeHandle className="w-3 bg-black flex justify-center items-center">
         <GrDrag className="w-full h-full text-white" />
       </PanelResizeHandle>
+
       <Panel minSize={30} defaultSize={45}>
-        <CodeEditor fileContent={fileContent} />
-      </Panel>
-      <PanelResizeHandle className="w-3 bg-black flex justify-center items-center">
-        <GrDrag className="w-full h-full text-white" />
-      </PanelResizeHandle>
-      <Panel minSize={10} defaultSize={35}>
-        <CodeTerminal />
+        <div
+          id="external-buttons"
+          className="flex flex-row-reverse gap-2 items-center"
+        >
+          <Button className="bg-darkish text-white">Run</Button>
+          <Button className="bg-darkish text-white">Submit</Button>
+        </div>
+
+        <Panel minSize={10} defaultSize={20}></Panel>
+
+        <iframe
+          src="http://localhost:8080/?folder=/home/dspcoder"
+          className="w-full h-full"
+          frameBorder="0"
+        ></iframe>
       </Panel>
     </PanelGroup>
   );
