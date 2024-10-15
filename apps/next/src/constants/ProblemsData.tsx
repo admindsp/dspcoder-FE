@@ -129,3 +129,23 @@ export const statusOptions = [
   { value: "attempted", label: "Attempted" },
   { value: "solved", label: "Solved" },
 ];
+
+export const listsOptions = [
+  { value: "Top 100", label: "Top 100" },
+  { value: "Top 200", label: "Top 200" },
+  { value: "Top 50", label: "Top 50" },
+];
+
+export const tagsOptions = [
+  { value: "array", label: "Array" },
+  { value: "string", label: "String" },
+  { value: "linked-list", label: "Linked List" },
+  // { value: "math", label: "Math" },
+  // { value: "tree", label: "Tree" },
+  // { value: "depth-first-search", label: "Depth First Search" },
+  // { value: "binary-search", label: "Binary Search" },
+  // { value: "hash-table", label: "Hash Table" },
+  // { value: "two-pointers", label: "Two Pointers" },
+  // { value: "greedy", label: "Greedy" },
+  // { value: "sort", label: "Sort" },
+]
