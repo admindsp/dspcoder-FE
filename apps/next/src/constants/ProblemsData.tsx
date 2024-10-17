@@ -149,3 +149,72 @@ export const tagsOptions = [
   // { value: "greedy", label: "Greedy" },
   // { value: "sort", label: "Sort" },
 ]
+
+export const Question_id_1111 = {
+  "id": 1,
+  "type": ["coding"],
+  "title": "Two Sum",
+  "difficulty": "Easy",
+  "topic": ["Array", "Hash Table"],
+  "companies": ["Amazon", "Facebook", "Google"],
+  "files": "S3/Questions/id_1111", // base, run, util : folders
+  "memory_footprint": "Low",
+  "total_accepted_solutions": 500,
+  "total_submissions": 1000,
+  "acceptance_rate": 0.5,
+  "total_clock_cycles": 1000000,
+  "ground_truth_ans": "This ans will be used as grnd truth for subjective ques",
+  "hints": [
+    {
+      "hint_number": 1,
+      "hint_text": "Start by sorting the array."
+    },
+    {
+      "hint_number": 2,
+      "hint_text": "Use a two-pointer approach."
+    },
+    {
+      "hint_number": 3,
+      "hint_text": "Consider using a hash map."
+    }
+  ],
+  "discussion": [
+    {
+      "user": "ninad98",
+      "message": "This question seems interesting!",
+      "timestamp": "2024-06-03T12:00:00Z"
+    },
+    {
+      "user": "username_1234",
+      "message": "This question seems interesting!",
+      "timestamp": "2024-06-03T12:00:00Z"
+    }
+  ],
+  "problem_description": [
+    {
+      "id": 1,
+      "content": "<!DOCTYPE html><html><head><title>Sample HTML</title></head><body><h1>Hello, world!</h1><p>This is a sample HTML document.</p></body></html>",
+      "format": "html"
+    },
+    {
+      "id": 2,
+      "content": "function twoSum(nums, target) {\n // Your code here\n}",
+      "format": "code"
+    },
+    {
+      "id": 3,
+      "content": "s3 location of audio file",
+      "format": "audio"
+    },
+    {
+      "id": 4,
+      "content": "s3 location of images",
+      "format": "image"
+    },
+    {
+      "id": 5,
+      "content": "Given an array of integers, return indices of the two numbers such that they add up to a specific target.",
+      "format": "text"
+    }
+  ]
+}
