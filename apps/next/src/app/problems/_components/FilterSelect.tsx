@@ -21,9 +21,9 @@ type Props = {
 export const difficulty_label_styles = tv({
   base: "text-black text-xl",
   slots: {
-    Easy: "text-green-500",
-    Medium: "text-yellow-500",
-    Hard: "text-red-500",
+    Easy: "!text-green-500",
+    Medium: "!text-yellow-500",
+    Hard: "!text-red-500",
   },
 });
 
