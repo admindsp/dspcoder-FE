@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 import { PrimaryBannerType } from "@/types/HomePage";
+import Link from "next/link";
 
 type PrimaryBannerProp = {
   data: PrimaryBannerType;
@@ -21,9 +22,12 @@ const PrimaryBanner = ({ data }: PrimaryBannerProp) => {
             {data.description}
           </span>
         </div>
-        <button className="text-black bg-white py-1 px-4 rounded-sm mt-4 md:mt-7 font-bold">
+        <Link
+          href="/problems"
+          className="text-black bg-white py-1 px-4 rounded-sm mt-4 md:mt-7 font-bold"
+        >
           Try Now
-        </button>
+        </Link>
       </div>
       <div className="flex justify-center lg:justify-end lg:w-1/2 mt-8 lg:mt-0">
         {data.media.map((mediaObj, idx) => {
