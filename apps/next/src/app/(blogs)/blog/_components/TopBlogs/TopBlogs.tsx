@@ -1,3 +1,4 @@
+"use client";
 import http_client from "@/app/api/client";
 import { BlogType } from "@/types/Blog";
 import { cn } from "@dspcoder/ui/lib/utils";
@@ -11,14 +12,14 @@ import {
   CarouselPrevious,
 } from "@dspcoder/ui/components/ui/carousel";
 import TopBlogCard from "./TopBlogCard";
-import { useMediaQuery } from "@uidotdev/usehooks";
+// import { useMediaQuery } from "@uidotdev/usehooks";
 
 type Props = {
   className: string;
 };
 
 const TopBlogs = ({ className }: Props) => {
-  const isDesktop = useMediaQuery("only screen and (min-width : 1024px)");
+  const isDesktop = true;
   const { data: Blogs, isLoading } = useQuery({
     queryKey: ["FetchedTopArticles"],
     queryFn: async () => {

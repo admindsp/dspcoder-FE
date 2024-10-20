@@ -6,7 +6,7 @@ type Props = {};
 
 const page = (props: Props) => {
   const router = useRouter();
-  return <div>{router.query.problemId}</div>;
+  return <div>hi</div>;
 };
 
 export default page;
