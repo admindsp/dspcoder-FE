@@ -20,10 +20,19 @@ const ProblemsListFilter = ({ type }: ProblemsListFilterProps) => {
     <div>
       <div id="problem-types" className="pb-2 border-b border-gray-400">
         <div className="w-full text-gray-400 flex justify-around text-xl">
-          <Link className={cn(type === "dsa" && "text-red-500")} href="">
+          <Link className={cn(!type && "text-red-500")} href="/problems">
+            All Problems
+          </Link>
+          <Link
+            className={cn(type === "dsa" && "text-red-500")}
+            href="/problems?type=dsa"
+          >
             Data Structures and Algorithms
           </Link>
-          <Link className={cn(type === "embedded" && "text-red-500")} href="">
+          <Link
+            className={cn(type === "embedded" && "text-red-500")}
+            href="/problems?type=embedded"
+          >
             Embedded Systems
           </Link>
         </div>
