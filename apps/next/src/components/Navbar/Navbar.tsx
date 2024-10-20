@@ -16,7 +16,7 @@ const Navbar = () => {
           href="/problems"
           className="font-sans font-semibold hover:text-gray-300 transition-all text-sm"
         >
-          Problems Page
+          Problems
         </Link>
         <div className="icons flex gap-3 items-center">
           <AuthenticatedSection />

@@ -17,9 +17,9 @@ type ProblemsListFilterProps = {
 
 const ProblemsListFilter = ({ type }: ProblemsListFilterProps) => {
   return (
-    <div>
+    <div className="w-full">
       <div id="problem-types" className="pb-2 border-b border-gray-400">
-        <div className="w-full text-gray-400 flex justify-around text-xl">
+        <div className="w-full text-gray-400 flex justify-around text-lg">
           <Link className={cn(!type && "text-red-500")} href="/problems">
             All Problems
           </Link>
@@ -38,7 +38,7 @@ const ProblemsListFilter = ({ type }: ProblemsListFilterProps) => {
         </div>
       </div>
 
-      <div id="problem-filters" className="w-full flex items-center gap-3 py-2">
+      <div id="problem-filters" className="flex items-center gap-3 py-2">
         <Input
           name=""
           type="text"

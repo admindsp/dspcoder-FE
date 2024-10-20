@@ -11,10 +11,10 @@ const GithubLogin = () => {
     <div className="w-full">
       <Button
         onClick={handleSignIn}
-        className="bg-darkish flex gap-2 items-center justify-center px-4 py-2 text-white w-full"
+        className="bg-darkish max-h-[30px] flex gap-2 items-center justify-center px-4 py-1 text-white w-full"
       >
         <IoLogoGithub className="w-5 h-5" />
-        <span>Login with Github</span>
+        <span>Sign in with Github</span>
       </Button>
     </div>
   );

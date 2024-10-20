@@ -11,7 +11,7 @@ import AIBasedInterviewImg from "@/assets/AIBasedInterviewImg.png";
 
 export const homePageData: HomePageDataType = {
   primary: {
-    title: "Embedded System Practice",
+    title: "Embedded Systems Redefined",
     description:
       "Learn and practice advanced embedded system concepts with industry-leading boards and platforms.",
     media: [
