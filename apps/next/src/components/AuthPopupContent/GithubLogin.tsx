@@ -5,7 +5,7 @@ import { IoLogoGithub } from "react-icons/io";
 
 const GithubLogin = () => {
   const handleSignIn = () => {
-    signIn("github");
+    signIn("github", { callbackUrl: "https://www.dspcoder.com" });
   };
   return (
     <div className="w-full">
