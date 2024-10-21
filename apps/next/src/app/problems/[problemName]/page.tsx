@@ -12,7 +12,7 @@ const Problem = () => {
 
   useEffect(() => {
     const fetchMarkdown = async () => {
-      const response = await fetch("/test.md"); // Make sure test.md is placed under /public directory
+      const response = await fetch("/test.md");
       const text = await response.text();
       setMarkdownContent(text);
     };
@@ -41,10 +41,14 @@ const Problem = () => {
       <Panel minSize={30} defaultSize={45}>
         <div
           id="external-buttons"
-          className="flex flex-row-reverse gap-2 items-center"
+          className="flex flex-row-reverse gap-2 items-center py-2"
         >
-          <Button className="bg-darkish text-white">Run</Button>
-          <Button className="bg-darkish text-white">Submit</Button>
+          <Button className="bg-grayish hover:bg-white hover:text-black text-white">
+            Run
+          </Button>
+          <Button className="bg-grayish hover:bg-white hover:text-black text-white">
+            Submit
+          </Button>
         </div>
 
         <Panel minSize={10} defaultSize={20}></Panel>

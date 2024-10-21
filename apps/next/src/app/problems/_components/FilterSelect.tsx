@@ -31,7 +31,7 @@ const FilterSelect = ({ placeholder, options }: Props) => {
   const { Easy, Medium, Hard } = difficulty_label_styles();
   return (
     <Select>
-      <SelectTrigger className="bg-grayish text-white w-[180px] border-none outline-none focus:outline-none focus:ring-0 focus:ring-offset-0">
+      <SelectTrigger className="bg-grayish text-white md:max-w-[180px] border-none outline-none focus:outline-none focus:ring-0 focus:ring-offset-0">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
@@ -42,7 +42,7 @@ const FilterSelect = ({ placeholder, options }: Props) => {
                 className={cn(
                   option.label === "Easy" && Easy(),
                   option.label === "Medium" && Medium(),
-                  option.label === "Hard" && Hard()
+                  option.label === "Hard" && Hard(),
                 )}
               >
                 {option.label}
