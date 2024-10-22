@@ -1,5 +1,5 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import React from "react";
 import {
   difficultyOptions,
@@ -11,7 +11,9 @@ import FilterSelect from "./FilterSelect";
 import Link from "next/link";
 import { cn } from "@dspcoder/ui/lib/utils";
 import { Input } from "@dspcoder/ui/components/ui/input";
+import { IoIosCloseCircle } from "react-icons/io";
 import { createQueryString } from "@/utils/createQueryString";
+import { Button } from "@dspcoder/ui/components/ui/button";
 
 type ProblemsListFilterProps = {
   type?: string;
@@ -19,6 +21,17 @@ type ProblemsListFilterProps = {
 
 const ProblemsListFilter = ({ type }: ProblemsListFilterProps) => {
   const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const handleRemoveParam = (key: string) => {
+    const updatedParams = new URLSearchParams(searchParams);
+    updatedParams.delete(key);
+    const queryString = updatedParams.toString();
+    router.push(`/problems?${queryString}`, { scroll: false });
+  };
+  const filteredParams = Array.from(searchParams.entries()).filter(
+    ([key]) => key !== "type"
+  );
 
   return (
     <div className="w-full">
@@ -32,7 +45,7 @@ const ProblemsListFilter = ({ type }: ProblemsListFilterProps) => {
           </Link>
           <Link
             className={cn(
-              type === "dsa" && "text-red-500 transition-all duration-300",
+              type === "dsa" && "text-red-500 transition-all duration-300"
             )}
             href={`/problems?${createQueryString(searchParams, "type", "dsa")}`}
           >
@@ -40,7 +53,7 @@ const ProblemsListFilter = ({ type }: ProblemsListFilterProps) => {
           </Link>
           <Link
             className={cn(
-              type === "embedded" && "text-red-500 transition-all duration-300",
+              type === "embedded" && "text-red-500 transition-all duration-300"
             )}
             href={`/problems?${createQueryString(searchParams, "type", "embedded")}`}
           >
@@ -51,37 +64,42 @@ const ProblemsListFilter = ({ type }: ProblemsListFilterProps) => {
 
       <div
         id="problem-filters"
-        className="grid grid-cols-2 sm:grid-flow-col w-full sm:w-fit gap-3 py-2"
+        className="flex flex-col lg:flex-row gap-3 py-2"
       >
         <Input
           name=""
           type="text"
           id="problem-search"
-          className="bg-grayish placeholder:text-gray-400 text-white border-none outline-none focus:outline-none focus:ring-0 focus:ring-offset-0 max-w-[30rem]"
-          placeholder="Search question"
+          className="bg-grayish max-h-[32px] lg:max-w-[20rem] placeholder:text-gray-400 text-white border-none outline-none focus:outline-none focus:ring-0 focus:ring-offset-0"
+          placeholder="Search a question..."
         />
-        <FilterSelect placeholder="Difficulty" options={difficultyOptions} />
-        <FilterSelect placeholder="Status" options={statusOptions} />
-        <FilterSelect placeholder="Lists" options={listsOptions} />
+        <div className="grid grid-cols-2 lg:grid-flow-col w-full lg:w-fit gap-2 ">
+          <FilterSelect placeholder="Difficulty" options={difficultyOptions} />
+          <FilterSelect placeholder="Status" options={statusOptions} />
+          <FilterSelect placeholder="Lists" options={listsOptions} />
+          <FilterSelect placeholder="Tags" options={tagsOptions} />
+        </div>
       </div>
 
       <div
         id="problem-tags"
-        className="w-full flex flex-wrap items-center gap-3 pt-4"
+        className="w-full flex flex-wrap py-2 items-center gap-3 "
       >
-        {tagsOptions.map((tag, index) => (
-          <Link
-            href={`/problems?${createQueryString(searchParams, "tag", tag.value)}`}
+        {filteredParams.map(([key, value], index) => (
+          <div
             key={index}
             className={cn(
-              " hover:bg-white hover:text-black transition-all duration-300 text-white rounded-lg pt-1 pb-1 px-4 flex align-middle cursor-pointer",
-              searchParams.get("tag")?.toString() === tag.value
-                ? "bg-white !text-black scale-95"
-                : "bg-grayish",
+              "bg-grayish text-grayish_text text-sm font-semibold rounded-lg py-1 px-2 flex items-center justify-between gap-3"
             )}
           >
-            <span>{tag.label}</span>
-          </Link>
+            <span>{value}</span>
+            <Button
+              className="bg-transparent hover:bg-transparent h-fit w-fit p-0 text-white"
+              onClick={() => handleRemoveParam(key)}
+            >
+              <IoIosCloseCircle className="h-4 w-4" />
+            </Button>
+          </div>
         ))}
       </div>
     </div>
