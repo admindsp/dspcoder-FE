@@ -11,7 +11,7 @@ type ProblemsPageProps = {
 const Problems = ({ searchParams }: ProblemsPageProps) => {
   const { type } = searchParams;
   return (
-    <div className="px-20 bg-black min-h-screen py-5 sm:py-8 gap-4 flex justify-between">
+    <div className="px-4 md:px-20 bg-black min-h-screen py-5 sm:py-8 gap-4 flex justify-between">
       <div className="w-full">
         <ProblemsListFilter type={type} />
         <ProblemsList />

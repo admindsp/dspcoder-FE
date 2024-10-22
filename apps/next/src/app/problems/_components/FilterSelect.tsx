@@ -65,11 +65,7 @@ const FilterSelect = ({ placeholder, options }: Props) => {
       <SelectContent className="bg-grayish font-semibold text-grayish_text outline-none ring-offset-0 border-none">
         <SelectGroup>
           {options.map((option) => (
-            <SelectItem
-              className="hover:bg-darkish"
-              key={option.value}
-              value={option.value}
-            >
+            <SelectItem className="" key={option.value} value={option.value}>
               <span
                 className={cn(
                   option.label === "Easy" && Easy(),
