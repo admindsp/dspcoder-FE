@@ -10,7 +10,7 @@ type PrimaryBannerProp = {
 
 const PrimaryBanner = ({ data }: PrimaryBannerProp) => {
   return (
-    <div className="flex flex-col lg:flex-row justify-between items-center px-4 md:px-12 border-b py-2 lg:py-0 lg:border-none">
+    <div className="flex flex-col lg:flex-row justify-between items-center px-4 md:px-12 border-b py-20 lg:py-0 lg:border-none">
       <div className="flex flex-col items-start space-y-4 md:space-y-6 lg:w-1/2">
         <div className="md:w-full">
           <span className="text-white text-4xl md:text-6xl font-semibold block pb-2">
