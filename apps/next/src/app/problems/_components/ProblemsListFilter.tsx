@@ -37,13 +37,18 @@ const ProblemsListFilter = ({ type }: ProblemsListFilterProps) => {
   }, [searchTerm]);
 
   useEffect(() => {
+    const updatedQuery = createQueryString(
+      searchParams,
+      "title",
+      debouncedSearchTerm
+    );
+
     if (debouncedSearchTerm) {
-      const updatedQuery = createQueryString(
-        searchParams,
-        "title",
-        debouncedSearchTerm
-      );
       router.push(`/problems?${updatedQuery}`, { scroll: false });
+    } else {
+      const updatedParams = new URLSearchParams(searchParams);
+      updatedParams.delete("title");
+      router.push(`/problems?${updatedParams.toString()}`, { scroll: false });
     }
   }, [debouncedSearchTerm, searchParams, router]);
 
@@ -104,9 +109,17 @@ const ProblemsListFilter = ({ type }: ProblemsListFilterProps) => {
         />
         <div className="grid grid-cols-2 lg:grid-flow-col w-full lg:w-fit gap-2 ">
           <FilterSelect placeholder="Difficulty" options={difficultyOptions} />
-          <FilterSelect placeholder="Status" options={statusOptions} />
-          <FilterSelect placeholder="Lists" options={listsOptions} />
           <FilterSelect placeholder="Tags" options={tagsOptions} />
+          <FilterSelect
+            disabled={true}
+            placeholder="Status"
+            options={statusOptions}
+          />
+          <FilterSelect
+            disabled={true}
+            placeholder="Lists"
+            options={listsOptions}
+          />
         </div>
       </div>
 

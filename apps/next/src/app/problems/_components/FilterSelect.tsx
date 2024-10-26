@@ -18,6 +18,7 @@ type Props = {
     label: string;
     value: string;
   }[];
+  disabled?: boolean;
 };
 
 export const difficulty_label_styles = tv({
@@ -29,7 +30,7 @@ export const difficulty_label_styles = tv({
   },
 });
 
-const FilterSelect = ({ placeholder, options }: Props) => {
+const FilterSelect = ({ placeholder, options, disabled = false }: Props) => {
   const { Easy, Medium, Hard } = difficulty_label_styles();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -59,7 +60,10 @@ const FilterSelect = ({ placeholder, options }: Props) => {
 
   return (
     <Select onValueChange={handleFilterChange} value={selectedValue}>
-      <SelectTrigger className="bg-grayish px-4 font-semibold text-grayish_text w-full max-h-[32px] lg:min-w-[120px] border-none outline-none focus:outline-none focus:ring-0 focus:ring-offset-0">
+      <SelectTrigger
+        disabled={disabled}
+        className="bg-grayish px-4 font-semibold text-grayish_text w-full max-h-[32px] lg:min-w-[120px] border-none outline-none focus:outline-none focus:ring-0 focus:ring-offset-0"
+      >
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent className="bg-grayish font-semibold text-grayish_text outline-none ring-offset-0 border-none">
