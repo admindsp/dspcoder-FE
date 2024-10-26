@@ -10,8 +10,7 @@
   (there is a sample .env.sample file where actually parameters need to be set)
 - Go back to root folder, type the following command: `pnpm run dev`
 
-## DOCKER Setup
-
--- 
+## TO-DO:
+1. Problems page
 
 
