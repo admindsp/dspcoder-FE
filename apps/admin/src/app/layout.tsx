@@ -9,13 +9,17 @@ export const metadata = {
   description: "Get prepared for your next interview with DSPCoder",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body>
         <AuthProvider>
           <Navbar />
-          <div className="dark:bg-darkish dark:text-white text-black bg-[#c5c5c5] min-h-screen flex flex-col">
+          <div className=" min-h-screen flex flex-col">
             <div className="w-[80%] mx-auto flex-grow">{children}</div>
           </div>
           <Footer />

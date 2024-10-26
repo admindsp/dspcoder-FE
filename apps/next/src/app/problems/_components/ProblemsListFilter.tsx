@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams, useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   difficultyOptions,
   listsOptions,
@@ -23,6 +23,34 @@ const ProblemsListFilter = ({ type }: ProblemsListFilterProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState(searchTerm);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 500);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchTerm]);
+
+  useEffect(() => {
+    if (debouncedSearchTerm) {
+      const updatedQuery = createQueryString(
+        searchParams,
+        "title",
+        debouncedSearchTerm
+      );
+      router.push(`/problems?${updatedQuery}`, { scroll: false });
+    }
+  }, [debouncedSearchTerm, searchParams, router]);
+
+  const handleSearch = (e: any) => {
+    setSearchTerm(e.target.value);
+  };
+
   const handleRemoveParam = (key: string) => {
     const updatedParams = new URLSearchParams(searchParams);
     updatedParams.delete(key);
@@ -30,7 +58,7 @@ const ProblemsListFilter = ({ type }: ProblemsListFilterProps) => {
     router.push(`/problems?${queryString}`, { scroll: false });
   };
   const filteredParams = Array.from(searchParams.entries()).filter(
-    ([key]) => key !== "type"
+    ([key]) => key !== "type" && key !== "title"
   );
 
   return (
@@ -67,6 +95,7 @@ const ProblemsListFilter = ({ type }: ProblemsListFilterProps) => {
         className="flex flex-col lg:flex-row gap-3 py-2"
       >
         <Input
+          onChange={(e) => handleSearch(e)}
           name=""
           type="text"
           id="problem-search"

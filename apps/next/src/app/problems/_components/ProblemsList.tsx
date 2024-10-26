@@ -1,5 +1,4 @@
 "use client";
-import { ProblemsData } from "@/constants/ProblemsData";
 import { difficulty_label_styles } from "./FilterSelect";
 import {
   Table,
@@ -14,10 +13,19 @@ import { cn } from "@dspcoder/ui/lib/utils";
 import Link from "next/link";
 import { createQueryString } from "@/utils/createQueryString";
 import { useSearchParams } from "next/navigation";
+import { ProblemsSearchParamsType, ProblemType } from "@/types/Problem";
+import { use } from "react";
 
-export default function ProblemsList() {
+type ProblemsListProps = {
+  getProblemsPromise: Promise<ProblemType[]>;
+};
+
+export default function ProblemsList({
+  getProblemsPromise,
+}: ProblemsListProps) {
   const searchParams = useSearchParams();
   const { Easy, Medium, Hard } = difficulty_label_styles();
+  const problemsData = use(getProblemsPromise);
 
   return (
     <Table className="table-auto border-collapse">
@@ -30,28 +38,20 @@ export default function ProblemsList() {
         </TableRow>
       </TableHeader>
       <TableBody className="text-white">
-        {ProblemsData.map((problem) => (
+        {problemsData.map((problem) => (
           <TableRow
             className="!rounded-md !border-none hover:!bg-darkish bg-black "
             key={problem.id}
           >
             <TableCell className="whitespace-nowrap max-w-max">
-              <Link href={`/problems/${problem.title}`}>{problem.title}</Link>
+              <Link href={`/problems/${problem.title}/${problem.id}`}>
+                {problem.title}
+              </Link>
             </TableCell>
             <TableCell className="capitalize whitespace-nowrap max-w-max">
-              <span className="inline-flex gap-2">
-                {problem.type.map((type, idx) => {
-                  return (
-                    <Link
-                      key={idx}
-                      href={`/problems?${createQueryString(searchParams, "type", type)}`}
-                    >
-                      {type}
-                      {idx !== problem.type.length - 1 && ","}
-                    </Link>
-                  );
-                })}
-              </span>
+              <Link href={`/problems?type=${problem?.type?.toLowerCase()}`}>
+                {problem.type}
+              </Link>
             </TableCell>
             <TableCell
               className={cn(
@@ -61,7 +61,11 @@ export default function ProblemsList() {
                 problem.difficulty == "Hard" && Hard()
               )}
             >
-              {problem.difficulty}
+              <Link
+                href={`/problems?difficulty=${problem?.difficulty?.toLowerCase()}`}
+              >
+                {problem.difficulty}
+              </Link>
             </TableCell>
             <TableCell className="capitalize whitespace-nowrap max-w-max">
               <span className="inline-flex gap-2">

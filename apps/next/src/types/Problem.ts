@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const ProblemSchema = z.object({
   id: z.number(),
-  type: z.array(z.string()),
+  type: z.string(),
   title: z.string(),
   difficulty: z.string(),
   topic: z.array(z.string()),
@@ -10,4 +10,14 @@ export const ProblemSchema = z.object({
   folder_path: z.string(),
 });
 
+export const ProblemsSearchParamsSchema = z.object({
+  type: z.string().optional(),
+  title: z.string().optional(),
+  difficulty: z.string().optional(),
+  tags: z.string().optional(),
+});
+
 export type ProblemType = z.infer<typeof ProblemSchema>;
+export type ProblemsSearchParamsType = z.infer<
+  typeof ProblemsSearchParamsSchema
+>;

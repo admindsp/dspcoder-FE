@@ -1,10 +1,20 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-const AuthContext = createContext(null);
+interface AuthContextType {
+  isAuthenticated: boolean;
+  login: () => void;
+  logout: () => void;
+}
 
-export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+const AuthContext = createContext<AuthContextType | null>(null);
+
+type AuthProviderProps = {
+  children: React.ReactNode;
+};
+
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -22,11 +32,19 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
   };
 
-  return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  const value: AuthContextType = {
+    isAuthenticated,
+    login,
+    logout,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = (): AuthContextType => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};

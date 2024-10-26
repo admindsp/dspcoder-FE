@@ -1,346 +1,242 @@
 "use client";
-import axios from "axios";
-import React from "react";
-import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 
-type Example = {
-  input: string;
-  output: string;
-  image?: FileList;
-};
+import { useState } from "react";
+import { Label } from "@dspcoder/ui/components/ui/label";
+import { Input } from "@dspcoder/ui/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@dspcoder/ui/components/ui/select";
+import { Button } from "@dspcoder/ui/components/ui/button";
+import { Progress } from "@dspcoder/ui/components/ui/progress";
+import { Textarea } from "@dspcoder/ui/components/ui/textarea";
+import { BlobServiceClient } from "@azure/storage-blob";
 
-type ProblemFormInputs = {
+// Define the shape of the form data
+interface FormData {
   title: string;
   description: string;
   difficulty: string;
-  questionType: string;
-  keywords?: string[];
-  questionImages?: FileList;
-  examples: Example[];
-};
+  type: string;
+  tags: string;
+  companies: string;
+}
 
-const ProblemUpload: React.FC = () => {
-  const {
-    register,
-    handleSubmit,
-    control,
-    setValue,
-    formState: { errors },
-  } = useForm<ProblemFormInputs>({
-    defaultValues: {
-      examples: [{ input: "", output: "", image: undefined }],
-      keywords: [""],
-    },
+const sasToken =
+  "sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2024-10-24T07:20:05Z&st=2024-10-23T23:20:05Z&spr=https&sig=ebVZ1ufxjDh4eQ5qdD2RcSBEBw%2BN8XS7hXQ7oQkTp30%3D";
+const storageAccountName = "dspcoderproblem";
+
+export default function ProblemUpload() {
+  const [step, setStep] = useState<number>(1);
+  const [folderPath, setFolderPath] = useState<string>("");
+  const [uploading, setUploading] = useState<boolean>(false);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
+  const [formData, setFormData] = useState<FormData>({
+    title: "",
+    description: "",
+    difficulty: "",
+    type: "dsa",
+    tags: "",
+    companies: "",
   });
 
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "examples",
-  });
+  const handleFolderUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      setUploading(true);
+      setUploadProgress(0);
 
-  const {
-    fields: keywordFields,
-    append: appendKeyword,
-    remove: removeKeyword,
-  } = useFieldArray({
-    control,
-    name: "examples",
-  });
+      try {
+        const blobServiceClient = new BlobServiceClient(
+          `https://${storageAccountName}.blob.core.windows.net/${sasToken}`
+        );
+        const containerClient =
+          blobServiceClient.getContainerClient("problem-bucket");
 
-  const onSubmit: SubmitHandler<ProblemFormInputs> = async (data) => {
-    try {
-      const formData = new FormData();
-      formData.append("title", data.title);
-      formData.append("description", data.description);
-      formData.append("difficulty", data.difficulty);
-      formData.append("questionType", data.questionType);
+        let totalSize = 0;
+        let uploadedSize = 0;
+        for (const file of files) {
+          totalSize += file.size;
+        }
 
-      if (data.keywords) {
-        data.keywords.forEach((keyword, index) => {
-          formData.append(`keywords[${index}]`, keyword);
-        });
-      }
+        for (const file of files) {
+          const blobName = file.webkitRelativePath;
+          const blockBlobClient = containerClient.getBlockBlobClient(blobName);
 
-      if (data.questionImages && data.questionImages.length > 0) {
-        Array.from(data.questionImages).forEach((file, index) => {
-          formData.append(`questionImages[${index}]`, file);
-        });
-      }
-
-      data.examples.forEach((example, index) => {
-        formData.append(`examples[${index}][input]`, example.input);
-        formData.append(`examples[${index}][output]`, example.output);
-        if (example.image && example.image.length > 0) {
-          Array.from(example.image).forEach((file, fileIndex) => {
-            formData.append(`examples[${index}][image][${fileIndex}]`, file);
+          await blockBlobClient.uploadData(await file.arrayBuffer(), {
+            onProgress: (ev) => {
+              uploadedSize += ev.loadedBytes;
+              const totalProgress = (uploadedSize / totalSize) * 100;
+              setUploadProgress(Math.round(totalProgress));
+            },
           });
         }
+
+        setFolderPath(
+          `${containerClient.url}/${files[0].webkitRelativePath.split("/")[0]}`
+        );
+        setStep(2);
+      } catch (error) {
+        console.error("Error uploading to Azure Blob Storage:", error);
+        alert("An error occurred while uploading. Please try again.");
+      } finally {
+        setUploading(false);
+      }
+    }
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSelectChange = (name: keyof FormData, value: string) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const problemData = { ...formData, folder_path: folderPath };
+
+    try {
+      const response = await fetch("/api/problems", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(problemData),
       });
 
-      const response = await axios.post(
-        "http://localhost:5000/api/upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      if (!response.ok) {
+        throw new Error("Failed to submit problem data");
+      }
 
-      console.log("Upload successful:", response.data);
+      alert("Problem uploaded successfully!");
     } catch (error) {
-      console.error("Upload failed:", error);
+      console.error("Error submitting problem data:", error);
+      alert(
+        "An error occurred while submitting the problem. Please try again."
+      );
     }
   };
 
   return (
-    <div className="w-full bg-darkish min-h-screen flex justify-center items-center p-4">
-      <div className="p-6 bg-gray-800 rounded-lg shadow-lg w-full max-w-3xl">
-        <h1 className="text-3xl font-bold mb-6 text-gray-300 text-center">
-          Upload a New Problem
-        </h1>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <div className="w-full bg-background min-h-screen p-4 flex flex-col items-center">
+      {step === 1 ? (
+        <div className="w-full max-w-md">
+          <h1 className="text-2xl font-bold mb-4">Upload Problem Folder</h1>
+          <Input
+            type="file"
+            onChange={handleFolderUpload}
+            webkitdirectory="true"
+            directory="true"
+            multiple
+            disabled={uploading}
+          />
+          {uploading && (
+            <div className="mt-4">
+              <Progress value={uploadProgress} className="w-full" />
+              <p className="mt-2">Uploading... {uploadProgress}%</p>
+            </div>
+          )}
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4">
+          <h1 className="text-2xl font-bold mb-4">Problem Details</h1>
+
           <div>
-            <label
-              htmlFor="title"
-              className="block text-sm font-medium text-gray-300"
-            >
-              Problem Title
-            </label>
-            <input
-              {...register("title", { required: "Title is required" })}
+            <Label htmlFor="title">Title</Label>
+            <Input
               id="title"
-              type="text"
-              className="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-700 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-300"
+              name="title"
+              value={formData.title}
+              onChange={handleInputChange}
+              required
             />
-            {errors.title && (
-              <span className="text-red-500 text-sm">
-                {errors.title.message}
-              </span>
-            )}
           </div>
 
           <div>
-            <label
-              htmlFor="description"
-              className="block text-sm font-medium text-gray-300"
-            >
-              Problem Description
-            </label>
-            <textarea
-              {...register("description", {
-                required: "Description is required",
-              })}
+            <Label htmlFor="description">Description</Label>
+            <Textarea
               id="description"
-              className="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-700 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-300"
-            />
-            {errors.description && (
-              <span className="text-red-500 text-sm">
-                {errors.description.message}
-              </span>
-            )}
-          </div>
-
-          <div>
-            <label
-              htmlFor="difficulty"
-              className="block text-sm font-medium text-gray-300"
-            >
-              Problem Difficulty
-            </label>
-            <select
-              {...register("difficulty", {
-                required: "Difficulty is required",
-              })}
-              id="difficulty"
-              className="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-700 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-300"
-            >
-              <option value="">Select difficulty</option>
-              <option value="easy">Easy</option>
-              <option value="medium">Medium</option>
-              <option value="hard">Hard</option>
-            </select>
-            {errors.difficulty && (
-              <span className="text-red-500 text-sm">
-                {errors.difficulty.message}
-              </span>
-            )}
-          </div>
-
-          <div>
-            <label
-              htmlFor="questionType"
-              className="block text-sm font-medium text-gray-300"
-            >
-              Question Type
-            </label>
-            <select
-              {...register("questionType", {
-                required: "Question Type is required",
-              })}
-              id="questionType"
-              className="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-700 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-300"
-            >
-              <option value="">Select type</option>
-              <option value="DSA">DSA</option>
-              <option value="Embedded">Embedded</option>
-            </select>
-            {errors.questionType && (
-              <span className="text-red-500 text-sm">
-                {errors.questionType.message}
-              </span>
-            )}
-          </div>
-
-          <div>
-            <label
-              htmlFor="keywords"
-              className="block text-sm font-medium text-gray-300"
-            >
-              Keywords
-            </label>
-            <div className="flex space-x-2 overflow-x-auto py-2">
-              {keywordFields.map((field, index) => (
-                <div key={field.id} className="flex items-center space-x-2">
-                  <input
-                    {...register(`keywords.${index}`, { required: false })}
-                    id={`keywords.${index}`}
-                    type="text"
-                    className="px-4 py-2 border border-gray-600 bg-gray-700 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-300"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => removeKeyword(index)}
-                    className="text-white bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md"
-                  >
-                    Remove
-                  </button>
-                </div>
-              ))}
-            </div>
-            <button
-              type="button"
-              onClick={() => appendKeyword({ input: "", output: "" })}
-              className="mt-2 bg-green-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
-            >
-              Add Keyword
-            </button>
-          </div>
-
-          <div>
-            <label
-              htmlFor="questionImages"
-              className="block text-sm font-medium text-gray-300"
-            >
-              Question Images
-            </label>
-            <input
-              {...register("questionImages")}
-              id="questionImages"
-              type="file"
-              multiple
-              className="mt-1 block w-full text-gray-300"
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+              required
             />
           </div>
 
-          <div className="border-2 border-gray-600 rounded-lg p-4">
-            <label className="block text-base font-medium text-gray-300">
-              Examples
-            </label>
-            <div className="max-h-80 overflow-y-auto space-y-4 p-2 border rounded-md border-gray-600">
-              {fields.map((field, index) => (
-                <div key={field.id} className="space-y-2">
-                  <div>
-                    <label
-                      htmlFor={`examples[${index}].input`}
-                      className="block text-sm font-medium text-gray-300"
-                    >
-                      Example Input
-                    </label>
-                    <textarea
-                      {...register(`examples.${index}.input`, {
-                        required: "Input is required",
-                      })}
-                      id={`examples[${index}].input`}
-                      className="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-700 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-300"
-                    />
-                    {errors.examples?.[index]?.input && (
-                      <span className="text-red-500 text-sm">
-                        {errors?.examples[index]?.input?.message}
-                      </span>
-                    )}
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor={`examples[${index}].output`}
-                      className="block text-sm font-medium text-gray-300"
-                    >
-                      Example Output
-                    </label>
-                    <textarea
-                      {...register(`examples.${index}.output`, {
-                        required: "Output is required",
-                      })}
-                      id={`examples[${index}].output`}
-                      className="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-700 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-300"
-                    />
-                    {errors.examples?.[index]?.output && (
-                      <span className="text-red-500 text-sm">
-                        {errors?.examples[index]?.output?.message}
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <div className="">
-                      <label
-                        htmlFor={`examples[${index}].image`}
-                        className="block text-sm font-medium text-gray-300"
-                      >
-                        Example Image
-                      </label>
-                      <input
-                        {...register(`examples.${index}.image`)}
-                        id={`examples[${index}].image`}
-                        type="file"
-                        className="mt-1 block w-full text-gray-300"
-                      />
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={() => remove(index)}
-                      className="text-white bg-red-600 hover:bg-red-700 px-4 h-fit py-2 rounded-md"
-                    >
-                      Remove Example
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <button
-              type="button"
-              onClick={() =>
-                append({ input: "", output: "", image: undefined })
-              }
-              className="mt-4 bg-green-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+          <div>
+            <Label htmlFor="difficulty">Difficulty</Label>
+            <Select
+              name="difficulty"
+              onValueChange={(value) => handleSelectChange("difficulty", value)}
+              required
             >
-              Add Example
-            </button>
+              <SelectTrigger>
+                <SelectValue placeholder="Select difficulty" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="easy">Easy</SelectItem>
+                <SelectItem value="medium">Medium</SelectItem>
+                <SelectItem value="hard">Hard</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
-          <div className="text-center">
-            <button
-              type="submit"
-              className="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          <div>
+            <Label htmlFor="type">Type</Label>
+            <Select
+              name="type"
+              onValueChange={(value) => handleSelectChange("type", value)}
+              defaultValue="dsa"
+              required
             >
-              Submit
-            </button>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="dsa">DSA</SelectItem>
+                <SelectItem value="embedded">Embedded</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
+
+          <div>
+            <Label htmlFor="tags">Tags (comma-separated)</Label>
+            <Input
+              id="tags"
+              name="tags"
+              value={formData.tags}
+              onChange={handleInputChange}
+            />
+          </div>
+
+          <div>
+            <Label htmlFor="companies">Companies (comma-separated)</Label>
+            <Input
+              id="companies"
+              name="companies"
+              value={formData.companies}
+              onChange={handleInputChange}
+            />
+          </div>
+
+          <div>
+            <Label htmlFor="folder_path">Folder Path</Label>
+            <Input id="folder_path" value={folderPath} readOnly />
+          </div>
+
+          <Button type="submit">Submit</Button>
         </form>
-      </div>
+      )}
     </div>
   );
-};
-
-export default ProblemUpload;
+}
