@@ -17,15 +17,12 @@ import { ProblemsSearchParamsType, ProblemType } from "@/types/Problem";
 import { use } from "react";
 
 type ProblemsListProps = {
-  getProblemsPromise: Promise<ProblemType[]>;
+  problemsData: ProblemType[];
 };
 
-export default function ProblemsList({
-  getProblemsPromise,
-}: ProblemsListProps) {
+export default function ProblemsList({ problemsData }: ProblemsListProps) {
   const searchParams = useSearchParams();
   const { Easy, Medium, Hard } = difficulty_label_styles();
-  const problemsData = use(getProblemsPromise);
 
   return (
     <Table className="table-auto border-collapse">

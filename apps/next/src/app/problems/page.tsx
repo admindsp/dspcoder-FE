@@ -16,17 +16,14 @@ export default async function Problems({ searchParams }: ProblemsPageProps) {
     ...(tags && { tags: tags }),
   };
 
-  const getProblemsPromise: Promise<ProblemType[]> = http_client.get(
-    "/api/problems/",
-    {
-      params: filterPayload,
-    }
-  );
+  const problemsData: ProblemType[] = await http_client.get("/api/problems/", {
+    params: filterPayload,
+  });
   return (
     <div className="px-4 md:px-20 bg-black min-h-screen py-5 sm:py-8 gap-4 flex justify-between">
       <div className="w-full">
         <ProblemsListFilter type={type} />
-        <ProblemsList getProblemsPromise={getProblemsPromise} />
+        <ProblemsList problemsData={problemsData} />
       </div>
     </div>
   );
