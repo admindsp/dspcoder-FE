@@ -13,7 +13,6 @@ export default async function Problem({ params }: ProblemPageProps) {
   return (
     <>
       <ProblemContent />
-      <p>test</p>
     </>
   );
 }

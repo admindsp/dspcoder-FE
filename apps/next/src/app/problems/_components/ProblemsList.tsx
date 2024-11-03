@@ -13,16 +13,12 @@ import { cn } from "@dspcoder/ui/lib/utils";
 import Link from "next/link";
 import { createQueryString } from "@/utils/createQueryString";
 import { useSearchParams } from "next/navigation";
-import { ProblemsSearchParamsType, ProblemType } from "@/types/Problem";
-import { use } from "react";
+import { useProblemsContext } from "@/contenxt/ProblemsProvider";
 
-type ProblemsListProps = {
-  problemsData: ProblemType[];
-};
-
-export default function ProblemsList({ problemsData }: ProblemsListProps) {
+export default function ProblemsList() {
   const searchParams = useSearchParams();
   const { Easy, Medium, Hard } = difficulty_label_styles();
+  const { problemsData } = useProblemsContext();
 
   return (
     <Table className="table-auto border-collapse">
@@ -35,7 +31,7 @@ export default function ProblemsList({ problemsData }: ProblemsListProps) {
         </TableRow>
       </TableHeader>
       <TableBody className="text-white">
-        {problemsData.map((problem) => (
+        {problemsData?.map((problem) => (
           <TableRow
             className="!rounded-md !border-none hover:!bg-darkish bg-black "
             key={problem.id}

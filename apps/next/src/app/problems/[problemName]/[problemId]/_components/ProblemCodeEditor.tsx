@@ -19,7 +19,7 @@ const ProblemCodeEditor = (props: Props) => {
       </div>
 
       <iframe
-        src="http://localhost:8080/?folder=/home/dspcoder"
+        src="http://test-test.eastus.azurecontainer.io:8080/?folder=/home/test"
         className="w-full h-full"
         frameBorder="0"
       ></iframe>

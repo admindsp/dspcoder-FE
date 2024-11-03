@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import "@dspcoder/ui/globals.css";
 import Footer from "@/components/Footer/Footer";
 import AuthProvider from "@/contenxt/AuthProvider";
+import QueryProvider from "@/contenxt/QueryClientProvider";
 
 export const metadata: Metadata = {
   title: "DSPCoder",
@@ -16,13 +17,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <AuthProvider>
-        <body className="relative bg-darkish">
-          <Navbar />
-          {children}
-          <Footer />
-        </body>
-      </AuthProvider>
+      <QueryProvider>
+        <AuthProvider>
+          <body className="relative bg-darkish">
+            <Navbar />
+            {children}
+            <Footer />
+          </body>
+        </AuthProvider>
+      </QueryProvider>
     </html>
   );
 }
