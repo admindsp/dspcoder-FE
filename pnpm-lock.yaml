@@ -113,78 +113,11 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
 
-  apps/docs:
-    dependencies:
-      '@dspcoder/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
-      '@monaco-editor/react':
-        specifier: ^4.6.0
-        version: 4.6.0(monaco-editor@0.52.0)(react-dom@18.2.0)(react@18.2.0)
-      '@tanstack/react-query':
-        specifier: ^5.39.0
-        version: 5.39.0(react@18.2.0)
-      axios:
-        specifier: ^1.6.8
-        version: 1.6.8
-      lottie-react:
-        specifier: ^2.4.0
-        version: 2.4.0(react-dom@18.2.0)(react@18.2.0)
-      next:
-        specifier: ^14.0.4
-        version: 14.2.3(react-dom@18.2.0)(react@18.2.0)
-      react:
-        specifier: ^18.2.0
-        version: 18.2.0
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
-      react-simple-typewriter:
-        specifier: ^5.0.1
-        version: 5.0.1(react-dom@18.2.0)(react@18.2.0)
-      react-spinners:
-        specifier: ^0.13.8
-        version: 0.13.8(react-dom@18.2.0)(react@18.2.0)
-    devDependencies:
-      '@dspcoder/eslint-config':
-        specifier: workspace:*
-        version: link:../../packages/eslint-config
-      '@dspcoder/typescript-config':
-        specifier: workspace:*
-        version: link:../../packages/typescript-config
-      '@next/eslint-plugin-next':
-        specifier: ^14.0.4
-        version: 14.2.3
-      '@types/eslint':
-        specifier: ^8.56.1
-        version: 8.56.5
-      '@types/node':
-        specifier: ^20.10.6
-        version: 20.11.24
-      '@types/react':
-        specifier: ^18.2.46
-        version: 18.2.61
-      '@types/react-dom':
-        specifier: ^18.2.18
-        version: 18.2.19
-      autoprefixer:
-        specifier: ^10.4.17
-        version: 10.4.19(postcss@8.4.38)
-      eslint:
-        specifier: ^8.56.0
-        version: 8.57.0
-      postcss:
-        specifier: ^8.4.33
-        version: 8.4.38
-      tailwindcss:
-        specifier: ^3.4.1
-        version: 3.4.3
-      typescript:
-        specifier: ^5.3.3
-        version: 5.3.3
-
   apps/next:
     dependencies:
+      '@dspcoder/jotai':
+        specifier: '*'
+        version: link:../../packages/jotai
       '@dspcoder/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -209,6 +142,9 @@ importers:
       next-auth:
         specifier: ^4.24.7
         version: 4.24.7(next@15.0.0-rc.0)(react-dom@19.0.0-rc-778e1ed2-20240926)(react@19.0.0-rc-778e1ed2-20240926)
+      next-cloudinary:
+        specifier: ^6.16.0
+        version: 6.16.0(next@15.0.0-rc.0)(react@19.0.0-rc-778e1ed2-20240926)
       next-mdx-remote:
         specifier: ^5.0.0
         version: 5.0.0(@types/react@18.2.61)(react@19.0.0-rc-778e1ed2-20240926)
@@ -1362,6 +1298,39 @@ packages:
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
     dev: true
+
+  /@cloudinary-util/types@1.5.10:
+    resolution: {integrity: sha512-n5lrm7SdAXhgWEbkSJKHZGnaoO9G/g4WYS6HYnq/k4nLj79sYfQZOoKjyR8hF2iyLRdLkT+qlk68RNFFv5tKew==}
+    dev: false
+
+  /@cloudinary-util/url-loader@5.10.4:
+    resolution: {integrity: sha512-gHkdvOaV+rlcwuIT7Vqd0ts/H5bsH4+bwFten/gIZ8oRjzdTBvgIY3R6F8bbJt0pFIEfpFEQLe4rPkl0NNqEWg==}
+    dependencies:
+      '@cloudinary-util/types': 1.5.10
+      '@cloudinary-util/util': 3.3.2
+      '@cloudinary/url-gen': 1.15.0
+      zod: 3.23.8
+    dev: false
+
+  /@cloudinary-util/util@3.3.2:
+    resolution: {integrity: sha512-Cc0iFxzfl7fcOXuznpeZFGYC885Of/vDgccRDnhTe/8Rf8YKv2PjLtezyo0VgmdA/CpeZy29NCXAsf6liokbwg==}
+    dev: false
+
+  /@cloudinary-util/util@4.0.0:
+    resolution: {integrity: sha512-S4xcou/3A7l5o+bcKlw2VHBNgwups7/0lbVDT/cO5YmtrcEYXgj6LGmwnjvpTm/x571VPVN8x5jWdT3rLZiKJQ==}
+    dev: false
+
+  /@cloudinary/transformation-builder-sdk@1.15.2:
+    resolution: {integrity: sha512-oXYaW/whGaQVlR1O/ocp7vYcxaMAy3uGcQ8+8xjbfDCy/+c+zFIuP6JKI8L05kzqw7Wjh0cqzG+4u0X1UpPh+A==}
+    dependencies:
+      '@cloudinary/url-gen': 1.15.0
+    dev: false
+
+  /@cloudinary/url-gen@1.15.0:
+    resolution: {integrity: sha512-bjU67eZxLUgoRy/Plli4TQio7q6P31OYqnEgXxeN9TKXrzr6h0DeEdIUhKI9gy3HkEBWXWWJIPh7j7gkOJPnyA==}
+    dependencies:
+      '@cloudinary/transformation-builder-sdk': 1.15.2
+    dev: false
 
   /@emnapi/runtime@1.2.0:
     resolution: {integrity: sha512-bV21/9LQmcQeCPEg3BDFtvwL6cwiTMksYNWQQ4KOxCZikEGalWtenoZ0wCiukJINlGCIi2KXx01g4FoH/LxpzQ==}
@@ -7250,6 +7219,19 @@ packages:
       react: 19.0.0-rc-778e1ed2-20240926
       react-dom: 19.0.0-rc-778e1ed2-20240926(react@19.0.0-rc-778e1ed2-20240926)
       uuid: 8.3.2
+    dev: false
+
+  /next-cloudinary@6.16.0(next@15.0.0-rc.0)(react@19.0.0-rc-778e1ed2-20240926):
+    resolution: {integrity: sha512-gbw/A1aBHJBC2thm4/veI77IkmbAQXuRUj8kNEuxf1zgjGkUWkShho/cXS4VsFhnHuDieqb30gMjZnZdBDrQ/Q==}
+    peerDependencies:
+      next: ^12 || ^13 || ^14 || >=15.0.0-rc || ^15
+      react: ^17 || ^18 || >=19.0.0-beta || ^19
+    dependencies:
+      '@cloudinary-util/types': 1.5.10
+      '@cloudinary-util/url-loader': 5.10.4
+      '@cloudinary-util/util': 4.0.0
+      next: 15.0.0-rc.0(react-dom@19.0.0-rc-778e1ed2-20240926)(react@19.0.0-rc-778e1ed2-20240926)
+      react: 19.0.0-rc-778e1ed2-20240926
     dev: false
 
   /next-mdx-remote@5.0.0(@types/react@18.2.61)(react@19.0.0-rc-778e1ed2-20240926):

@@ -4,6 +4,8 @@ import "@dspcoder/ui/globals.css";
 import Footer from "@/components/Footer/Footer";
 import AuthProvider from "@/contenxt/AuthProvider";
 import QueryProvider from "@/contenxt/QueryClientProvider";
+import ContainerProvider from "@/contenxt/ContainerProvider";
+import { Toaster } from "@dspcoder/ui/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "DSPCoder",
@@ -19,11 +21,14 @@ export default function RootLayout({
     <html lang="en">
       <QueryProvider>
         <AuthProvider>
-          <body className="relative bg-darkish">
-            <Navbar />
-            {children}
-            <Footer />
-          </body>
+          <ContainerProvider>
+            <body className="relative bg-darkish">
+              <Navbar />
+              {children}
+              <Footer />
+              <Toaster />
+            </body>
+          </ContainerProvider>
         </AuthProvider>
       </QueryProvider>
     </html>

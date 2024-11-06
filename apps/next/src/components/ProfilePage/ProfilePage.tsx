@@ -14,17 +14,25 @@ import {
   AvatarImage,
 } from "@dspcoder/ui/components/ui/avatar";
 import { signOut, useSession } from "next-auth/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { IoIosLogOut } from "react-icons/io";
+import { useContainer } from "@/contenxt/ContainerProvider";
 
 type Props = {};
 
 const ProfilePage = (props: Props) => {
   const { data: session } = useSession();
+  const { deleteContainer } = useContainer();
 
   const handleSignOut = () => {
-    signOut();
+    try {
+      deleteContainer();
+      signOut();
+    } catch (err) {
+      alert("Unable to signout");
+    }
   };
+
   return (
     <div className="">
       <DropdownMenu>

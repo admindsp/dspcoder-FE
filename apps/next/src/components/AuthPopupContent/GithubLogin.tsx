@@ -4,11 +4,12 @@ import React from "react";
 import { IoLogoGithub } from "react-icons/io";
 
 const GithubLogin = () => {
-  const handleSignIn = () => {
-    signIn("github", { callbackUrl: "https://www.dspcoder.com" });
+  const handleSignIn = async () => {
+    await signIn("github", { callbackUrl: "https://www.dspcoder.com" });
   };
+
   return (
-    <div className="w-full">
+    <div className="w-fit">
       <Button
         onClick={handleSignIn}
         className="bg-darkish max-h-[30px] flex gap-2 items-center justify-center px-4 py-1 text-white w-full"
