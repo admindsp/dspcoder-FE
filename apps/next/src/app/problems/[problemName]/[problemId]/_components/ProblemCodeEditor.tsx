@@ -19,17 +19,6 @@ const ProblemCodeEditor = (props: Props) => {
   if (status === "authenticated" && !isLoading)
     return (
       <div className="h-full">
-        {/* <div
-          id="external-buttons"
-          className="flex flex-row-reverse gap-2 items-center py-2"
-        >
-          <Button className="bg-grayish hover:bg-white hover:text-black text-white">
-            Run
-          </Button>
-          <Button className="bg-grayish hover:bg-white hover:text-black text-white">
-            Submit
-          </Button>
-        </div> */}
         <iframe src={path} className="w-full h-full" frameBorder="0"></iframe>
       </div>
     );

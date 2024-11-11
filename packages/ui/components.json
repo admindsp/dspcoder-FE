@@ -11,7 +11,7 @@
     "prefix": ""
   },
   "aliases": {
-    "components": "@dspcoder/ui/components",
+    "components": "/src/components",
     "utils": "@dspcoder/ui/lib/utils"
   }
 }

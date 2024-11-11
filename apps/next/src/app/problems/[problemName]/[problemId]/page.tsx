@@ -10,9 +10,5 @@ type ProblemPageProps = {
 export default async function Problem({ params }: ProblemPageProps) {
   const { problemName, problemId } = params;
 
-  return (
-    <>
-      <ProblemContent />
-    </>
-  );
+  return <ProblemContent />;
 }

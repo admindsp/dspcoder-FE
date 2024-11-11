@@ -6,6 +6,7 @@ import { ContainerDetailsType } from "@/types/Container";
 import { containerDetailsAtom, useAtom } from "@dspcoder/jotai";
 import { useToast } from "@dspcoder/ui/components/ui/use-toast";
 import { useQuery } from "@tanstack/react-query";
+
 interface ContainerContextType {
   containerDetails: ContainerDetailsType | null;
   deleteContainer: () => void;
@@ -15,7 +16,7 @@ interface ContainerContextType {
 }
 
 const ContainerContext = createContext<ContainerContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const useContainer = () => {
@@ -48,13 +49,13 @@ export default function ContainerProvider({
         "/api/container/create-container/",
         {
           ...requestBody,
-        }
+        },
       );
       setContainerDetails(response);
       console.log("Container created:", response);
       return response as ContainerDetailsType;
     },
-    enabled: false,
+    enabled: status === "authenticated",
   });
 
   const deleteContainer = async () => {
@@ -66,7 +67,7 @@ export default function ContainerProvider({
           params: {
             container_name: containerDetails?.container_name,
           },
-        }
+        },
       );
       setContainerDetails(null);
       console.log("Container deleted");
@@ -74,12 +75,6 @@ export default function ContainerProvider({
       console.error("Error deleting container:", error);
     }
   };
-
-  useEffect(() => {
-    if (status === "authenticated") {
-      refetch();
-    }
-  }, [status]);
 
   return (
     <ContainerContext.Provider

@@ -22,7 +22,7 @@ export default function RootLayout({
       <QueryProvider>
         <AuthProvider>
           <ContainerProvider>
-            <body className="relative bg-darkish">
+            <body className="relative bg-black">
               <Navbar />
               {children}
               <Footer />
