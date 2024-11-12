@@ -1,27 +1,28 @@
-import type { Metadata } from "next";
-import Navbar from "@/components/Navbar/Navbar";
-import "@dspcoder/ui/globals.css";
-import Footer from "@/components/Footer/Footer";
-import AuthProvider from "@/contenxt/AuthProvider";
-import QueryProvider from "@/contenxt/QueryClientProvider";
-import ContainerProvider from "@/contenxt/ContainerProvider";
-import { Toaster } from "@dspcoder/ui/components/ui/toaster";
 import {
   SidebarProvider,
   SidebarTrigger,
 } from "@dspcoder/ui/components/ui/sidebar";
 import ProblemSidebar from "./_components/ProblemSidebar";
+import ProblemPageContent from "./_components/ProblemPageContent";
 
 export default function ProblemPageLayout({
   children,
+  problemCodeEditor,
+  problemTab,
 }: Readonly<{
   children: React.ReactNode;
+  problemCodeEditor: React.ReactNode;
+  problemTab: React.ReactNode;
 }>) {
   return (
-    <SidebarProvider>
+    <SidebarProvider className="blur-0" defaultOpen={false}>
       <ProblemSidebar />
       <SidebarTrigger className="text-white" />
-      <div className="relative ">{children}</div>
+
+      <ProblemPageContent
+        leftContent={problemTab}
+        rightContent={problemCodeEditor}
+      />
     </SidebarProvider>
   );
 }

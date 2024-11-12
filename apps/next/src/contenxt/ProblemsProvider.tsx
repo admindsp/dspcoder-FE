@@ -9,7 +9,7 @@ type ProblemsContextType = {
 };
 
 const ProblemsContext = createContext<ProblemsContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const ProblemsProvider = ({
@@ -54,7 +54,7 @@ export const useProblemsContext = () => {
   const context = useContext(ProblemsContext);
   if (!context) {
     throw new Error(
-      "useProblemsContext must be used within a ProblemsProvider"
+      "useProblemsContext must be used within a ProblemsProvider",
     );
   }
   return context;

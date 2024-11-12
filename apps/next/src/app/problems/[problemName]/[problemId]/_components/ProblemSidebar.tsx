@@ -13,26 +13,27 @@ import { MdOutlineDescription } from "react-icons/md";
 import { LuClipboardEdit } from "react-icons/lu";
 import { CiSquareChevRight } from "react-icons/ci";
 import { GoCommentDiscussion } from "react-icons/go";
+import Link from "next/link";
 
 const items = [
   {
     title: "Problem Description",
-    url: "?to=description",
+    url: "?tab=description",
     icon: <MdOutlineDescription />,
   },
   {
     title: "Solution",
-    url: "?to=solution",
+    url: "?tab=solution",
     icon: <CiSquareChevRight />,
   },
   {
     title: "Submissions",
-    url: "?to=submission",
+    url: "?tab=submission",
     icon: <LuClipboardEdit />,
   },
   {
     title: "Discussion Forum",
-    url: "?to=discussion",
+    url: "?tab=discussion",
     icon: <GoCommentDiscussion />,
   },
 ];
@@ -40,7 +41,7 @@ const items = [
 const ProblemSidebar = () => {
   return (
     <Sidebar collapsible="icon">
-      <SidebarContent className="bg-darkish outline-none border-none text-white">
+      <SidebarContent className="bg-black outline-none border-none text-white">
         <SidebarGroup>
           <SidebarGroupLabel className="text-white">
             Navigate To
@@ -50,10 +51,10 @@ const ProblemSidebar = () => {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link href={item.url}>
                       {item.icon}
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

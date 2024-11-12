@@ -1,9 +1,10 @@
+"use client";
 import { useContainer } from "@/contenxt/ContainerProvider";
-import { Button } from "@dspcoder/ui/components/ui/button";
 import { useSession } from "next-auth/react";
 import React from "react";
-import ProblemCodeEditorLoader from "./ProblemCodeEditorLoader";
+
 import GithubLogin from "@/components/AuthPopupContent/GithubLogin";
+import ProblemCodeEditorLoader from "./_components/ProblemCodeEditorLoader";
 
 type Props = {};
 

@@ -9,10 +9,10 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
+    "@dspcoder/jotai": "workspace:*",
     "@dspcoder/ui": "workspace:*",
     "@tanstack/react-query": "^5.39.0",
     "@uidotdev/usehooks": "^2.4.1",
-    "@dspcoder/jotai": "workspace:*",
     "axios": "^1.6.8",
     "gray-matter": "^4.0.3",
     "lottie-react": "^2.4.0",
