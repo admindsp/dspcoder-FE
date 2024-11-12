@@ -1,5 +1,3 @@
-import ProblemContent from "./_components/ProblemContent";
-
 type ProblemPageProps = {
   params: {
     problemName: string;

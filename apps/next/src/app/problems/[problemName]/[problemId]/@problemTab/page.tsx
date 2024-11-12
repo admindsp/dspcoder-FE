@@ -1,7 +1,8 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import React from "react";
+import ProblemDescription from "./_components/ProblemDescription";
+import ProblemSubmission from "./_components/ProblemSubmission";
+import ProblemSolution from "./_components/ProblemSolution";
+import ProblemDiscussion from "./_components/ProblemDiscussion";
 
 type Props = {
   params: {
@@ -13,24 +14,11 @@ type Props = {
   };
 };
 
-export default function ProblemTab({ params, searchParams }: Props) {
-  const [markdownContent, setMarkdownContent] = useState("");
+export default async function ProblemTab({ params, searchParams }: Props) {
+  const { tab } = searchParams;
 
-  useEffect(() => {
-    const fetchMarkdown = async () => {
-      const response = await fetch("/test.md");
-      const text = await response.text();
-      setMarkdownContent(text);
-    };
-
-    fetchMarkdown();
-  }, []);
-  return (
-    <div className="markdown-content p-4 text-white">
-      <div>{searchParams.tab ?? "hello"}</div>
-      <ReactMarkdown remarkPlugins={[remarkGfm]}>
-        {markdownContent}
-      </ReactMarkdown>
-    </div>
-  );
+  if (tab === "submission") return <ProblemSubmission />;
+  if (tab === "solution") return <ProblemSolution />;
+  if (tab === "discussion") return <ProblemDiscussion />;
+  return <ProblemDescription />;
 }
