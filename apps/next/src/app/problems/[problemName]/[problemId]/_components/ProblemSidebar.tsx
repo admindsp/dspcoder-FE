@@ -40,7 +40,7 @@ const items = [
 
 const ProblemSidebar = () => {
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar collapsible="icon" className="border-grayish_100">
       <SidebarContent className="bg-black outline-none border-none text-white">
         <SidebarGroup>
           <SidebarGroupLabel className="text-white">

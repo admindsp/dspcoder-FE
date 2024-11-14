@@ -14,23 +14,27 @@ import path from "path";
 //   a: (props) => <a className="text-blue-600 hover:underline" {...props} />,
 // };
 
-export default function ProblemDescription() {
+export default function MDXRenderer() {
   const [content, setContent] = useState("");
 
-  // useEffect(() => {
-  //   async function loadMDXContent() {
-  //     try {
-  //       const filePath = path.join(process.cwd(), "content.mdx");
-  //       const fileContent = await fs.readFile(filePath, "utf8");
-  //       setContent(fileContent);
-  //     } catch (error) {
-  //       console.error("Error loading MDX content:", error);
-  //       setContent("# Error\nFailed to load MDX content.");
-  //     }
-  //   }
+  useEffect(() => {
+    async function loadMDXContent() {
+      try {
+        const filePath = path.join(process.cwd(), "test.md");
+        const fileContent = await fs.readFile(filePath, "utf8");
+        setContent(fileContent);
+      } catch (error) {
+        console.error("Error loading MDX content:", error);
+        setContent("# Error\nFailed to load MDX content.");
+      }
+    }
 
-  //   loadMDXContent();
-  // }, []);
+    loadMDXContent();
+  }, []);
 
-  return <div className="container mx-auto px-4 py-8">description</div>;
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <MDXRemote source={content} />
+    </div>
+  );
 }

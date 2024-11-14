@@ -15,7 +15,7 @@ export default function ProblemPageLayout({
   problemTab: React.ReactNode;
 }>) {
   return (
-    <SidebarProvider className="blur-0" defaultOpen={false}>
+    <SidebarProvider className="blur-0 " defaultOpen={false}>
       <ProblemSidebar />
       <SidebarTrigger className="text-white" />
 
