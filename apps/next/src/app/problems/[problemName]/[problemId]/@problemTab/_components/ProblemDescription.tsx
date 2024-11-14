@@ -1,36 +1,55 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import fs from "fs/promises";
+import fs from "fs";
 import path from "path";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { notFound } from "next/navigation";
 
-// const components = {
-//   h1: (props) => <h1 className="text-3xl font-bold mb-4" {...props} />,
-//   h2: (props) => <h2 className="text-2xl font-semibold mb-3" {...props} />,
-//   p: (props) => <p className="mb-2" {...props} />,
-//   ul: (props) => <ul className="list-disc list-inside mb-2" {...props} />,
-//   ol: (props) => <ol className="list-decimal list-inside mb-2" {...props} />,
-//   a: (props) => <a className="text-blue-600 hover:underline" {...props} />,
-// };
-
-export default function ProblemDescription() {
-  const [content, setContent] = useState("");
-
-  // useEffect(() => {
-  //   async function loadMDXContent() {
-  //     try {
-  //       const filePath = path.join(process.cwd(), "content.mdx");
-  //       const fileContent = await fs.readFile(filePath, "utf8");
-  //       setContent(fileContent);
-  //     } catch (error) {
-  //       console.error("Error loading MDX content:", error);
-  //       setContent("# Error\nFailed to load MDX content.");
-  //     }
-  //   }
-
-  //   loadMDXContent();
-  // }, []);
-
-  return <div className="container mx-auto px-4 py-8">description</div>;
+export default async function ProblemDescription() {
+  try {
+    const filePath = path.join(process.cwd(), "public", "test.md");
+    const fileContents = fs.readFileSync(filePath, "utf8");
+    return (
+      <div className="bg-darkish_100 h-full p-6 rounded-lg">
+        <MDXRemote
+          source={fileContents}
+          components={{
+            h1: (props) => (
+              <h1 className="text-white text-3xl font-bold mb-4" {...props} />
+            ),
+            h2: (props) => (
+              <h2 className="text-white text-2xl font-bold mb-3" {...props} />
+            ),
+            h3: (props) => (
+              <h3 className="text-white text-xl font-bold mb-2" {...props} />
+            ),
+            p: (props) => <p className="text-white mb-4" {...props} />,
+            ul: (props) => (
+              <ul
+                className="text-white list-disc list-inside mb-4"
+                {...props}
+              />
+            ),
+            ol: (props) => (
+              <ol
+                className="text-white list-decimal list-inside mb-4"
+                {...props}
+              />
+            ),
+            li: (props) => <li className="text-white mb-1" {...props} />,
+            a: (props) => (
+              <a className="text-blue-400 hover:underline" {...props} />
+            ),
+            code: (props) => (
+              <code
+                className="text-white bg-gray-800 rounded px-1"
+                {...props}
+              />
+            ),
+          }}
+        />
+      </div>
+    );
+  } catch (error) {
+    console.error("Error reading markdown file:", error);
+    notFound();
+  }
 }

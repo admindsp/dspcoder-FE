@@ -1,9 +1,11 @@
 import dotenv from "dotenv";
 import createMDX from "@next/mdx";
+import remarkGfm from "remark-gfm";
+
 dotenv.config({ path: "../../.env" });
 
 /** @type {import('next').NextConfig} */
-const nextjsconfigs = {
+const nextConfig = {
   reactStrictMode: true,
   env: {
     NEXT_PUBLIC_MONGO_URI: process.env.NEXT_PUBLIC_MONGO_URI,
@@ -19,13 +21,11 @@ const nextjsconfigs = {
   pageExtensions: ["js", "jsx", "mdx", "md", "ts", "tsx"],
 };
 
-const nextConfig = createMDX({
-  // Add markdown plugins here, if needed
+const withMDX = createMDX({
   options: {
-    remarkPlugins: [],
+    remarkPlugins: [remarkGfm],
     rehypePlugins: [],
   },
 });
 
-// Merge MDX config with Next.js config
-export default nextConfig(nextjsconfigs);
+export default withMDX(nextConfig);

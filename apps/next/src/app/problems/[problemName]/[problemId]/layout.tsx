@@ -16,8 +16,10 @@ export default function ProblemPageLayout({
 }>) {
   return (
     <SidebarProvider className="blur-0 " defaultOpen={false}>
-      <ProblemSidebar />
-      <SidebarTrigger className="text-white" />
+      <div className="relative">
+        <ProblemSidebar />
+        <SidebarTrigger className="text-white font-bold absolute -right-6 top-0 z-20" />
+      </div>
 
       <ProblemPageContent
         leftContent={problemTab}

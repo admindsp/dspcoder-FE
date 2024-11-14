@@ -1,8 +1,9 @@
 import React from "react";
-import ProblemDescription from "./_components/ProblemDescription";
+
 import ProblemSubmission from "./_components/ProblemSubmission";
 import ProblemSolution from "./_components/ProblemSolution";
 import ProblemDiscussion from "./_components/ProblemDiscussion";
+import ProblemDescription from "./_components/ProblemDescription";
 
 type Props = {
   params: {
