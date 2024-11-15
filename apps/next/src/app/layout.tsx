@@ -14,8 +14,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  navbar,
 }: Readonly<{
   children: React.ReactNode;
+  navbar: React.ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -23,7 +25,7 @@ export default function RootLayout({
         <AuthProvider>
           <ContainerProvider>
             <body className="relative bg-black">
-              <Navbar />
+              {navbar}
               {children}
               <Footer />
               <Toaster />

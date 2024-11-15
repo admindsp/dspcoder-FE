@@ -22,6 +22,7 @@
     "fs.promises": "^0.1.2",
     "gray-matter": "^4.0.3",
     "lottie-react": "^2.4.0",
+    "lucide-react": "^0.314.0",
     "marked": "^15.0.0",
     "next": "15.0.0-rc.0",
     "next-auth": "^4.24.7",

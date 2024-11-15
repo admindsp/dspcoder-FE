@@ -24,7 +24,7 @@ const PrimaryBanner = ({ data }: PrimaryBannerProp) => {
         </div>
         <Link
           href="/problems"
-          className="text-black bg-white py-1 px-4 rounded-sm mt-4 md:mt-7 font-bold"
+          className="text-white bg-green-700 hover:bg-green-800 transition-colors duration-300 py-1 px-4 rounded-sm mt-4 md:mt-7 font-bold"
         >
           Try Now
         </Link>

@@ -160,6 +160,9 @@ importers:
       lottie-react:
         specifier: ^2.4.0
         version: 2.4.0(react-dom@19.0.0-rc-778e1ed2-20240926)(react@19.0.0-rc-778e1ed2-20240926)
+      lucide-react:
+        specifier: ^0.314.0
+        version: 0.314.0(react@19.0.0-rc-778e1ed2-20240926)
       marked:
         specifier: ^15.0.0
         version: 15.0.0
@@ -6787,6 +6790,14 @@ packages:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.3.1
+    dev: false
+
+  /lucide-react@0.314.0(react@19.0.0-rc-778e1ed2-20240926):
+    resolution: {integrity: sha512-c2zOW7TOyKxPCaSs1og2lFdoI3SR4iii3yrZJU2Zpdc78nOw4fUmrcFNultaCiwZcr4CyiKdzjMdvKNlBBk+UQ==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 19.0.0-rc-778e1ed2-20240926
     dev: false
 
   /markdown-extensions@2.0.0:
