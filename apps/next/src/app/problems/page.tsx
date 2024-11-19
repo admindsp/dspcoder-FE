@@ -15,7 +15,7 @@ export default function Problems({ searchParams }: ProblemsPageProps) {
 
   return (
     <ProblemsProvider searchParams={searchParams}>
-      <div className="px-4 md:px-20 bg-black py-5 sm:py-8 gap-4 h-screen grid grid-rows-[auto_1fr]">
+      <div className="px-4 md:px-20 bg-black py-5 sm:py-8 gap-4 grid grid-rows-[auto_1fr]">
         <ProblemsListFilter type={type} />
         <ProblemsList />
       </div>

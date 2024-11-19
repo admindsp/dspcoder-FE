@@ -29,7 +29,6 @@ export default function ProblemPageLayout({
           leftContent={problemTab}
           rightContent={problemCodeEditor}
         />
-        =
       </SidebarProvider>
     </>
   );

@@ -24,11 +24,10 @@ export default function RootLayout({
       <QueryProvider>
         <AuthProvider>
           <ContainerProvider>
-            <body className="relative bg-black">
-              {navbar}
-              {children}
+            <body className="flex flex-col overflow-auto h-screen max-h-screen relative bg-black">
+              <header>{navbar}</header>
+              <main className="flex-grow">{children}</main>
               <Footer />
-              <Toaster />
             </body>
           </ContainerProvider>
         </AuthProvider>

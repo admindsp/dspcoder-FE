@@ -19,7 +19,7 @@ export default function RootLayout({
       <body>
         <AuthProvider>
           <Navbar />
-          <div className=" min-h-screen flex flex-col">
+          <div className=" flex flex-grow flex-col">
             <div className="w-[80%] mx-auto flex-grow">{children}</div>
           </div>
           <Footer />

@@ -71,7 +71,7 @@ interface ProblemSolutionProps {
 export default function ProblemSolution() {
   const { title, description, codeSnippets = [] } = solutionProps;
   const [selectedLanguage, setSelectedLanguage] = useState(
-    codeSnippets[0]?.language || ""
+    codeSnippets[0]?.language || "",
   );
 
   if (codeSnippets.length === 0) {
@@ -91,7 +91,7 @@ export default function ProblemSolution() {
   }
 
   return (
-    <Card className="w-full max-w-4xl mx-auto bg-darkish_100 text-white border-none outline-none h-full">
+    <Card className="w-full mx-auto bg-darkish_100 text-white border-none outline-none h-full">
       <CardHeader>
         <CardTitle>{title || "No Title"}</CardTitle>
         <CardDescription className="text-grayish_text">

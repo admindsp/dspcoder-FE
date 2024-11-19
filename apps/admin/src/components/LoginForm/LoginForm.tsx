@@ -24,7 +24,7 @@ const LoginForm: React.FC = () => {
         {
           email,
           password,
-        }
+        },
       );
       const token = response.data.token;
       toast.success("Successfully logged in.");
@@ -38,7 +38,7 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center">
       <div className="w-full max-w-md p-8 bg-white rounded shadow-md">
         <h2 className="mb-6 text-2xl font-bold text-center text-black">
           Login

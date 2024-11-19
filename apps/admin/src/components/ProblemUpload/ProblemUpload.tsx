@@ -44,7 +44,7 @@ export default function ProblemUpload() {
   });
 
   const handleFolderUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const files = event.target.files;
     if (files && files.length > 0) {
@@ -53,7 +53,7 @@ export default function ProblemUpload() {
 
       try {
         const blobServiceClient = new BlobServiceClient(
-          `https://${storageAccountName}.blob.core.windows.net/${sasToken}`
+          `https://${storageAccountName}.blob.core.windows.net/${sasToken}`,
         );
         const containerClient =
           blobServiceClient.getContainerClient("problem-bucket");
@@ -78,7 +78,7 @@ export default function ProblemUpload() {
         }
 
         setFolderPath(
-          `${containerClient.url}/${files[0].webkitRelativePath.split("/")[0]}`
+          `${containerClient.url}/${files[0].webkitRelativePath.split("/")[0]}`,
         );
         setStep(2);
       } catch (error) {
@@ -91,7 +91,7 @@ export default function ProblemUpload() {
   };
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -122,13 +122,13 @@ export default function ProblemUpload() {
     } catch (error) {
       console.error("Error submitting problem data:", error);
       alert(
-        "An error occurred while submitting the problem. Please try again."
+        "An error occurred while submitting the problem. Please try again.",
       );
     }
   };
 
   return (
-    <div className="w-full bg-background min-h-screen p-4 flex flex-col items-center">
+    <div className="w-full bg-background p-4 flex flex-col items-center">
       {step === 1 ? (
         <div className="w-full max-w-md">
           <h1 className="text-2xl font-bold mb-4">Upload Problem Folder</h1>
