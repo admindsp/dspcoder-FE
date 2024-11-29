@@ -5,9 +5,15 @@ export const ProblemSchema = z.object({
   type: z.string(),
   title: z.string(),
   difficulty: z.string(),
-  topic: z.array(z.string()),
+  tags: z.array(z.string()),
   companies: z.array(z.string()),
-  folder_path: z.string(),
+  file_path: z.string(),
+  likes: z.number(),
+  dislikes: z.number(),
+  successful_submissions: z.number(),
+  failed_submissions: z.number(),
+  acceptance_rate: z.number(),
+  readme: z.string().optional(),
 });
 
 export const ProblemsSearchParamsSchema = z.object({

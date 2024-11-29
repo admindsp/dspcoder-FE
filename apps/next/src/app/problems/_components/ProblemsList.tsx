@@ -21,7 +21,7 @@ export default function ProblemsList() {
   const { problemsData } = useProblemsContext();
 
   return (
-    <Table className="table-auto border-collapse">
+    <Table className="table-auto border-collapse overflow-auto">
       <TableHeader>
         <TableRow className="font-bold text-sm text-white hover:bg-transparent !border-b-[#2B2B2B]">
           <TableHead className="text-grayish_text">Title</TableHead>
@@ -30,7 +30,7 @@ export default function ProblemsList() {
           <TableHead className="text-grayish_text">Companies</TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody className="text-white">
+      <TableBody className="text-white max-h-[calc(100vh-200px)] overflow-auto">
         {problemsData?.map((problem) => (
           <TableRow
             className="!rounded-md !border-none hover:!bg-darkish bg-black "

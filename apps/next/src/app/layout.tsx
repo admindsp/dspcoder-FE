@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar/Navbar";
 import "@dspcoder/ui/globals.css";
-import Footer from "@/components/Footer/Footer";
+
 import AuthProvider from "@/contenxt/AuthProvider";
 import QueryProvider from "@/contenxt/QueryClientProvider";
 import ContainerProvider from "@/contenxt/ContainerProvider";
-import { Toaster } from "@dspcoder/ui/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "DSPCoder",
@@ -15,19 +13,23 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
   navbar,
+  footer,
 }: Readonly<{
   children: React.ReactNode;
   navbar: React.ReactNode;
+  footer: React.ReactNode;
 }>) {
   return (
     <html lang="en">
       <QueryProvider>
         <AuthProvider>
           <ContainerProvider>
-            <body className="flex flex-col overflow-auto h-screen max-h-screen relative bg-black">
+            <body className="flex flex-col min-h-screen">
               <header>{navbar}</header>
-              <main className="flex-grow">{children}</main>
-              <Footer />
+              <div className="flex-grow overflow-y-auto bg-black">
+                {children}
+              </div>
+              <footer>{footer}</footer>
             </body>
           </ContainerProvider>
         </AuthProvider>

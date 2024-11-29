@@ -5,7 +5,7 @@ import Logo from "./Logo";
 
 const Navbar = () => {
   return (
-    <div className="bg-[#131315] border-b border-[#2B2B2B] text-white py-2 px-4 flex gap-6 overflow-hidden min-h-10 max-h-12 sticky">
+    <nav className="bg-[#131315] border-b border-[#2B2B2B] text-white py-2 px-4 flex gap-6 overflow-hidden min-h-10 max-h-12 sticky">
       <div className="min-w-24 flex justify-center items-center object-contain">
         <Link className="flex gap-1 items-center" href="/">
           <Logo />
@@ -22,15 +22,15 @@ const Navbar = () => {
         </Link>
         <div className="icons flex gap-3 items-center">
           <AuthenticatedSection />
-          <Link
+          {/* <Link
             className="inline-flex justify-center items-center gap-2 bg-[#616828] hover:bg-[#4d531f] px-2 py-1 rounded-md transition-all duration-300"
             href="/blog"
           >
             Blog <FaBlog />
-          </Link>
+          </Link> */}
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 

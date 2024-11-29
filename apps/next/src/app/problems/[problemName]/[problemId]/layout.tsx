@@ -20,11 +20,12 @@ export default function ProblemPageLayout({
   return (
     <>
       {navbar}
-      <SidebarProvider className="blur-0 " defaultOpen={false}>
-        <div className="relative">
-          <ProblemSidebar />
-          <SidebarTrigger className="text-white font-bold absolute -right-6 top-0 z-20" />
-        </div>
+      <SidebarProvider
+        className="blur-0 !min-h-0 max-h-[calc(100vh-100px)] overflow-hidden"
+        defaultOpen={false}
+      >
+        <ProblemSidebar />
+
         <ProblemPageContent
           leftContent={problemTab}
           rightContent={problemCodeEditor}

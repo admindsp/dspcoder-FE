@@ -16,6 +16,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarTrigger,
 } from "@dspcoder/ui/components/ui/sidebar";
 
 const items = [
@@ -46,8 +47,12 @@ const ProblemSidebar = () => {
   const currentTab = searchParams.get("tab") || "description";
 
   return (
-    <Sidebar collapsible="icon" className="border-grayish_100">
+    <Sidebar
+      collapsible="icon"
+      className="border-grayish_100 bg-black h-[calc(100vh-100px)]"
+    >
       <SidebarContent className="bg-black outline-none border-none text-white">
+        <SidebarTrigger className="text-white font-bold bg-black w-full border-b border-b-grayish_100 z-30 " />
         <SidebarGroup>
           <SidebarGroupLabel className="text-white">
             Navigate To

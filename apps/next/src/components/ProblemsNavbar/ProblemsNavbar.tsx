@@ -12,7 +12,7 @@ export const buttonStyles = tv({
     Run: "bg-zinc-800 text-white border-zinc-700 hover:bg-zinc-700 hover:text-white font-bold",
     Compile:
       "bg-zinc-800 text-white border-zinc-700 hover:bg-zinc-700 hover:text-white font-bold",
-    Submit: "bg-green-700 text-white hover:bg-green-800 font-bold",
+    Submit: "bg-green-800 text-white hover:bg-green-900 font-bold",
   },
 });
 

@@ -71,12 +71,12 @@ interface ProblemSolutionProps {
 export default function ProblemSolution() {
   const { title, description, codeSnippets = [] } = solutionProps;
   const [selectedLanguage, setSelectedLanguage] = useState(
-    codeSnippets[0]?.language || "",
+    codeSnippets[0]?.language || ""
   );
 
   if (codeSnippets.length === 0) {
     return (
-      <Card className="w-full max-w-4xl mx-auto border-none outline-none">
+      <Card className="w-full max-w-4xl mx-auto border-none h-[calc(100vh-100px)] outline-none">
         <CardHeader>
           <CardTitle>{title || "No Title"}</CardTitle>
           <CardDescription>
@@ -91,7 +91,7 @@ export default function ProblemSolution() {
   }
 
   return (
-    <Card className="w-full mx-auto bg-darkish_100 text-white border-none outline-none h-full">
+    <Card className="w-full rounded-none mx-auto bg-black text-white border-none outline-none h-[calc(100vh-100px)] overflow-auto">
       <CardHeader>
         <CardTitle>{title || "No Title"}</CardTitle>
         <CardDescription className="text-grayish_text">
@@ -103,7 +103,7 @@ export default function ProblemSolution() {
           defaultValue={selectedLanguage}
           onValueChange={setSelectedLanguage}
         >
-          <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4">
+          <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 gap-2">
             {codeSnippets?.map((snippet) => (
               <TabsTrigger key={snippet.language} value={snippet.language}>
                 {snippet.language}
