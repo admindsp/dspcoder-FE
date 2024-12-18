@@ -16,17 +16,14 @@ import {
 import { signOut, useSession } from "next-auth/react";
 import React, { useEffect } from "react";
 import { IoIosLogOut } from "react-icons/io";
-import { useContainer } from "@/contenxt/ContainerProvider";
 
 type Props = {};
 
 const ProfilePage = (props: Props) => {
   const { data: session } = useSession();
-  const { deleteContainer } = useContainer();
 
   const handleSignOut = () => {
     try {
-      deleteContainer();
       signOut();
     } catch (err) {
       alert("Unable to signout");

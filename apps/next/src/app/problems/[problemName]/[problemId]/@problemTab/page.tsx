@@ -34,7 +34,6 @@ export default async function ProblemTab({ params, searchParams }: Props) {
   const { problemId } = params;
   const problemData = await fetchProblemData(problemId);
 
-  console.log("PROBLEM DATA", problemData);
   if (tab === "submission") return <ProblemSubmission />;
   if (tab === "solution") return <ProblemSolution />;
   if (tab === "discussion") return <ProblemDiscussion />;

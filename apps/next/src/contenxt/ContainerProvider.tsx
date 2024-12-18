@@ -16,7 +16,7 @@ interface ContainerContextType {
 }
 
 const ContainerContext = createContext<ContainerContextType | undefined>(
-  undefined,
+  undefined
 );
 
 export const useContainer = () => {
@@ -49,7 +49,7 @@ export default function ContainerProvider({
         "/api/container/create-container/",
         {
           ...requestBody,
-        },
+        }
       );
       setContainerDetails(response);
       console.log("Container created:", response);
@@ -58,29 +58,34 @@ export default function ContainerProvider({
     enabled: status === "authenticated",
   });
 
-  const deleteContainer = async () => {
+  const stopContainer = async () => {
     try {
       const resp = await http_client.post(
-        "/api/container/delete-container/",
+        "/api/container/stop-container/",
         null,
         {
           params: {
             container_name: containerDetails?.container_name,
           },
-        },
+        }
       );
       setContainerDetails(null);
-      console.log("Container deleted");
+      console.log("Container Stopped");
     } catch (error) {
-      console.error("Error deleting container:", error);
+      console.error("Error while stopping container:", error);
     }
   };
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      stopContainer();
+    }
+  }, [status]);
 
   return (
     <ContainerContext.Provider
       value={{
         containerDetails,
-        deleteContainer,
         isLoading,
         isError,
         isSuccess,

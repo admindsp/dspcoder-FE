@@ -7,9 +7,17 @@ import React from "react";
 import GithubLogin from "@/components/AuthPopupContent/GithubLogin";
 import ProblemCodeEditorLoader from "./_components/ProblemCodeEditorLoader";
 
-type Props = {};
+type Props = {
+  params: {
+    problemName: string;
+    problemId: string;
+  };
+  searchParams: {
+    tab: string;
+  };
+};
 
-const ProblemCodeEditor = (props: Props) => {
+const ProblemCodeEditor = ({ params, searchParams }: Props) => {
   const { containerDetails, isLoading, isSuccess } = useContainer();
   const { status } = useSession();
   const path = "http://" + containerDetails?.default_folder_path;

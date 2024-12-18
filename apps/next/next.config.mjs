@@ -17,6 +17,7 @@ const nextConfig = {
     NEXT_PUBLIC_AUTH_SECRET: process.env.NEXT_PUBLIC_AUTH_SECRET,
     NEXT_PUBLIC_CODE_EXECUTION_API_URL:
       process.env.NEXT_PUBLIC_CODE_EXECUTION_API_URL,
+    NEXT_PUBLIC_POSTGRES_URL: process.env.NEXT_PUBLIC_POSTGRES_URL,
   },
   pageExtensions: ["js", "jsx", "mdx", "md", "ts", "tsx"],
 };

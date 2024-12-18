@@ -28,11 +28,7 @@ const ProblemContent = ({ leftContent, rightContent }: Props) => {
       className="min-h-0 h-[80vh] overflow-hidden"
       direction="horizontal"
     >
-      <Panel
-        minSizePercentage={10}
-        defaultSizePercentage={30}
-        maxSizePercentage={40}
-      >
+      <Panel minSizePercentage={10} defaultSizePercentage={40}>
         {leftContent}
       </Panel>
 
@@ -40,7 +36,9 @@ const ProblemContent = ({ leftContent, rightContent }: Props) => {
         <GrDrag className="w-full h-full text-white" />
       </PanelResizeHandle>
 
-      <Panel minSizePercentage={30}>{rightContent}</Panel>
+      <Panel minSizePercentage={30} defaultSizePercentage={60}>
+        {rightContent}
+      </Panel>
     </PanelGroup>
   );
 };
