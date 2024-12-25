@@ -6,6 +6,13 @@ import React from "react";
 
 import GithubLogin from "@/components/AuthPopupContent/GithubLogin";
 import ProblemCodeEditorLoader from "./_components/ProblemCodeEditorLoader";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@dspcoder/ui/components/ui/select";
 
 type Props = {
   params: {
@@ -17,7 +24,10 @@ type Props = {
   };
 };
 
-const ProblemCodeEditor = ({ params, searchParams }: Props) => {
+const ProblemCodeEditor = async ({ params, searchParams }: Props) => {
+  const { problemId } = params;
+  // const problemData = await fetchProblemData(problemId);
+  console.log("Problem id", problemId);
   const { containerDetails, isLoading, isSuccess } = useContainer();
   const { status } = useSession();
   const path = "http://" + containerDetails?.default_folder_path;
@@ -31,7 +41,18 @@ const ProblemCodeEditor = ({ params, searchParams }: Props) => {
       )}
 
       {status === "authenticated" && !isLoading && (
-        <div className="flex-grow flex">
+        <div className="relative flex-grow">
+          <Select defaultValue="C">
+            <SelectTrigger className="max-w-[100px] bg-white text-black h-[24px] z-50 w-full absolute right-2 top-10 ">
+              <SelectValue placeholder="Select Language" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="C" className="h-[24px]">
+                C
+              </SelectItem>
+            </SelectContent>
+          </Select>
+
           <iframe
             src={path}
             className="w-full h-full"

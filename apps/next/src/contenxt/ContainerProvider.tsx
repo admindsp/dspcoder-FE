@@ -9,7 +9,6 @@ import { useQuery } from "@tanstack/react-query";
 
 interface ContainerContextType {
   containerDetails: ContainerDetailsType | null;
-  deleteContainer: () => void;
   isLoading: boolean;
   isSuccess: boolean;
   isError: boolean;
