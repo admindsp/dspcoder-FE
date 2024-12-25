@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@dspcoder/ui/components/ui/select";
+import { containerProblemPathAtom, useAtom } from "@dspcoder/jotai";
 
 type Props = {
   params: {
@@ -30,7 +31,9 @@ const ProblemCodeEditor = async ({ params, searchParams }: Props) => {
   console.log("Problem id", problemId);
   const { containerDetails, isLoading, isSuccess } = useContainer();
   const { status } = useSession();
-  const path = "http://" + containerDetails?.default_folder_path;
+  const [containerProblemPath] = useAtom(containerProblemPathAtom);
+  let path = "http://" + containerDetails?.default_folder_path;
+  if (containerProblemPath) path = containerProblemPath;
 
   return (
     <div className="flex flex-col h-full">

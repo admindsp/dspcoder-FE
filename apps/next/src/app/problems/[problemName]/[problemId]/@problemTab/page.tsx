@@ -6,6 +6,7 @@ import ProblemDiscussion from "./_components/ProblemDiscussion";
 
 import { ProblemType } from "@/types/Problem";
 import ProblemDescription from "./_components/ProblemDescription";
+import ClientWrapper from "./ClientWrapper";
 
 type Props = {
   params: {
@@ -34,13 +35,16 @@ export default async function ProblemTab({ params, searchParams }: Props) {
   const { problemId } = params;
   const problemData = await fetchProblemData(problemId);
 
-  if (tab === "submission") return <ProblemSubmission />;
-  if (tab === "solution") return <ProblemSolution />;
-  if (tab === "discussion") return <ProblemDiscussion />;
-  return (
-    <ProblemDescription
-      markdown={problemData.readme}
-      problemData={problemData}
-    />
-  );
+  let content = null;
+  if (tab === "submission") content = <ProblemSubmission />;
+  if (tab === "solution") content = <ProblemSolution />;
+  if (tab === "discussion") content = <ProblemDiscussion />;
+  else
+    content = (
+      <ProblemDescription
+        markdown={problemData.readme}
+        problemData={problemData}
+      />
+    );
+  return <ClientWrapper problemData={problemData}>{content}</ClientWrapper>;
 }
