@@ -29,8 +29,8 @@ const ClientWrapper = ({ children, problemData }: Props) => {
           },
         }
       );
-      //   console.log(resp.message.URL, "RESPONSE URL");
-      if (resp?.message?.URL) setContainerProblemPath(resp.message.URL);
+      //   console.log(resp.URL, "RESPONSE URL");
+      if (resp?.problem_path) setContainerProblemPath(resp.problem_path);
     },
   });
   return <>{children}</>;
