@@ -1,13 +1,14 @@
+import Navbar from "@/components/Navbar/Navbar";
+
 export default function ProblemPageLayout({
   children,
-  navbar,
 }: Readonly<{
   children: React.ReactNode;
   navbar: React.ReactNode;
 }>) {
   return (
     <>
-      {navbar}
+      <Navbar />
       {children}
     </>
   );
