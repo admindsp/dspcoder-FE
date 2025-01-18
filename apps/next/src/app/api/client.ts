@@ -1,53 +1,48 @@
-import axios, { AxiosRequestConfig } from "axios";
-export const client_call = () => {
-  const client = axios.create({
+import axios, { AxiosRequestConfig, AxiosInstance } from "axios";
+
+const createClient = (): AxiosInstance => {
+  return axios.create({
     baseURL: process.env.NEXT_PUBLIC_BACKEND_API_URL,
   });
+};
 
-  return client;
+const handleRequest = async <T>(requestFn: () => Promise<T>): Promise<T> => {
+  try {
+    return await requestFn();
+  } catch (error) {
+    console.error("Request failed:", error);
+    throw error;
+  }
 };
 
 const http_client = {
-  get: async (url: string, config?: AxiosRequestConfig) => {
-    const client = client_call();
-    try {
-      const response = await client.get(url, config);
-      return response.data;
-    } catch (error) {
-      console.error("GET request failed:", error);
-      throw error;
-    }
-  },
-  post: async (url: string, data?: any, config?: AxiosRequestConfig) => {
-    const client = client_call();
-    try {
-      const response = await client.post(url, data, config);
-      return response.data;
-    } catch (error) {
-      console.error("POST request failed:", error);
-      throw error;
-    }
-  },
-  put: async (url: string, data?: any, config?: AxiosRequestConfig) => {
-    const client = client_call();
-    try {
-      const response = await client.put(url, data, config);
-      return response.data;
-    } catch (error) {
-      console.error("PUT request failed:", error);
-      throw error;
-    }
-  },
-  delete: async (url: string, config?: AxiosRequestConfig) => {
-    const client = client_call();
-    try {
-      const response = await client.delete(url, config);
-      return response.data;
-    } catch (error) {
-      console.error("DELETE request failed:", error);
-      throw error;
-    }
-  },
+  get: <T>(url: string, config?: AxiosRequestConfig) =>
+    handleRequest(() =>
+      createClient()
+        .get<T>(url, config)
+        .then((res) => res.data)
+    ),
+
+  post: <T>(url: string, data?: any, config?: AxiosRequestConfig) =>
+    handleRequest(() =>
+      createClient()
+        .post<T>(url, data, config)
+        .then((res) => res.data)
+    ),
+
+  put: <T>(url: string, data?: any, config?: AxiosRequestConfig) =>
+    handleRequest(() =>
+      createClient()
+        .put<T>(url, data, config)
+        .then((res) => res.data)
+    ),
+
+  delete: <T>(url: string, config?: AxiosRequestConfig) =>
+    handleRequest(() =>
+      createClient()
+        .delete<T>(url, config)
+        .then((res) => res.data)
+    ),
 };
 
 export default http_client;

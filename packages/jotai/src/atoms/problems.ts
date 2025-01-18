@@ -3,3 +3,5 @@ export const userAtom = atom({
   name: "",
   loggedIn: false,
 });
+
+export const selectedLanguageAtom = atom("c");
