@@ -4,13 +4,14 @@ import http_client from "@/app/api/client";
 import { useQuery } from "@tanstack/react-query";
 
 type ProblemsContextType = {
-  problemsData?: ProblemType[];
+  problemsData: ProblemType[];
   isLoading: boolean;
 };
 
-const ProblemsContext = createContext<ProblemsContextType | undefined>(
-  undefined,
-);
+const ProblemsContext = createContext<ProblemsContextType>({
+  problemsData: [],
+  isLoading: true,
+});
 
 export const ProblemsProvider = ({
   children,
@@ -31,20 +32,25 @@ export const ProblemsProvider = ({
     data: problemsData,
     isLoading,
     refetch,
-  } = useQuery({
+  } = useQuery<ProblemType[]>({
     queryKey: [
       `type:${type}-title:${title}-difficulty:${difficulty}-tags:${tags}`,
     ],
-    queryFn: () => {
-      const response = http_client.get("/api/problems/", {
-        params: filterPayload,
-      });
-      return response;
+    queryFn: async () => {
+      const response = await http_client.get<{ data: ProblemType[] }>(
+        "/api/problems/",
+        {
+          params: filterPayload,
+        }
+      );
+      return response?.data;
     },
   });
 
   return (
-    <ProblemsContext.Provider value={{ problemsData, isLoading }}>
+    <ProblemsContext.Provider
+      value={{ problemsData: problemsData || [], isLoading }}
+    >
       {children}
     </ProblemsContext.Provider>
   );
@@ -54,7 +60,7 @@ export const useProblemsContext = () => {
   const context = useContext(ProblemsContext);
   if (!context) {
     throw new Error(
-      "useProblemsContext must be used within a ProblemsProvider",
+      "useProblemsContext must be used within a ProblemsProvider"
     );
   }
   return context;

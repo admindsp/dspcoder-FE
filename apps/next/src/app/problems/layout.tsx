@@ -1,17 +1,16 @@
-export default function ProblemPageLayout({
+import Footer from "../@footer/page";
+import Navbar from "../@navbar/page";
+
+export default function ProblemsPageLayout({
   children,
-  navbar,
-  footer,
 }: Readonly<{
   children: React.ReactNode;
-  navbar: React.ReactNode;
-  footer: React.ReactNode;
 }>) {
   return (
     <>
-      {navbar}
+      <Navbar />
       {children}
-      {footer}
+      <Footer />
     </>
   );
 }

@@ -4,7 +4,6 @@ export default function ProblemPageLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-  navbar: React.ReactNode;
 }>) {
   return (
     <>

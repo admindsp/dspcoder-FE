@@ -50,7 +50,7 @@ export default function ContainerProvider({
           ...requestBody,
         }
       );
-      setContainerDetails(response);
+      setContainerDetails(response as ContainerDetailsType);
       console.log("Container created:", response);
       return response as ContainerDetailsType;
     },

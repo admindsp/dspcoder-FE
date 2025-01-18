@@ -9,4 +9,10 @@ export const ContainerDetailsSchema = z.object({
   default_folder_path: z.string(),
 });
 
+export const setupUserCodeBaseSchema = z.object({
+  status: z.string(),
+  problem_path: z.string(),
+});
+
 export type ContainerDetailsType = z.infer<typeof ContainerDetailsSchema>;
+export type SetupUserCodeBaseType = z.infer<typeof setupUserCodeBaseSchema>;

@@ -18,13 +18,13 @@ export const authConfig: NextAuthOptions = {
   callbacks: {
     async signIn({ user, account, profile }) {
       const existingUser = await prisma.user.findUnique({
-        where: { email: user.email },
+        where: { email: user?.email ?? undefined },
       });
 
       if (!existingUser) {
         await prisma.user.create({
           data: {
-            name: user.name,
+            name: user.name ?? "Unknown",
             email: user.email!,
             image: user.image,
             isPremium: false,

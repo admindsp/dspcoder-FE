@@ -10,6 +10,7 @@ import {
   useAtom,
 } from "@dspcoder/jotai";
 import ProblemCodeEditorLoader from "../ProblemCodeEditor/_components/ProblemCodeEditorLoader";
+import { SetupUserCodeBaseType } from "@/types/Container";
 
 type Props = {
   children: React.ReactNode;
@@ -31,7 +32,7 @@ const ClientWrapper = ({ children, problemData }: Props) => {
       if (problemData.file_path && selectedLanguage) {
         setIsLoading(true);
         try {
-          const resp = await http_client.post(
+          const resp = (await http_client.post(
             "/api/container/setup-code-base/",
             null,
             {
@@ -42,9 +43,9 @@ const ClientWrapper = ({ children, problemData }: Props) => {
                 original: false,
               },
             }
-          );
+          )) as SetupUserCodeBaseType;
 
-          if (resp?.problem_path) {
+          if (resp && resp?.problem_path) {
             setContainerProblemPath(resp.problem_path);
           }
         } catch (error) {
