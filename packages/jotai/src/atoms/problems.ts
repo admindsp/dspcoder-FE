@@ -4,4 +4,4 @@ export const userAtom = atom({
   loggedIn: false,
 });
 
-export const selectedLanguageAtom = atom("c");
+export const selectedLanguageAtom = atom("C");

@@ -26,25 +26,26 @@ const ClientWrapper = ({ children, problemData }: Props) => {
   const [, setContainerProblemPath] = useAtom(containerProblemPathAtom);
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const [isLoading, setIsLoading] = useState(true);
-
+  const user_name = containerDetails?.user_name ?? "";
   useEffect(() => {
     const setupCodeBase = async () => {
-      if (problemData.file_path && selectedLanguage) {
+      if (problemData.file_path && selectedLanguage && containerDetails) {
         setIsLoading(true);
+
         try {
           const resp = (await http_client.post(
             "/api/container/setup-code-base/",
             null,
             {
               params: {
-                username: containerDetails?.user_name,
+                username: user_name,
                 file_path: problemData.file_path,
                 lang: selectedLanguage,
                 original: false,
               },
             }
           )) as SetupUserCodeBaseType;
-
+          console.log("resp", resp);
           if (resp && resp?.problem_path) {
             setContainerProblemPath(resp.problem_path);
           }
