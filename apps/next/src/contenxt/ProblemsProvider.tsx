@@ -37,13 +37,10 @@ export const ProblemsProvider = ({
       `type:${type}-title:${title}-difficulty:${difficulty}-tags:${tags}`,
     ],
     queryFn: async () => {
-      const response = await http_client.get<{ data: ProblemType[] }>(
-        "/api/problems/",
-        {
-          params: filterPayload,
-        }
-      );
-      return response?.data;
+      const response = await http_client.get<ProblemType[]>("/api/problems/", {
+        params: filterPayload,
+      });
+      return response;
     },
   });
 
