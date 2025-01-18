@@ -15,7 +15,7 @@ type ProblemPageProps = {
 
 async function fetchProblemData(problemId: string): Promise<ProblemType> {
   const response = await fetch(
-    `http://127.0.0.1:8080/api/problems/get-problem-description?id=${problemId}`,
+    `http://dspcoder-apibackend.onrender.com/api/problems/get-problem-description?id=${problemId}`,
     { cache: "no-store" } // This ensures fresh data on each request
   );
 

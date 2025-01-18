@@ -3,8 +3,6 @@ export default function ProblemPageLayout({
   navbar,
 }: Readonly<{
   children: React.ReactNode;
-  problemCodeEditor: React.ReactNode;
-  problemTab: React.ReactNode;
   navbar: React.ReactNode;
 }>) {
   return (
