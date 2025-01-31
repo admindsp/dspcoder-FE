@@ -52,7 +52,7 @@ const ProblemsNavbar = () => {
             <SelectValue placeholder="Select language" />
           </SelectTrigger>
           <SelectContent className="ring-0 focus:ring-0 outline-none border-none">
-            <SelectItem value="c">C</SelectItem>
+            <SelectItem value="C">C</SelectItem>
             <SelectItem value="cpp">C++</SelectItem>
           </SelectContent>
         </Select>

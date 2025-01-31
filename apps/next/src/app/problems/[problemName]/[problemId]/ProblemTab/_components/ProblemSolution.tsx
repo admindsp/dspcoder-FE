@@ -76,7 +76,7 @@ export default function ProblemSolution() {
 
   if (codeSnippets.length === 0) {
     return (
-      <Card className="w-full max-w-4xl mx-auto border-none h-[calc(100vh-100px)] outline-none">
+      <Card className="w-full max-w-4xl mx-auto border-none h-[calc(100vh-50px)] outline-none">
         <CardHeader>
           <CardTitle>{title || "No Title"}</CardTitle>
           <CardDescription>

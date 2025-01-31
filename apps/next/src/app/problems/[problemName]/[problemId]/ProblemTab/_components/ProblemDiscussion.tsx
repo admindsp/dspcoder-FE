@@ -4,7 +4,7 @@ type Props = {};
 
 const ProblemDiscussion = (props: Props) => {
   return (
-    <div className="h-[calc(100vh-100px)] overflow-auto">ProblemDiscussion</div>
+    <div className="h-[calc(100vh-50px)] overflow-auto">ProblemDiscussion</div>
   );
 };
 

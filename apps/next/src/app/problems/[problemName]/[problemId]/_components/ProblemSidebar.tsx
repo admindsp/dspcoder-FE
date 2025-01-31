@@ -1,6 +1,4 @@
 "use client";
-
-import React from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { MdOutlineDescription } from "react-icons/md";
@@ -18,27 +16,32 @@ import {
   SidebarMenuItem,
   SidebarTrigger,
 } from "@dspcoder/ui/components/ui/sidebar";
+import { Button } from "@dspcoder/ui/components/ui/button";
 
 const items = [
   {
     title: "Problem Description",
     url: "?tab=description",
     icon: <MdOutlineDescription className="h-4 w-4" />,
+    disabled: false,
   },
   {
     title: "Solution",
     url: "?tab=solution",
     icon: <CiSquareChevRight className="h-4 w-4" />,
+    disabled: false,
   },
   {
     title: "Submissions",
     url: "?tab=submission",
     icon: <LuClipboardEdit className="h-4 w-4" />,
+    disabled: true,
   },
   {
     title: "Discussion Forum",
     url: "?tab=discussion",
     icon: <GoCommentDiscussion className="h-4 w-4" />,
+    disabled: true,
   },
 ];
 
@@ -49,7 +52,7 @@ const ProblemSidebar = () => {
   return (
     <Sidebar
       collapsible="icon"
-      className="border-grayish_100 bg-black h-[calc(100vh-100px)]"
+      className="border-grayish_100 bg-black h-[calc(100vh-50px)]"
     >
       <SidebarContent className="bg-black outline-none border-none text-white">
         <SidebarTrigger className="text-white font-bold bg-black w-full border-b border-b-grayish_100 z-30 " />
@@ -62,14 +65,24 @@ const ProblemSidebar = () => {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
-                    isActive={currentTab === item.url.split("=")[1]}
                     asChild
-                    className=" data-[active=true]:bg-white"
+                    isActive={currentTab === item.url.split("=")[1]}
+                    className={`data-[active=true]:bg-white ${
+                      item.disabled && "opacity-50 cursor-not-allowed"
+                    }`}
+                    disabled={item.disabled}
                   >
-                    <Link href={item.url} className="flex items-center gap-2">
-                      {item.icon}
-                      <span>{item.title}</span>
-                    </Link>
+                    {item.disabled ? (
+                      <div className="flex items-center gap-2">
+                        {item.icon}
+                        <span>{item.title}</span>
+                      </div>
+                    ) : (
+                      <Link href={item.url} className="flex items-center gap-2">
+                        {item.icon}
+                        <span>{item.title}</span>
+                      </Link>
+                    )}
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

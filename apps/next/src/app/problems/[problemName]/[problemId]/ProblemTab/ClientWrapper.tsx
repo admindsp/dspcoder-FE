@@ -45,7 +45,7 @@ const ClientWrapper = ({ children, problemData }: Props) => {
               },
             }
           )) as SetupUserCodeBaseType;
-          console.log("resp", resp);
+
           if (resp && resp?.problem_path) {
             setContainerProblemPath(resp.problem_path);
           }

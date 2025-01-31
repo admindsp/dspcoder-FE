@@ -1,0 +1,11 @@
+@media (max-width: 400px) {
+  .text-nowrap-custom {
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 401px) {
+  .text-nowrap-custom {
+    white-space: normal;
+  }
+}
