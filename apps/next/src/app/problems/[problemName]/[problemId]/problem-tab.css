@@ -1,0 +1,11 @@
+.problem-tab-content {
+  white-space: normal;
+  overflow-x: hidden;
+}
+
+@media (max-width: 500px) {
+  .problem-tab-content {
+    white-space: nowrap;
+    overflow-x: auto;
+  }
+}
