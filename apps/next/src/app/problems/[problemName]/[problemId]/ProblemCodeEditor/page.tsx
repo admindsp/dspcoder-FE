@@ -35,7 +35,7 @@ const ProblemCodeEditor = () => {
       <ProblemsNavbar />
       <div className="flex-grow overflow-hidden">
         <iframe
-          src={path}
+          src="https://ninad2.greenriver-1bb7ca43.eastus.azurecontainerapps.io/"
           className="w-full h-full"
           frameBorder="0"
           title="Code Editor"

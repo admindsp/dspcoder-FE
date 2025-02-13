@@ -7,7 +7,7 @@ type ProblemDescriptionProps = {
   problemData: ProblemType;
 };
 
-export default function ProblemDescription({
+export default async function ProblemDescription({
   markdown,
   problemData,
 }: ProblemDescriptionProps) {
