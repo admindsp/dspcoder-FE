@@ -18,7 +18,6 @@ const MediaBanner = ({ mediaData }: MediaBannerProps) => {
             <Image
               src={media.path}
               alt={media.alt_text}
-              layout="responsive"
               width={500}
               height={300}
               className="object-cover h-full"

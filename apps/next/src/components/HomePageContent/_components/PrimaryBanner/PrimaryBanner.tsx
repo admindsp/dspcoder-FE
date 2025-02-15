@@ -39,7 +39,6 @@ const PrimaryBanner = ({ data }: PrimaryBannerProp) => {
               <Image
                 src={mediaObj.path}
                 alt={mediaObj.alt_text || "Banner Image"}
-                layout="responsive"
                 width={700}
                 height={400}
                 className="w-full h-full"

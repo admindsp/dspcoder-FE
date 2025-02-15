@@ -5,7 +5,7 @@ import Logo from "./Logo";
 
 const Navbar = () => {
   return (
-    <nav className="bg-[#131315] border-b border-[#2B2B2B] text-white py-2 px-4 flex gap-6 overflow-hidden min-h-10 max-h-12 sticky">
+    <nav className="bg-[#131315] border-b border-[#2B2B2B] text-white py-2 px-4 flex gap-6 overflow-hidden min-h-10 max-h-12">
       <div className="min-w-24 flex justify-center items-center object-contain">
         <Link className="flex gap-1 items-center" href="/">
           <Logo />

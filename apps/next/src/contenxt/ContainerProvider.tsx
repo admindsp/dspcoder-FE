@@ -75,12 +75,6 @@ export default function ContainerProvider({
     }
   };
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      stopContainer();
-    }
-  }, [status]);
-
   return (
     <ContainerContext.Provider
       value={{
