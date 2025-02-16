@@ -18,6 +18,8 @@ const nextConfig = {
     NEXT_PUBLIC_CODE_EXECUTION_API_URL:
       process.env.NEXT_PUBLIC_CODE_EXECUTION_API_URL,
     NEXT_PUBLIC_POSTGRES_URL: process.env.NEXT_PUBLIC_POSTGRES_URL,
+    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME:
+      process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
   },
   pageExtensions: ["js", "jsx", "mdx", "md", "ts", "tsx"],
 };
