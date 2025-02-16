@@ -2,6 +2,7 @@
   "name": "@dspcoder/eslint-config",
   "version": "0.0.0",
   "private": true,
+  "main": "library.js",
   "files": [
     "library.js",
     "next.js",
