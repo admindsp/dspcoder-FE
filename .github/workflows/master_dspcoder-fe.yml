@@ -17,11 +17,10 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: "22.x"
+          node-version: "20.x"
 
       - name: Install pnpm globally
-        run: |
-          npm install -g pnpm
+        run: npm install -g pnpm
 
       - name: Verify pnpm installation
         run: pnpm --version
@@ -29,23 +28,25 @@ jobs:
       - name: Install dependencies with pnpm
         run: pnpm install
 
+      - name: Create .env file
+        run: |
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+          echo "NEXT_PUBLIC_AUTH_SECRET=${{ secrets.NEXT_PUBLIC_AUTH_SECRET }}" >> .env
+          echo "NEXT_PUBLIC_BACKEND_API_URL=${{ secrets.NEXT_PUBLIC_BACKEND_API_URL }}" >> .env
+          echo "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=${{ secrets.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME }}" >> .env
+          echo "GITHUB_CLIENT_ID=${{ secrets.NEXT_PUBLIC_GITHUB_CLIENT_ID }}" >> .env
+          echo "GITHUB_CLIENT_SECRET=${{ secrets.NEXT_PUBLIC_GITHUB_CLIENT_SECRET }}" >> .env
+          echo "NEXT_PUBLIC_MONGO_URI=${{ secrets.NEXT_PUBLIC_MONGO_URI }}" >> .env
+          echo "NEXT_PUBLIC_NEXTAUTH_SECRET=${{ secrets.NEXT_PUBLIC_NEXTAUTH_SECRET }}" >> .env
+          echo "NEXT_PUBLIC_PRODUCTION_URL=${{ secrets.NEXT_PUBLIC_PRODUCTION_URL }}" >> .env
+          echo "NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}" >> .env
+          echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env
+
       - name: Build the app with TurboRepo
-        run: pnpm turbo run build --filter=next...
-        env:
-        DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        NEXT_PUBLIC_AUTH_SECRET: ${{ secrets.NEXT_PUBLIC_AUTH_SECRET }}
-        NEXT_PUBLIC_BACKEND_API_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_API_URL }}
-        NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: ${{ secrets.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME }}
-        GITHUB_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_GITHUB_CLIENT_ID }}
-        GITHUB_CLIENT_SECRET: ${{ secrets.NEXT_PUBLIC_GITHUB_CLIENT_SECRET }}
-        NEXT_PUBLIC_MONGO_URI: ${{ secrets.NEXT_PUBLIC_MONGO_URI }}
-        NEXT_PUBLIC_NEXTAUTH_SECRET: ${{ secrets.NEXT_PUBLIC_NEXTAUTH_SECRET }}
-        NEXT_PUBLIC_PRODUCTION_URL: ${{ secrets.NEXT_PUBLIC_PRODUCTION_URL }}
-        NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
-        NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+        run: pnpm turbo run build --filter=next
 
       - name: Zip artifact for deployment
-        run: zip -r release.zip ./dist
+        run: zip -r release.zip .
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -60,8 +61,8 @@ jobs:
       name: "Production"
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write # This is required for requesting the JWT
-      contents: read # This is required for actions/checkout
+      id-token: write
+      contents: read
 
     steps:
       - name: Download artifact from build job
@@ -86,15 +87,3 @@ jobs:
           app-name: "dspcoder-FE"
           slot-name: "Production"
           package: .
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          NEXT_PUBLIC_AUTH_SECRET: ${{ secrets.NEXT_PUBLIC_AUTH_SECRET }}
-          NEXT_PUBLIC_BACKEND_API_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_API_URL }}
-          NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: ${{ secrets.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME }}
-          GITHUB_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_GITHUB_CLIENT_ID }}
-          GITHUB_CLIENT_SECRET: ${{ secrets.NEXT_PUBLIC_GITHUB_CLIENT_SECRET }}
-          NEXT_PUBLIC_MONGO_URI: ${{ secrets.NEXT_PUBLIC_MONGO_URI }}
-          NEXT_PUBLIC_NEXTAUTH_SECRET: ${{ secrets.NEXT_PUBLIC_NEXTAUTH_SECRET }}
-          NEXT_PUBLIC_PRODUCTION_URL: ${{ secrets.NEXT_PUBLIC_PRODUCTION_URL }}
-          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
-          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
