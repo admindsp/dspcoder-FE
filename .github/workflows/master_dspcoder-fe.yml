@@ -13,24 +13,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read #This is required for actions/checkout
-
-    steps:
-      - uses: actions/checkout@v4
+      contents: read 
+    - uses: actions/checkout@v4
 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
           node-version: '22.x'
-
-      - name: npm install, build, and test
+          
+      - name: Set up pnpm
         run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
+          curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+
+      - name: Install dependencies with pnpm
+        run: pnpm install
+
+      - name: Build the app with TurboRepo
+        run: pnpm turbo run build --filter=next...
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: zip -r release.zip ./dist
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -64,11 +66,30 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_540F4D21549A41469EEC6E06A4DBF737 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_0A43E3F68A504A8989134E2E8AB98559 }}
 
-      - name: 'Deploy to Azure Web App'
+      - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'dspcoder-FE'
           slot-name: 'Production'
           package: .
+          env:
+            MONGO_URI: ${{ secrets.MONGO_URI }}
+            PROD_DB: ${{ secrets.PROD_DB }}
+            DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+            PORT: ${{ secrets.PORT }}
+            SERVER: ${{ secrets.SERVER }}
+            AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
+            AZURE_IMAGE_NAME: ${{ secrets.AZURE_IMAGE_NAME }}
+            AZURE_CLIENT_PASSWORD: ${{ secrets.AZURE_CLIENT_PASSWORD }}
+            AZURE_PRINCIPAL_NAME: ${{ secrets.AZURE_PRINCIPAL_NAME }}
+            AZURE_REGISTRY_USERNAME: ${{ secrets.AZURE_REGISTRY_USERNAME }}
+            AZURE_REGISTRY_PASSWORD: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
+            AZURE_RENODE_REGISTRY: ${{ secrets.AZURE_RENODE_REGISTRY }}
+            AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP }}
+            AZURE_SUBSCRIPTION_NAME: ${{ secrets.AZURE_SUBSCRIPTION_NAME }}
+            AZURE_PORT: ${{ secrets.AZURE_PORT }}
+            PROBLEMS_COLLECTION: ${{ secrets.PROBLEMS_COLLECTION }}
+            BLOGS_COLLECTION: ${{ secrets.BLOGS_COLLECTION }}
+            AZURE_BLOB_CONNECTION_STRING: ${{ secrets.AZURE_BLOB_CONNECTION_STRING }}
           
