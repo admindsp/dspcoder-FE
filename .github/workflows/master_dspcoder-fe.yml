@@ -74,16 +74,10 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_540F4D21549A41469EEC6E06A4DBF737 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_0A43E3F68A504A8989134E2E8AB98559 }}
 
-      - name: Enable "Run from Package" mode (Faster Deployment)
-        run: |
-          az webapp config appsettings set \
-            --name dspcoder-FE \
-            --resource-group AzureCredits \
-            --settings SCM_RUN_FROM_PACKAGE=1
-
-      - name: Deploy to Azure Web App using ZIP (Faster than webapps-deploy@v3)
-        run: |
-          az webapp deployment source config-zip \
-            --resource-group AzureCredits \
-            --name dspcoder-FE \
-            --src release.zip
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: "dspcoder-FE"
+          slot-name: "Production"
+          package: .
