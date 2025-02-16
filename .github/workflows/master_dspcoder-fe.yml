@@ -70,9 +70,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_BB0CB07D734A4059A858F8920B07E950 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_540F4D21549A41469EEC6E06A4DBF737 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_0A43E3F68A504A8989134E2E8AB98559 }}
 
       - name: Enable "Run from Package" mode (Faster Deployment)
         run: |
