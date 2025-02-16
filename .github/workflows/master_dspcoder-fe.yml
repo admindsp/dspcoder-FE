@@ -71,22 +71,22 @@ jobs:
           app-name: "dspcoder-FE"
           slot-name: "Production"
           package: .
-          env:
-            MONGO_URI: ${{ secrets.MONGO_URI }}
-            PROD_DB: ${{ secrets.PROD_DB }}
-            DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-            PORT: ${{ secrets.PORT }}
-            SERVER: ${{ secrets.SERVER }}
-            AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
-            AZURE_IMAGE_NAME: ${{ secrets.AZURE_IMAGE_NAME }}
-            AZURE_CLIENT_PASSWORD: ${{ secrets.AZURE_CLIENT_PASSWORD }}
-            AZURE_PRINCIPAL_NAME: ${{ secrets.AZURE_PRINCIPAL_NAME }}
-            AZURE_REGISTRY_USERNAME: ${{ secrets.AZURE_REGISTRY_USERNAME }}
-            AZURE_REGISTRY_PASSWORD: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
-            AZURE_RENODE_REGISTRY: ${{ secrets.AZURE_RENODE_REGISTRY }}
-            AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP }}
-            AZURE_SUBSCRIPTION_NAME: ${{ secrets.AZURE_SUBSCRIPTION_NAME }}
-            AZURE_PORT: ${{ secrets.AZURE_PORT }}
-            PROBLEMS_COLLECTION: ${{ secrets.PROBLEMS_COLLECTION }}
-            BLOGS_COLLECTION: ${{ secrets.BLOGS_COLLECTION }}
-            AZURE_BLOB_CONNECTION_STRING: ${{ secrets.AZURE_BLOB_CONNECTION_STRING }}
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+          PROD_DB: ${{ secrets.PROD_DB }}
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+          PORT: ${{ secrets.PORT }}
+          SERVER: ${{ secrets.SERVER }}
+          AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
+          AZURE_IMAGE_NAME: ${{ secrets.AZURE_IMAGE_NAME }}
+          AZURE_CLIENT_PASSWORD: ${{ secrets.AZURE_CLIENT_PASSWORD }}
+          AZURE_PRINCIPAL_NAME: ${{ secrets.AZURE_PRINCIPAL_NAME }}
+          AZURE_REGISTRY_USERNAME: ${{ secrets.AZURE_REGISTRY_USERNAME }}
+          AZURE_REGISTRY_PASSWORD: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
+          AZURE_RENODE_REGISTRY: ${{ secrets.AZURE_RENODE_REGISTRY }}
+          AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP }}
+          AZURE_SUBSCRIPTION_NAME: ${{ secrets.AZURE_SUBSCRIPTION_NAME }}
+          AZURE_PORT: ${{ secrets.AZURE_PORT }}
+          PROBLEMS_COLLECTION: ${{ secrets.PROBLEMS_COLLECTION }}
+          BLOGS_COLLECTION: ${{ secrets.BLOGS_COLLECTION }}
+          AZURE_BLOB_CONNECTION_STRING: ${{ secrets.AZURE_BLOB_CONNECTION_STRING }}
