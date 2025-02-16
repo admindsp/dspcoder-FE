@@ -18,15 +18,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "20.x"
+          cache: "pnpm" # Cache pnpm dependencies for faster installs
 
       - name: Install pnpm globally
         run: npm install -g pnpm
 
-      - name: Verify pnpm installation
-        run: pnpm --version
-
       - name: Install dependencies with pnpm
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Create .env file
         run: |
@@ -45,8 +43,8 @@ jobs:
       - name: Build the app with TurboRepo
         run: pnpm turbo run build --filter=next
 
-      - name: Zip artifact for deployment
-        run: zip -r release.zip .
+      - name: Zip artifact for deployment (Exclude unnecessary files)
+        run: zip -r release.zip . -x "node_modules/*" ".git/*" "*.log"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -70,20 +68,23 @@ jobs:
         with:
           name: node-app
 
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
-
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_BB0CB07D734A4059A858F8920B07E950 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_540F4D21549A41469EEC6E06A4DBF737 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_0A43E3F68A504A8989134E2E8AB98559 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
 
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: "dspcoder-FE"
-          slot-name: "Production"
-          package: .
+      - name: Enable "Run from Package" mode (Faster Deployment)
+        run: |
+          az webapp config appsettings set \
+            --name dspcoder-FE \
+            --resource-group AzureCredits \
+            --settings SCM_RUN_FROM_PACKAGE=1
+
+      - name: Deploy to Azure Web App using ZIP (Faster than webapps-deploy@v3)
+        run: |
+          az webapp deployment source config-zip \
+            --resource-group AzureCredits \
+            --name dspcoder-FE \
+            --src release.zip
