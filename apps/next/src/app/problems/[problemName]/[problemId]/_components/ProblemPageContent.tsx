@@ -5,7 +5,6 @@ import { GrDrag } from "react-icons/gr";
 import dynamic from "next/dynamic";
 import ProblemCodeEditor from "../ProblemCodeEditor/page";
 import ProblemTab from "../ProblemTab/ProblemTab";
-import type { ProblemType } from "@/types/Problem";
 import type { PanelResizeHandleProps } from "react-resizable-panels";
 
 const PanelResizeHandle = dynamic<PanelResizeHandleProps>(
@@ -32,19 +31,20 @@ type ProblemPageContentProps = {
   searchParams: {
     tab: string;
   };
-  problemData: ProblemType;
 };
 
-const ProblemContent = ({
-  params,
-  searchParams,
-  problemData,
-}: ProblemPageContentProps) => {
+const ProblemContent = ({ params, searchParams }: ProblemPageContentProps) => {
   const [isResizing, setIsResizing] = useState(false);
 
   const memoizedProblemTab = useMemo(
-    () => <ProblemTab tab={searchParams.tab} problemData={problemData} />,
-    [searchParams.tab, problemData]
+    () => (
+      <ProblemTab
+        tab={searchParams.tab}
+        params={params}
+        searchParams={searchParams}
+      />
+    ),
+    [searchParams.tab]
   );
 
   return (

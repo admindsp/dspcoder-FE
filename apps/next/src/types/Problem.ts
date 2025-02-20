@@ -23,7 +23,16 @@ export const ProblemsSearchParamsSchema = z.object({
   tags: z.string().optional(),
 });
 
+export const ProblemDescriptionResponseSchema = z.object({
+  data: ProblemSchema,
+  message: z.string(),
+});
+
 export type ProblemType = z.infer<typeof ProblemSchema>;
 export type ProblemsSearchParamsType = z.infer<
   typeof ProblemsSearchParamsSchema
+>;
+
+export type ProblemDescriptionResponseType = z.infer<
+  typeof ProblemDescriptionResponseSchema
 >;

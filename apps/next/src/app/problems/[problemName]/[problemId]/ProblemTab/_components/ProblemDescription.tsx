@@ -11,6 +11,8 @@ export default async function ProblemDescription({
   markdown,
   problemData,
 }: ProblemDescriptionProps) {
+  if (!problemData) return null;
+
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-6">
@@ -25,14 +27,14 @@ export default async function ProblemDescription({
           </span>
           <span className="text-gray-400">Type: {problemData.type}</span>
           <span className="text-gray-400">
-            Acceptance Rate: {problemData.acceptance_rate.toFixed(2)}%
+            Acceptance Rate: {problemData.acceptance_rate?.toFixed(2)}%
           </span>
         </div>
       </div>
       <div className="mb-6">
         <h2 className="text-white text-xl font-semibold mb-2">Tags:</h2>
         <div className="flex flex-wrap gap-2">
-          {problemData.tags.map((tag, index) => (
+          {problemData.tags?.map((tag, index) => (
             <span
               key={index}
               className="bg-blue-600 text-white px-2 py-1 rounded text-sm"
@@ -45,7 +47,7 @@ export default async function ProblemDescription({
       <div className="mb-6">
         <h2 className="text-white text-xl font-semibold mb-2">Companies:</h2>
         <div className="flex flex-wrap gap-2">
-          {problemData.companies.map((company, index) => (
+          {problemData.companies?.map((company, index) => (
             <span
               key={index}
               className="bg-gray-700 text-white px-2 py-1 rounded text-sm"
@@ -120,7 +122,7 @@ export default async function ProblemDescription({
 }
 
 function getDifficultyColor(difficulty: string): string {
-  switch (difficulty.toLowerCase()) {
+  switch (difficulty?.toLowerCase()) {
     case "easy":
       return "bg-green-600 text-white";
     case "medium":

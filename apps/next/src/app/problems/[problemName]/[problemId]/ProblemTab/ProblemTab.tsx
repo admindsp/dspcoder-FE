@@ -6,8 +6,13 @@ import React, {
   Suspense,
 } from "react";
 import dynamic from "next/dynamic";
-import type { ProblemType } from "@/types/Problem";
+import type {
+  ProblemDescriptionResponseType,
+  ProblemType,
+} from "@/types/Problem";
 import ClientWrapper from "./ClientWrapper";
+import { useQuery } from "@tanstack/react-query";
+import http_client from "@/app/api/client";
 
 const ProblemSubmission = dynamic(
   () => import("./_components/ProblemSubmission")
@@ -22,10 +27,65 @@ const ProblemDescription = dynamic(
 
 type ProblemTabProps = {
   tab: string;
+  params: {
+    problemName: string;
+    problemId: string;
+  };
+  searchParams: {
+    tab: string;
+  };
+};
+
+type TabContentProps = {
+  tab: string;
   problemData: ProblemType;
 };
 
-export default function ProblemTab({ tab, problemData }: ProblemTabProps) {
+export default function ProblemTab({
+  tab,
+  params,
+  searchParams,
+}: ProblemTabProps) {
+  const { data, isLoading, isError, error, refetch } =
+    useQuery<ProblemDescriptionResponseType>({
+      queryKey: ["problem-data", params?.problemId],
+      queryFn: async () => {
+        if (!params?.problemId) {
+          throw new Error("Problem ID is required");
+        }
+
+        const response = await http_client.get<ProblemDescriptionResponseType>(
+          "/api/get_problem_description",
+          {
+            params: {
+              problem_id: params.problemId,
+            },
+          }
+        );
+        return response;
+      },
+      retry: (failureCount, error: any) => {
+        return error?.response?.status !== 404 && failureCount < 3;
+      },
+    });
+
+  if (isLoading) {
+    return (
+      <div className="flex h-[200px] items-center justify-center">
+        <span className="text-white">Problem data is loading.</span>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return <div className="text-white">Error fetching problem data.</div>;
+  }
+
+  if (!data) {
+    return <div className="text-white">Problem Data not found.</div>;
+  }
+
+  const { data: problemData } = data;
   return (
     <ClientWrapper problemData={problemData}>
       <TabContent tab={tab} problemData={problemData} />
@@ -33,7 +93,7 @@ export default function ProblemTab({ tab, problemData }: ProblemTabProps) {
   );
 }
 
-const TabContent = React.memo(({ tab, problemData }: ProblemTabProps) => {
+const TabContent = React.memo(({ tab, problemData }: TabContentProps) => {
   const [isWide, setIsWide] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
 

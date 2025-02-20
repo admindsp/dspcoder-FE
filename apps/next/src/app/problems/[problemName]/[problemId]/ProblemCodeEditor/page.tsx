@@ -10,11 +10,8 @@ import { containerProblemPathAtom, useAtom } from "@dspcoder/jotai";
 import ProblemsNavbar from "@/components/ProblemsNavbar/ProblemsNavbar";
 
 const ProblemCodeEditor = () => {
-  const { containerDetails, isLoading, isSuccess } = useContainer();
+  const { containerUrl, isLoading, isSuccess } = useContainer();
   const { status } = useSession();
-  const [containerProblemPath] = useAtom(containerProblemPathAtom);
-  let path = "http://" + containerDetails?.default_folder_path;
-  if (containerProblemPath) path = containerProblemPath;
 
   if (status === "unauthenticated")
     return (
@@ -35,7 +32,7 @@ const ProblemCodeEditor = () => {
       <ProblemsNavbar />
       <div className="flex-grow overflow-hidden">
         <iframe
-          src="https://ninad2.greenriver-1bb7ca43.eastus.azurecontainerapps.io/"
+          src={""}
           className="w-full h-full"
           frameBorder="0"
           title="Code Editor"

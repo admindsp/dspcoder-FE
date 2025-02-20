@@ -9,60 +9,44 @@ import {
   selectedLanguageAtom,
   useAtom,
 } from "@dspcoder/jotai";
-import ProblemCodeEditorLoader from "../ProblemCodeEditor/_components/ProblemCodeEditorLoader";
 import { SetupUserCodeBaseType } from "@/types/Container";
+import axios from "axios";
+import { useSession } from "next-auth/react";
 
 type Props = {
   children: React.ReactNode;
   problemData: ProblemType;
 };
 
+function extractFilename(url: string) {
+  const parts = url.split("/");
+  return parts[parts.length - 2];
+}
+
 const ClientWrapper = ({ children, problemData }: Props) => {
   const {
-    containerDetails,
+    containerUrl,
     isLoading: isContainerLoading,
     isSuccess,
   } = useContainer();
-  const [, setContainerProblemPath] = useAtom(containerProblemPathAtom);
+  const { data } = useSession();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  const [isLoading, setIsLoading] = useState(true);
-  const user_name = containerDetails?.user_name ?? "";
-  useEffect(() => {
-    const setupCodeBase = async () => {
-      if (problemData.file_path && selectedLanguage && containerDetails) {
-        setIsLoading(true);
+  console.log("CONTINARE UIRL", containerUrl);
+  if (!containerUrl) return;
+  const setup_code_base_api_url =
+    containerUrl.url.toString() + "uvi/setup_user_codebase";
+  const params = {
+    username: data?.user?.name,
+    question_id: extractFilename(problemData.file_path),
+    lang: selectedLanguage,
+    original: "False",
+  };
+  const setup_code_base = async () => {
+    const resp = await axios.get(setup_code_base_api_url, { params });
+    console.log(resp);
+  };
 
-        try {
-          const resp = (await http_client.post(
-            "/api/container/setup-code-base/",
-            null,
-            {
-              params: {
-                username: user_name,
-                file_path: problemData.file_path,
-                lang: selectedLanguage,
-                original: false,
-              },
-            }
-          )) as SetupUserCodeBaseType;
-
-          if (resp && resp?.problem_path) {
-            setContainerProblemPath(resp.problem_path);
-          }
-        } catch (error) {
-          console.error("Error setting up code base:", error);
-        } finally {
-          setIsLoading(false);
-        }
-      } else {
-        setIsLoading(false);
-      }
-    };
-
-    setupCodeBase();
-  }, []);
-
-  if (isContainerLoading || isLoading) return <ProblemCodeEditorLoader />;
+  setup_code_base();
 
   return <>{children}</>;
 };
