@@ -18,7 +18,11 @@ import {
 } from "@dspcoder/jotai";
 import http_client from "@/app/api/client";
 import { useSession } from "next-auth/react";
-import { RunQuestionType, SubmitQuestionType } from "@/types/Problem";
+import {
+  BuildQuestionType,
+  RunQuestionType,
+  SubmitQuestionType,
+} from "@/types/Problem";
 import { profile } from "console";
 
 export const buttonStyles = tv({
@@ -47,7 +51,7 @@ const ProblemsNavbar = () => {
         profile: "true",
       })) as RunQuestionType;
       console.log(resp);
-      alert(resp.response.status);
+      alert(resp.response.status + " || " + resp.response.output);
     } catch (err) {
       console.error(err);
     }
@@ -62,7 +66,7 @@ const ProblemsNavbar = () => {
         profile: "true",
       })) as SubmitQuestionType;
       console.log(resp);
-      alert(resp.response.status +" | " + resp.response.output.details);
+      alert(resp.response.status + " | " + resp.response.output.details);
     } catch (err) {
       console.error(err);
     }
@@ -70,13 +74,13 @@ const ProblemsNavbar = () => {
 
   const handleBuild = async () => {
     try {
-      const resp = await http_client.post("/api/build_question", {
+      const resp = (await http_client.post("/api/build_question", {
         username: session?.user?.name,
         question_id: currentProblem,
         lang: selectedLanguage,
-        profile: true,
-      });
+      })) as BuildQuestionType;
       console.log(resp);
+      alert(resp.response.status + " || " + resp.response.output);
     } catch (err) {
       console.error(err);
     }

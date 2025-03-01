@@ -49,6 +49,16 @@ export const SubmitQuestionSchema = z.object({
   }),
 });
 
+
+export const BuildQuestionSchema = z.object({
+  message: z.string(),
+  response: z.object({
+    status: z.enum(["PASS", "FAIL"]),
+    output: z.string(),
+    message: z.string(),
+  }),
+});
+
 export type ProblemType = z.infer<typeof ProblemSchema>;
 export type ProblemsSearchParamsType = z.infer<
   typeof ProblemsSearchParamsSchema
@@ -60,4 +70,4 @@ export type ProblemDescriptionResponseType = z.infer<
 
 export type RunQuestionType = z.infer<typeof RunQuestionSchema>;
 export type SubmitQuestionType = z.infer<typeof SubmitQuestionSchema>;
-
+export type BuildQuestionType = z.infer<typeof BuildQuestionSchema>;
