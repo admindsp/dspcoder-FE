@@ -6,12 +6,18 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"],
       "env": [
+        "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME",
         "NEXT_PUBLIC_MONGO_URI",
         "NEXTAUTH_URL",
         "NEXT_PUBLIC_GITHUB_CLIENT_ID",
         "NEXT_PUBLIC_GITHUB_CLIENT_SECRET",
         "NEXTAUTH_SECRET",
-        "NEXT_PUBLIC_BACKEND_API_URL"
+        "NEXT_PUBLIC_BACKEND_API_URL",
+        "NEXT_PUBLIC_BACKEND_AZURE_API_URL",
+        "NEXT_PUBLIC_AUTH_SECRET",
+        "NEXT_PUBLIC_PRODUCTION_URL",
+        "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME",
+        "DATABASE_URL"
       ],
       "inputs": [
         "$TURBO_DEFAULT$",
