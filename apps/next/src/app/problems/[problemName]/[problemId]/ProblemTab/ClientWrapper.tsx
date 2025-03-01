@@ -34,7 +34,7 @@ const ClientWrapper = ({ children, problemData }: Props) => {
   console.log("CONTINARE UIRL", containerUrl);
   if (!containerUrl) return;
   const setup_code_base_api_url =
-    containerUrl.url.toString() + "uvi/setup_user_codebase";
+    containerUrl?.toString() + "uvi/setup_user_codebase";
   const params = {
     username: data?.user?.name,
     question_id: extractFilename(problemData.file_path),
