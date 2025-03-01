@@ -33,6 +33,7 @@ const ClientWrapper = ({ children, problemData }: Props) => {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   console.log("CONTINARE UIRL", containerUrl);
   if (!containerUrl) return;
+
   const setup_code_base_api_url =
     containerUrl?.toString() + "uvi/setup_user_codebase";
   const params = {

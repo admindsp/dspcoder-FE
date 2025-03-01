@@ -60,7 +60,7 @@ export default function ProblemTab({
             params: {
               problem_id: params.problemId,
             },
-          }
+          },
         );
         return response;
       },
@@ -86,6 +86,7 @@ export default function ProblemTab({
   }
 
   const { data: problemData } = data;
+  console.log("PROBLEM DATA", problemData);
   return (
     <ClientWrapper problemData={problemData}>
       <TabContent tab={tab} problemData={problemData} />
@@ -129,7 +130,7 @@ const TabContent = React.memo(({ tab, problemData }: TabContentProps) => {
       default:
         return (
           <ProblemDescription
-            markdown={problemData?.readme ?? ""}
+            markdown={problemData?.readme ?? "Readme not loaded"}
             problemData={problemData}
           />
         );
