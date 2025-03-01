@@ -31,23 +31,22 @@ const ClientWrapper = ({ children, problemData }: Props) => {
   } = useContainer();
   const { data } = useSession();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  console.log("CONTINARE UIRL", containerUrl);
-  if (!containerUrl) return;
+  // if (!containerUrl) return;
 
-  const setup_code_base_api_url =
-    containerUrl?.toString() + "uvi/setup_user_codebase";
-  const params = {
-    username: data?.user?.name,
-    question_id: extractFilename(problemData.file_path),
-    lang: selectedLanguage,
-    original: "False",
-  };
-  const setup_code_base = async () => {
-    const resp = await axios.get(setup_code_base_api_url, { params });
-    console.log(resp);
-  };
+  // const setup_code_base_api_url =
+  //   containerUrl?.toString() + "uvi/setup_user_codebase";
+  // const params = {
+  //   username: data?.user?.name,
+  //   question_id: extractFilename(problemData.file_path),
+  //   lang: selectedLanguage,
+  //   original: "False",
+  // };
+  // const setup_code_base = async () => {
+  //   const resp = await axios.get(setup_code_base_api_url, { params });
+  //   console.log(resp);
+  // };
 
-  setup_code_base();
+  // setup_code_base();
 
   return <>{children}</>;
 };

@@ -10,9 +10,12 @@ export const ContainerDetailsSchema = z.object({
 });
 
 export const setupUserCodeBaseSchema = z.object({
-  status: z.string(),
-  problem_path: z.string(),
+  message: z.string(),
+  response: z.string(),
 });
+
+
+
 
 export type ContainerDetailsType = z.infer<typeof ContainerDetailsSchema>;
 export type SetupUserCodeBaseType = z.infer<typeof setupUserCodeBaseSchema>;

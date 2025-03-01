@@ -28,6 +28,27 @@ export const ProblemDescriptionResponseSchema = z.object({
   message: z.string(),
 });
 
+export const RunQuestionSchema = z.object({
+  response: z.object({
+    message: z.string().nullable(),
+    output: z.string(),
+    status: z.string(),
+  }),
+  message: z.string().nullable(),
+});
+
+export const SubmitQuestionSchema = z.object({
+  message: z.string(),
+  response: z.object({
+    status: z.enum(["FAIL", "SUCCESS"]),
+    output: z.object({
+      error: z.string(),
+      details: z.string(),
+      message: z.nullable(z.string()),
+    }),
+  }),
+});
+
 export type ProblemType = z.infer<typeof ProblemSchema>;
 export type ProblemsSearchParamsType = z.infer<
   typeof ProblemsSearchParamsSchema
@@ -36,3 +57,7 @@ export type ProblemsSearchParamsType = z.infer<
 export type ProblemDescriptionResponseType = z.infer<
   typeof ProblemDescriptionResponseSchema
 >;
+
+export type RunQuestionType = z.infer<typeof RunQuestionSchema>;
+export type SubmitQuestionType = z.infer<typeof SubmitQuestionSchema>;
+

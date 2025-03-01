@@ -5,3 +5,5 @@ export const userAtom = atom({
 });
 
 export const selectedLanguageAtom = atom("C");
+
+export const currentProblemAtom = atom<string | null>(null);

@@ -1,11 +1,14 @@
 "use client";
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import type React from "react";
+
 import { useSession } from "next-auth/react";
 import http_client from "@/app/api/client";
-import { ContainerDetailsType } from "@/types/Container";
+import type { ContainerDetailsType } from "@/types/Container";
 import { containerProblemPathAtom, useAtom } from "@dspcoder/jotai";
 import { useToast } from "@dspcoder/ui/components/ui/use-toast";
 import { useQuery } from "@tanstack/react-query";
+import { cookieUtils } from "@/utils/cookies";
 
 interface ContainerContextType {
   containerUrl: string | null;
@@ -15,7 +18,7 @@ interface ContainerContextType {
 }
 
 const ContainerContext = createContext<ContainerContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const useContainer = () => {
@@ -33,52 +36,70 @@ export default function ContainerProvider({
 }) {
   const { data: session, status } = useSession();
   const [containerUrl, setContainerUrl] = useAtom(containerProblemPathAtom);
+  const [hasInitialized, setHasInitialized] = useState(false);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const savedContainerUrl = cookieUtils.getContainerUrl();
+    if (savedContainerUrl && !containerUrl) {
+      setContainerUrl(savedContainerUrl);
+    }
+  }, [containerUrl, setContainerUrl]);
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      setContainerUrl(null);
+      cookieUtils.removeContainerUrl();
+      setHasInitialized(false);
+    }
+  }, [status, setContainerUrl]);
 
   const { data, isLoading, isError, isSuccess, refetch } = useQuery({
     queryKey: [`user-container-${session?.user?.email}`],
     queryFn: async () => {
-      const response = await http_client.post("/api/create_container", null, {
-        params: {
-          username: session?.user?.name,
-        },
-      });
-      const container_url = (await http_client.get("/api/get_container_url", {
-        params: {
-          username: session?.user?.name,
-        },
-      })) as string;
-      if (container_url) setContainerUrl(container_url);
-      return response as ContainerDetailsType;
+      try {
+        const response = await http_client.get("/api/create_container", {
+          params: {
+            username: session?.user?.name,
+          },
+        });
+
+        const container_url = (await http_client.get("/api/get_container_url", {
+          params: {
+            username: session?.user?.name,
+          },
+        })) as { url: string };
+
+        if (container_url?.url) {
+          setContainerUrl(container_url.url);
+          cookieUtils.setContainerUrl(container_url.url);
+        }
+
+        return response as ContainerDetailsType;
+      } catch (error) {
+        console.error("Error fetching container:", error);
+        toast({
+          title: "Error",
+          description: "Failed to initialize container. Please try again.",
+          variant: "destructive",
+        });
+        throw error;
+      }
     },
     enabled: false,
   });
 
-  // const stopContainer = async () => {
-  //   if (!containerDetails) return;
-  //   try {
-  //     await http_client.post("/api/container/stop-container/", null, {
-  //       params: {
-  //         container_name: containerDetails.container_name,
-  //       },
-  //     });
-  //     setContainerDetails(null);
-  //     console.log("Container Stopped");
-  //   } catch (error) {
-  //     console.error("Error while stopping container:", error);
-  //   }
-  // };
-
   useEffect(() => {
-    if (status === "authenticated") {
+    if (
+      status === "authenticated" &&
+      session?.user?.name &&
+      !containerUrl &&
+      !hasInitialized
+    ) {
+      setHasInitialized(true);
       refetch();
     }
-  }, [status, refetch]);
-
-  // useEffect(() => {
-  //   if (status === "unauthenticated") {
-  //     stopContainer();
-  //   }
-  // }, [status]);
+  }, [status, session, containerUrl, refetch, hasInitialized]);
 
   return (
     <ContainerContext.Provider

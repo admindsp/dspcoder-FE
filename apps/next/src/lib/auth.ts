@@ -1,4 +1,4 @@
-import { NextAuthOptions } from "next-auth";
+import type { NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import { PrismaClient } from "@prisma/client";
 
@@ -47,7 +47,9 @@ export const authConfig: NextAuthOptions = {
     },
   },
   events: {
-    async signOut({ token }) {
+    async signOut({ token, session }) {
+      // The cookie will be cleared by the ContainerProvider when it detects
+      // the status change to "unauthenticated"
       console.log("User signed out", token);
     },
   },

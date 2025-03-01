@@ -1,13 +1,10 @@
 "use client";
 
-import { useContainer } from "@/contenxt/ContainerProvider";
 import { useSession } from "next-auth/react";
-import React from "react";
-
 import GithubLogin from "@/components/AuthPopupContent/GithubLogin";
 import ProblemCodeEditorLoader from "./_components/ProblemCodeEditorLoader";
-import { containerProblemPathAtom, useAtom } from "@dspcoder/jotai";
 import ProblemsNavbar from "@/components/ProblemsNavbar/ProblemsNavbar";
+import { useContainer } from "@/contenxt/ContainerProvider";
 
 const ProblemCodeEditor = () => {
   const { containerUrl, isLoading, isSuccess } = useContainer();
@@ -20,6 +17,7 @@ const ProblemCodeEditor = () => {
         <GithubLogin />
       </div>
     );
+
   if (status === "authenticated" && isLoading)
     return (
       <div className="flex-grow h-full flex items-center justify-center">
@@ -32,7 +30,7 @@ const ProblemCodeEditor = () => {
       <ProblemsNavbar />
       <div className="flex-grow overflow-hidden">
         <iframe
-          src={""}
+          src={containerUrl || ""}
           className="w-full h-full"
           frameBorder="0"
           title="Code Editor"

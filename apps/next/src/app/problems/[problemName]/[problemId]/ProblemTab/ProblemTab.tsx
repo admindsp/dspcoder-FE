@@ -13,16 +13,26 @@ import type {
 import ClientWrapper from "./ClientWrapper";
 import { useQuery } from "@tanstack/react-query";
 import http_client from "@/app/api/client";
+import { getProblemName } from "@/utils/getProblemName";
+import { useContainer } from "@/contenxt/ContainerProvider";
+import { cookieUtils } from "@/utils/cookies";
+import { useSession } from "next-auth/react";
+import {
+  currentProblemAtom,
+  selectedLanguageAtom,
+  useAtom,
+} from "@dspcoder/jotai";
+import { SetupUserCodeBaseType } from "@/types/Container";
 
 const ProblemSubmission = dynamic(
-  () => import("./_components/ProblemSubmission")
+  () => import("./_components/ProblemSubmission"),
 );
 const ProblemSolution = dynamic(() => import("./_components/ProblemSolution"));
 const ProblemDiscussion = dynamic(
-  () => import("./_components/ProblemDiscussion")
+  () => import("./_components/ProblemDiscussion"),
 );
 const ProblemDescription = dynamic(
-  () => import("./_components/ProblemDescription")
+  () => import("./_components/ProblemDescription"),
 );
 
 type ProblemTabProps = {
@@ -46,6 +56,7 @@ export default function ProblemTab({
   params,
   searchParams,
 }: ProblemTabProps) {
+  const [currentProblem, setCurrentProblem] = useAtom(currentProblemAtom);
   const { data, isLoading, isError, error, refetch } =
     useQuery<ProblemDescriptionResponseType>({
       queryKey: ["problem-data", params?.problemId],
@@ -86,17 +97,18 @@ export default function ProblemTab({
   }
 
   const { data: problemData } = data;
-  console.log("PROBLEM DATA", problemData);
-  return (
-    <ClientWrapper problemData={problemData}>
-      <TabContent tab={tab} problemData={problemData} />
-    </ClientWrapper>
-  );
+  if (problemData) setCurrentProblem(getProblemName(problemData.file_path));
+
+  return <TabContent tab={tab} problemData={problemData} />;
 }
 
 const TabContent = React.memo(({ tab, problemData }: TabContentProps) => {
   const [isWide, setIsWide] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
+  const containerUrl = cookieUtils.getContainerUrl();
+  const { data } = useSession();
+  const [currentProblem] = useAtom(currentProblemAtom);
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const checkWidth = useCallback(() => {
     if (containerRef.current) {
@@ -116,6 +128,26 @@ const TabContent = React.memo(({ tab, problemData }: TabContentProps) => {
       resizeObserver.disconnect();
     };
   }, [checkWidth]);
+
+  const { data: SetupCodeBaseData } = useQuery({
+    queryKey: [`setup-code-base-${data?.user?.email}`],
+    queryFn: async () => {
+      try {
+        const response = (await http_client.post("/api/setup_user_codebase", {
+          username: data?.user?.name,
+          question_id: currentProblem,
+          lang: selectedLanguage,
+          original: "True",
+        })) as SetupUserCodeBaseType;
+        if (response.response) cookieUtils.setContainerUrl(response.response);
+        return response;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    enabled: !!currentProblem && !!containerUrl,
+  });
 
   const wrapClass = isWide ? "text-wrap" : "text-nowrap overflow-x-auto";
 
