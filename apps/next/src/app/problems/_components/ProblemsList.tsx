@@ -48,7 +48,7 @@ export default function ProblemsList() {
             </TableCell>
             <TableCell className="capitalize whitespace-nowrap max-w-max">
               <Link href={`/problems?type=${problem?.type?.toLowerCase()}`}>
-                {problem.type}
+                {problem.type?.toUpperCase()}
               </Link>
             </TableCell>
             <TableCell
