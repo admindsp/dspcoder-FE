@@ -14,6 +14,7 @@ export const ProblemSchema = z.object({
   failed_submissions: z.number(),
   acceptance_rate: z.number(),
   readme: z.string().optional(),
+  solution: z.string().optional(),
 });
 
 export const ProblemsSearchParamsSchema = z.object({
@@ -48,7 +49,6 @@ export const SubmitQuestionSchema = z.object({
     }),
   }),
 });
-
 
 export const BuildQuestionSchema = z.object({
   message: z.string(),

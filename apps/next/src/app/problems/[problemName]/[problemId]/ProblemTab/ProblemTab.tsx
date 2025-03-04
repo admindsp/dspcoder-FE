@@ -157,7 +157,7 @@ const TabContent = React.memo(({ tab, problemData }: TabContentProps) => {
       case "submission":
         return <ProblemSubmission />;
       case "solution":
-        return <ProblemSolution />;
+        return <ProblemSolution markdown={problemData?.solution} />;
       case "discussion":
         return <ProblemDiscussion />;
       default:
