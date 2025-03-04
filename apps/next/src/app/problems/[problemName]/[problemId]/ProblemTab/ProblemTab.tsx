@@ -23,16 +23,17 @@ import {
   useAtom,
 } from "@dspcoder/jotai";
 import { SetupUserCodeBaseType } from "@/types/Container";
+import ProblemSkeleton from "./_components/ProlemSkeleton";
 
 const ProblemSubmission = dynamic(
-  () => import("./_components/ProblemSubmission"),
+  () => import("./_components/ProblemSubmission")
 );
 const ProblemSolution = dynamic(() => import("./_components/ProblemSolution"));
 const ProblemDiscussion = dynamic(
-  () => import("./_components/ProblemDiscussion"),
+  () => import("./_components/ProblemDiscussion")
 );
 const ProblemDescription = dynamic(
-  () => import("./_components/ProblemDescription"),
+  () => import("./_components/ProblemDescription")
 );
 
 type ProblemTabProps = {
@@ -71,7 +72,7 @@ export default function ProblemTab({
             params: {
               problem_id: params.problemId,
             },
-          },
+          }
         );
         return response;
       },
@@ -83,7 +84,7 @@ export default function ProblemTab({
   if (isLoading) {
     return (
       <div className="flex h-[200px] items-center justify-center">
-        <span className="text-white">Problem data is loading.</span>
+        <ProblemSkeleton />
       </div>
     );
   }

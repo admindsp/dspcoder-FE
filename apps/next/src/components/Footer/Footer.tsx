@@ -1,11 +1,11 @@
 import React from "react";
 
-type Props = {};
-
-const Footer = (props: Props) => {
+const Footer = () => {
   return (
-    <div className="min-h-20 py-4 px-4 bg-gradient-to-b from-[#131315] to-[#000000] flex justify-center items-center gap-4 text-gray-400 font-semibold">
-      <span>@Copyright 2024 DSPCoder</span>
+    <div className="min-h-20 border-t border-slate-900 py-6 px-6 bg-gradient-to-b from-[#000000] to-[#161414] flex justify-center items-center gap-6 text-gray-400 font-semibold">
+      <span className="text-lg cursor-default hover:text-white transition-all duration-300">
+        © 2024 DSPCoder
+      </span>
     </div>
   );
 };

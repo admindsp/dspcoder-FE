@@ -49,6 +49,11 @@ const generateParticles = (count: number) => {
 const HomePageContent = () => {
   const [isHovered, setIsHovered] = React.useState(false);
   const particles = React.useMemo(() => generateParticles(8), []);
+  const [hoveredCard, setHoveredCard] = React.useState<number | null>(null);
+
+  const cardWidth = 300;
+  const cardHeight = 200;
+  const perimeter = 2 * (cardWidth + cardHeight);
 
   return (
     <div className="bg-black text-white min-h-screen flex flex-col items-center px-4 container lg:gap-16">
@@ -163,61 +168,46 @@ const HomePageContent = () => {
         }}
         className="grid gap-8 mt-16 md:grid-cols-3 w-full"
       >
-        <motion.div
-          variants={cardVariants}
-          whileHover="hover"
-          className="bg-gray-900 p-8 rounded-xl transition-colors shadow-lg"
-        >
+        {[0, 1, 2].map((index) => (
           <motion.div
-            variants={floatingIcon}
-            animate="animate"
-            className="text-blue-500 text-5xl mb-4"
+            key={index}
+            variants={cardVariants}
+            whileHover="hover"
+            className="bg-gray-900 p-8 rounded-xl transition-colors shadow-lg relative"
+            onHoverStart={() => setHoveredCard(index)}
+            onHoverEnd={() => setHoveredCard(null)}
           >
-            ⚡
-          </motion.div>
-          <h3 className="text-xl font-semibold mb-3">Hands-on Practice</h3>
-          <p className="text-gray-400">
-            Real-world projects with actual MCUs. Build your portfolio while you
-            learn.
-          </p>
-        </motion.div>
+            <motion.div
+              variants={floatingIcon}
+              animate="animate"
+              className="text-blue-500 text-5xl mb-4"
+            >
+              {index === 0 ? "⚡" : index === 1 ? "🎯" : "🚀"}
+            </motion.div>
+            <h3 className="text-xl font-semibold mb-3">
+              {index === 0
+                ? "Hands-on Practice"
+                : index === 1
+                  ? "Interview Ready"
+                  : "Industry Skills"}
+            </h3>
+            <p className="text-gray-400">
+              {index === 0
+                ? "Real-world projects with actual MCUs. Build your portfolio while you learn."
+                : index === 1
+                  ? "Company-specific preparation with curated coding questions."
+                  : "Master protocols, drivers, and standards used in aerospace, automotive, and medical devices."}
+            </p>
 
-        <motion.div
-          variants={cardVariants}
-          whileHover="hover"
-          className="bg-gray-900 p-8 rounded-xl transition-colors shadow-lg"
-        >
-          <motion.div
-            variants={floatingIcon}
-            animate="animate"
-            className="text-blue-500 text-5xl mb-4"
-          >
-            🎯
+            {/* Animated bottom border */}
+            <motion.div
+              className="absolute bottom-0 left-0 h-0.5 bg-yellow-500"
+              initial={{ width: 0 }}
+              animate={{ width: hoveredCard === index ? "100%" : "0%" }}
+              transition={{ duration: 0.3 }}
+            />
           </motion.div>
-          <h3 className="text-xl font-semibold mb-3">Interview Ready</h3>
-          <p className="text-gray-400">
-            Company-specific preparation with curated coding questions.
-          </p>
-        </motion.div>
-
-        <motion.div
-          variants={cardVariants}
-          whileHover="hover"
-          className="bg-gray-900 p-8 rounded-xl transition-colors shadow-lg"
-        >
-          <motion.div
-            variants={floatingIcon}
-            animate="animate"
-            className="text-blue-500 text-5xl mb-4"
-          >
-            🚀
-          </motion.div>
-          <h3 className="text-xl font-semibold mb-3">Industry Skills</h3>
-          <p className="text-gray-400">
-            Master protocols, drivers, and standards used in aerospace,
-            automotive, and medical devices.
-          </p>
-        </motion.div>
+        ))}
       </motion.section>
     </div>
   );

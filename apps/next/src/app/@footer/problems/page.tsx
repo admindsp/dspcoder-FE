@@ -1,3 +1,7 @@
 import Footer from "@/components/Footer/Footer";
 
-export default Footer;
+const ProblemListPageFooter = () => {
+  return <></>;
+};
+
+export default ProblemListPageFooter;
