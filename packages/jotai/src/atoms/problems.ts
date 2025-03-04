@@ -4,6 +4,6 @@ export const userAtom = atom({
   loggedIn: false,
 });
 
-export const selectedLanguageAtom = atom("C");
+export const selectedLanguageAtom = atom("c");
 
 export const currentProblemAtom = atom<string | null>(null);
