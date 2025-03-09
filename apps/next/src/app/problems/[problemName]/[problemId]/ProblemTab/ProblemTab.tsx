@@ -1,3 +1,5 @@
+"use client";
+
 import React, {
   useState,
   useEffect,
@@ -10,30 +12,42 @@ import type {
   ProblemDescriptionResponseType,
   ProblemType,
 } from "@/types/Problem";
-import ClientWrapper from "./ClientWrapper";
+
 import { useQuery } from "@tanstack/react-query";
 import http_client from "@/app/api/client";
 import { getProblemName } from "@/utils/getProblemName";
-import { useContainer } from "@/contenxt/ContainerProvider";
 import { cookieUtils } from "@/utils/cookies";
 import { useSession } from "next-auth/react";
+
+import type { SetupUserCodeBaseType } from "@/types/Container";
+import ProblemSkeleton from "./_components/ProlemSkeleton";
 import {
+  containerProblemPathAtom,
   currentProblemAtom,
   selectedLanguageAtom,
   useAtom,
 } from "@dspcoder/jotai";
-import { SetupUserCodeBaseType } from "@/types/Container";
-import ProblemSkeleton from "./_components/ProlemSkeleton";
 
 const ProblemSubmission = dynamic(
-  () => import("./_components/ProblemSubmission")
+  () => import("./_components/ProblemSubmission"),
+  {
+    loading: () => <ProblemSkeleton />,
+  }
 );
-const ProblemSolution = dynamic(() => import("./_components/ProblemSolution"));
+const ProblemSolution = dynamic(() => import("./_components/ProblemSolution"), {
+  loading: () => <ProblemSkeleton />,
+});
 const ProblemDiscussion = dynamic(
-  () => import("./_components/ProblemDiscussion")
+  () => import("./_components/ProblemDiscussion"),
+  {
+    loading: () => <ProblemSkeleton />,
+  }
 );
 const ProblemDescription = dynamic(
-  () => import("./_components/ProblemDescription")
+  () => import("./_components/ProblemDescription"),
+  {
+    loading: () => <ProblemSkeleton />,
+  }
 );
 
 type ProblemTabProps = {
@@ -58,8 +72,8 @@ export default function ProblemTab({
   searchParams,
 }: ProblemTabProps) {
   const [currentProblem, setCurrentProblem] = useAtom(currentProblemAtom);
-  const { data, isLoading, isError, error, refetch } =
-    useQuery<ProblemDescriptionResponseType>({
+  const { data, isLoading, isError } = useQuery<ProblemDescriptionResponseType>(
+    {
       queryKey: ["problem-data", params?.problemId],
       queryFn: async () => {
         if (!params?.problemId) {
@@ -79,7 +93,8 @@ export default function ProblemTab({
       retry: (failureCount, error: any) => {
         return error?.response?.status !== 404 && failureCount < 3;
       },
-    });
+    }
+  );
 
   if (isLoading) {
     return (
@@ -98,16 +113,20 @@ export default function ProblemTab({
   }
 
   const { data: problemData } = data;
-  if (problemData) setCurrentProblem(getProblemName(problemData.file_path));
+  if (problemData?.file_path) {
+    setCurrentProblem(getProblemName(problemData.file_path));
+  }
 
   return <TabContent tab={tab} problemData={problemData} />;
 }
 
+// Separate TabContent component with proper memoization
 const TabContent = React.memo(({ tab, problemData }: TabContentProps) => {
   const [isWide, setIsWide] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const containerUrl = cookieUtils.getContainerUrl();
-  const { data } = useSession();
+  const [, setContainerUrl] = useAtom(containerProblemPathAtom);
+  const { data: sessionData } = useSession();
   const [currentProblem] = useAtom(currentProblemAtom);
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
@@ -120,6 +139,8 @@ const TabContent = React.memo(({ tab, problemData }: TabContentProps) => {
   }, []);
 
   useEffect(() => {
+    checkWidth();
+
     const resizeObserver = new ResizeObserver(checkWidth);
     if (containerRef.current) {
       resizeObserver.observe(containerRef.current);
@@ -130,24 +151,34 @@ const TabContent = React.memo(({ tab, problemData }: TabContentProps) => {
     };
   }, [checkWidth]);
 
-  const { data: SetupCodeBaseData } = useQuery({
-    queryKey: [`setup-code-base-${data?.user?.email}`],
+  const { data: setupCodeBaseData } = useQuery({
+    queryKey: [
+      "setup-code-base",
+      sessionData?.user?.email,
+      currentProblem,
+      selectedLanguage,
+    ],
     queryFn: async () => {
       try {
         const response = (await http_client.post("/api/setup_user_codebase", {
-          username: data?.user?.name,
+          username: sessionData?.user?.name,
           question_id: currentProblem,
           lang: selectedLanguage,
           original: "True",
         })) as SetupUserCodeBaseType;
-        if (response.response) cookieUtils.setContainerUrl(response.response);
+
+        if (response.response) {
+          cookieUtils.setContainerUrl(response.response);
+          setContainerUrl(response.response);
+        }
         return response;
       } catch (error) {
-        console.error(error);
+        console.error("Error setting up code base:", error);
+        throw error;
       }
     },
 
-    enabled: !!currentProblem && !!containerUrl,
+    enabled: true,
   });
 
   const wrapClass = isWide ? "text-wrap" : "text-nowrap overflow-x-auto";

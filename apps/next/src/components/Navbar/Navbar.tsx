@@ -5,11 +5,10 @@ import Logo from "./Logo";
 
 const Navbar = () => {
   return (
-    <nav className="bg-[#131315] border-b border-[#2B2B2B] text-white py-3 px-6 flex items-center justify-between shadow-md">
+    <nav className="bg-[#131315] border-b border-[#2B2B2B] text-white  px-6 flex items-center justify-between shadow-md">
       <div className="flex items-center gap-6">
         <Link className="flex gap-2 items-center" href="/">
           <Logo />
-          <span className="font-bold text-lg text-white">DSPCODER</span>
         </Link>
 
         <div className="h-6 border-l border-[#2B2B2B]" />
