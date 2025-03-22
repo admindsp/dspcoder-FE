@@ -29,7 +29,7 @@ import {
 } from "@dspcoder/jotai";
 
 const ProblemSubmission = dynamic(
-  () => import("./_components/ProblemSubmission"),
+  () => import("./_components/ProblemSubmission/ProblemSubmission"),
   {
     loading: () => <ProblemSkeleton />,
   }
@@ -66,11 +66,7 @@ type TabContentProps = {
   problemData: ProblemType;
 };
 
-export default function ProblemTab({
-  tab,
-  params,
-  searchParams,
-}: ProblemTabProps) {
+export default function ProblemTab({ tab, params }: ProblemTabProps) {
   const [currentProblem, setCurrentProblem] = useAtom(currentProblemAtom);
   const { data, isLoading, isError } = useQuery<ProblemDescriptionResponseType>(
     {
@@ -93,6 +89,7 @@ export default function ProblemTab({
       retry: (failureCount, error: any) => {
         return error?.response?.status !== 404 && failureCount < 3;
       },
+      refetchOnWindowFocus: false,
     }
   );
 
@@ -120,11 +117,9 @@ export default function ProblemTab({
   return <TabContent tab={tab} problemData={problemData} />;
 }
 
-// Separate TabContent component with proper memoization
 const TabContent = React.memo(({ tab, problemData }: TabContentProps) => {
   const [isWide, setIsWide] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
-  const containerUrl = cookieUtils.getContainerUrl();
   const [, setContainerUrl] = useAtom(containerProblemPathAtom);
   const { data: sessionData } = useSession();
   const [currentProblem] = useAtom(currentProblemAtom);
@@ -150,6 +145,22 @@ const TabContent = React.memo(({ tab, problemData }: TabContentProps) => {
       resizeObserver.disconnect();
     };
   }, [checkWidth]);
+
+  const [containerUrlChecked, setContainerUrlChecked] = useState(false);
+
+  useEffect(() => {
+    const checkContainerUrl = () => {
+      const url = cookieUtils.getContainerUrl();
+      if (url) {
+        setContainerUrl(url);
+      }
+      setContainerUrlChecked(true);
+    };
+    checkContainerUrl();
+    const intervalId = setInterval(checkContainerUrl, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [setContainerUrl]);
 
   const { data: setupCodeBaseData } = useQuery({
     queryKey: [
@@ -177,8 +188,8 @@ const TabContent = React.memo(({ tab, problemData }: TabContentProps) => {
         throw error;
       }
     },
-
-    enabled: true,
+    refetchOnWindowFocus: false,
+    enabled: containerUrlChecked && !!cookieUtils.getContainerUrl(),
   });
 
   const wrapClass = isWide ? "text-wrap" : "text-nowrap overflow-x-auto";

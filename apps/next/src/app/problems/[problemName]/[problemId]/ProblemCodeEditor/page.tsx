@@ -27,7 +27,6 @@ const ProblemCodeEditor = () => {
 
   return (
     <div className="flex flex-col h-full">
-      <ProblemsNavbar />
       <div className="flex-grow overflow-hidden">
         <iframe
           src={containerUrl || ""}

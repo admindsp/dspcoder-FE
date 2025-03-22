@@ -18,7 +18,7 @@ interface ContainerContextType {
 }
 
 const ContainerContext = createContext<ContainerContextType | undefined>(
-  undefined,
+  undefined
 );
 
 export const useContainer = () => {

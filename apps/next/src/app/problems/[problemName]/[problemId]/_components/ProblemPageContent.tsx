@@ -36,17 +36,6 @@ type ProblemPageContentProps = {
 const ProblemContent = ({ params, searchParams }: ProblemPageContentProps) => {
   const [isResizing, setIsResizing] = useState(false);
 
-  const memoizedProblemTab = useMemo(
-    () => (
-      <ProblemTab
-        tab={searchParams.tab}
-        params={params}
-        searchParams={searchParams}
-      />
-    ),
-    [searchParams.tab]
-  );
-
   return (
     <div className="flex flex-col w-full">
       <PanelGroup
@@ -60,7 +49,11 @@ const ProblemContent = ({ params, searchParams }: ProblemPageContentProps) => {
           defaultSizePercentage={40}
           className="overflow-y-auto"
         >
-          {memoizedProblemTab}
+          <ProblemTab
+            tab={searchParams.tab}
+            params={params}
+            searchParams={searchParams}
+          />
         </Panel>
 
         <PanelResizeHandle

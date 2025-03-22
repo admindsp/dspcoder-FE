@@ -1,6 +1,5 @@
 import Link from "next/link";
 import AuthenticatedSection from "./AuthenticatedSection";
-import { FaBlog } from "react-icons/fa";
 import Logo from "./Logo";
 
 const Navbar = () => {
@@ -23,13 +22,6 @@ const Navbar = () => {
 
       <div className="flex items-center gap-5">
         <AuthenticatedSection />
-
-        {/* <Link
-          href="/blog"
-          className="inline-flex items-center text-sm text-gray-300 hover:text-white gap-2 transition-all duration-300"
-        >
-          <FaBlog className="text-xl" /> Blog
-        </Link> */}
       </div>
     </nav>
   );

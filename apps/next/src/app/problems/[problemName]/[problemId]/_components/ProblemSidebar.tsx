@@ -35,7 +35,7 @@ const items = [
     title: "Submissions",
     url: "?tab=submission",
     icon: <LuClipboardEdit className="h-4 w-4" />,
-    disabled: true,
+    disabled: false,
   },
   {
     title: "Discussion Forum",

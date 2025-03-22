@@ -14,7 +14,10 @@ import Link from "next/link";
 import { createQueryString } from "@/utils/createQueryString";
 import { useSearchParams } from "next/navigation";
 import { useProblemsContext } from "@/contenxt/ProblemsProvider";
-import Skeleton from "@/components/Skeleton/Skeleton";
+import { ProblemListSkeleton } from "./ProblemListSkeleton";
+
+// Import motion from framer-motion
+import { motion } from "framer-motion";
 
 export default function ProblemsList() {
   const searchParams = useSearchParams();
@@ -36,10 +39,14 @@ export default function ProblemsList() {
         </TableRow>
       </TableHeader>
       <TableBody className="text-white max-h-[calc(100vh-200px)] overflow-auto">
-        {problemsData?.map((problem) => (
-          <TableRow
-            className="!rounded-md !border-none hover:!bg-darkish bg-black "
+        {problemsData?.map((problem, idx) => (
+          <motion.tr
             key={problem.id}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.3, delay: idx * 0.05 }}
+            className="!rounded-md !border-none hover:!bg-darkish bg-black"
           >
             <TableCell className="whitespace-nowrap max-w-max">
               <Link href={`/problems/${problem.title}/${problem.id}`}>
@@ -80,46 +87,8 @@ export default function ProblemsList() {
                 })}
               </span>
             </TableCell>
-          </TableRow>
+          </motion.tr>
         ))}
-      </TableBody>
-    </Table>
-  );
-}
-
-function ProblemListSkeleton() {
-  return (
-    <Table className="table-auto border-collapse overflow-auto">
-      <TableHeader>
-        <TableRow className="font-bold text-sm text-white hover:bg-transparent !border-b-[#2B2B2B]">
-          <TableHead className="text-grayish_text">Title</TableHead>
-          <TableHead className="text-grayish_text">Type</TableHead>
-          <TableHead className="text-grayish_text">Difficulty</TableHead>
-          <TableHead className="text-grayish_text">Companies</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody className="text-white max-h-[calc(100vh-200px)] overflow-auto">
-        {Array(5)
-          .fill(0)
-          .map((_, index) => (
-            <TableRow
-              className="!rounded-md !border-none hover:!bg-darkish bg-black"
-              key={index}
-            >
-              <TableCell className="whitespace-nowrap max-w-max">
-                <Skeleton className="w-[200px] h-[20px]" />
-              </TableCell>
-              <TableCell className="capitalize whitespace-nowrap max-w-max">
-                <Skeleton className="w-[100px] h-[20px]" />
-              </TableCell>
-              <TableCell className="capitalize whitespace-nowrap max-w-max">
-                <Skeleton className="w-[80px] h-[20px]" />
-              </TableCell>
-              <TableCell className="capitalize whitespace-nowrap max-w-max">
-                <Skeleton className="w-[150px] h-[20px]" />
-              </TableCell>
-            </TableRow>
-          ))}
       </TableBody>
     </Table>
   );

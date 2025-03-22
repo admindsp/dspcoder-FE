@@ -38,23 +38,78 @@ export const RunQuestionSchema = z.object({
   message: z.string().nullable(),
 });
 
-export const SubmitQuestionSchema = z.object({
-  message: z.string(),
-  response: z.object({
-    status: z.enum(["FAIL", "SUCCESS"]),
-    output: z.object({
-      error: z.string(),
-      details: z.string(),
-      message: z.nullable(z.string()),
-    }),
-  }),
-});
-
 export const BuildQuestionSchema = z.object({
   message: z.string(),
   response: z.object({
     status: z.enum(["PASS", "FAIL"]),
     output: z.string(),
+    message: z.string(),
+  }),
+});
+
+const MemLeakSchema = z.object({
+  definitely_lost: z.number(),
+  indirectly_lost: z.number(),
+  possibly_lost: z.number(),
+  still_reachable: z.number(),
+  suppressed: z.number(),
+});
+
+const MemoryFootprintSchema = z.object({
+  heap_usage: z.number(),
+  stack_usage: z.number(),
+  total_ram: z.number(),
+});
+
+const CacheProfileSchema = z.object({
+  l1_miss: z.number(),
+  l2_miss: z.number(),
+  branch_miss: z.number(),
+});
+
+const MetadataSchema = z.object({
+  Total_Time: z.number(),
+  overall_status: z.enum(["PASS", "FAIL"]),
+  mem_stat: z.object({
+    footprint: MemoryFootprintSchema,
+    memory_leak: MemLeakSchema,
+    cache_profile: CacheProfileSchema,
+  }),
+});
+
+const TestCaseStatusSchema = z.object({
+  status: z.enum(["PASS", "FAIL"]),
+});
+
+export const SubmitQuestionSchema = z.object({
+  message: z.string(),
+  response: z.object({
+    status: z.enum(["FAIL", "SUCCESS"]),
+    output: z.object({
+      metadata: MetadataSchema,
+      test_cases: z.object({
+        test_case_1: TestCaseStatusSchema,
+        test_case_2: TestCaseStatusSchema,
+        test_case_3: TestCaseStatusSchema,
+        test_case_4: TestCaseStatusSchema,
+        test_case_5: TestCaseStatusSchema,
+        test_case_6: TestCaseStatusSchema,
+        test_case_7: TestCaseStatusSchema,
+        test_case_8: TestCaseStatusSchema,
+        test_case_9: TestCaseStatusSchema,
+        test_case_10: TestCaseStatusSchema,
+        test_case_11: TestCaseStatusSchema,
+        test_case_12: TestCaseStatusSchema,
+        test_case_13: TestCaseStatusSchema,
+        test_case_14: TestCaseStatusSchema,
+        test_case_15: TestCaseStatusSchema,
+        test_case_16: TestCaseStatusSchema,
+        test_case_17: TestCaseStatusSchema,
+        test_case_18: TestCaseStatusSchema,
+        test_case_19: TestCaseStatusSchema,
+        test_case_20: TestCaseStatusSchema,
+      }),
+    }),
     message: z.string(),
   }),
 });
