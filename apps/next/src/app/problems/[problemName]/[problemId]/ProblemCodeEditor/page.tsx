@@ -1,23 +1,15 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import GithubLogin from "@/components/AuthPopupContent/GithubLogin";
 import ProblemCodeEditorLoader from "./_components/ProblemCodeEditorLoader";
-import ProblemsNavbar from "@/components/ProblemsNavbar/ProblemsNavbar";
 import { useContainer } from "@/contenxt/ContainerProvider";
+import { UnauthenticatedErrorEditor } from "./_components/unauthenticated-error-editor";
 
 const ProblemCodeEditor = () => {
   const { containerUrl, isLoading, isSuccess } = useContainer();
   const { status } = useSession();
 
-  if (status === "unauthenticated")
-    return (
-      <div className="flex-grow h-full flex flex-col items-center justify-center text-white gap-4">
-        <p className="text-lg font-bold">Kindly Login to view your editor.</p>
-        <GithubLogin />
-      </div>
-    );
-
+  if (status === "unauthenticated") return <UnauthenticatedErrorEditor />;
   if (status === "authenticated" && isLoading)
     return (
       <div className="flex-grow h-full flex items-center justify-center">

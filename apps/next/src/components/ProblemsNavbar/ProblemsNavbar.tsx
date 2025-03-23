@@ -28,6 +28,7 @@ import Link from "next/link";
 import { Code, Play, Send } from "lucide-react";
 import AuthenticatedSection from "../Navbar/AuthenticatedSection";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useSubmission } from "@/contenxt/SubmissionProvider";
 
 export const buttonStyles = tv({
   base: "",
@@ -47,6 +48,7 @@ const ProblemsNavbar = () => {
   const { data: session } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { refetch } = useSubmission();
 
   const handleRun = async () => {
     try {
@@ -70,6 +72,7 @@ const ProblemsNavbar = () => {
 
   const handleSubmit = async () => {
     updateTabParam();
+    refetch();
   };
 
   const handleBuild = async () => {

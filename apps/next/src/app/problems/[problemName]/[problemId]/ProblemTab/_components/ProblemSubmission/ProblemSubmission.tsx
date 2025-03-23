@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState } from "react";
+
 import Skeleton from "@/components/Skeleton/Skeleton";
 import {
   Tabs,
@@ -9,72 +9,27 @@ import {
   TabsList,
   TabsTrigger,
 } from "@dspcoder/ui/components/ui/tabs";
-import { useQuery } from "@tanstack/react-query";
-import type { SubmitQuestionType } from "@/types/Problem";
+
 import { useSession } from "next-auth/react";
-import {
-  currentProblemAtom,
-  selectedLanguageAtom,
-  useAtom,
-} from "@dspcoder/jotai";
-import http_client from "@/app/api/client";
+
 import { SubmissionStatusCard } from "./status-card";
 import { TestCaseResults } from "./test-case-results";
 import { MemoryProfile } from "./memory-profile";
 import { CacheProfile } from "./cache-profile";
+import { useSubmission } from "@/contenxt/SubmissionProvider";
+import { SubmissionError } from "./submission-error";
+import { UnauthenticatedError } from "./unauthenticated-error";
 
 const ProblemSubmission = () => {
-  const searchParams = useSearchParams();
-  const { data: session } = useSession();
-  const submittedFromUrl = searchParams.get("submitted") === "true";
-
-  const [submitted, setSubmitted] = useState(submittedFromUrl);
-  const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  const [currentProblem] = useAtom(currentProblemAtom);
   const [activeTab, setActiveTab] = useState("results");
+  const { status } = useSession();
+  const { submissionData, isLoading, isError } = useSubmission();
 
-  const {
-    data: submissionData,
-    isLoading,
-    isError,
-    refetch,
-  } = useQuery<SubmitQuestionType>({
-    queryKey: ["submission-data", currentProblem, selectedLanguage, submitted],
-    queryFn: async () => {
-      const resp = (await http_client.post("/api/submit_question", {
-        username: session?.user?.name,
-        question_id: currentProblem,
-        lang: selectedLanguage,
-        profile: "true",
-      })) as SubmitQuestionType;
-
-      return resp;
-    },
-    retry: (failureCount, error: any) => {
-      return failureCount < 3;
-    },
-    enabled: false,
-    refetchOnWindowFocus: false,
-  });
-
-  useEffect(() => {
-    if (submitted) {
-      refetch();
-    }
-  }, [submitted, refetch]);
-
-  useEffect(() => {
-    const newSubmitted = searchParams.get("submitted") === "true";
-
-    if (newSubmitted) {
-      setSubmitted(true);
-    }
-  }, [searchParams]);
-
+  if (status === "unauthenticated") return <UnauthenticatedError />;
   if (isLoading) {
     return <Skeleton className="h-96" />;
   }
-  if (!submissionData) return null;
+  if (!submissionData || isError) return <SubmissionError />;
 
   const { output } = submissionData.response;
   const parsedOutput = typeof output === "string" ? JSON.parse(output) : output;
