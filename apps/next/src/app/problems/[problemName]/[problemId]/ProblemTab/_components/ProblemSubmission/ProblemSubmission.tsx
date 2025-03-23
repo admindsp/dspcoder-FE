@@ -8,7 +8,7 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@dspcoder/ui/components/ui/Tabs";
+} from "@dspcoder/ui/components/ui/tabs";
 import { useQuery } from "@tanstack/react-query";
 import type { SubmitQuestionType } from "@/types/Problem";
 import { useSession } from "next-auth/react";

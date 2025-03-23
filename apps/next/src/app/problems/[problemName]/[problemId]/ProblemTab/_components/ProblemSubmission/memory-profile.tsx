@@ -1,12 +1,11 @@
 import { Database } from "lucide-react";
-import { Progress } from "@dspcoder/ui/components/ui/Progress";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@dspcoder/ui/components/ui/Card";
+} from "@dspcoder/ui/components/ui/card";
 
 interface MemoryProfileProps {
   memStat: {

@@ -5,7 +5,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@dspcoder/ui/components/ui/Card";
+} from "@dspcoder/ui/components/ui/card";
 
 interface CacheProfileProps {
   cacheProfile: Record<string, number>;

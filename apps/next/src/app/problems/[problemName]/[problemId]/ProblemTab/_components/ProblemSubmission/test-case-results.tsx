@@ -1,12 +1,12 @@
 import { CheckCircle, XCircle } from "lucide-react";
-import { Badge } from "@dspcoder/ui/components/ui/Badge";
+import { Badge } from "@dspcoder/ui/components/ui/badge";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@dspcoder/ui/components/ui/Card";
+} from "@dspcoder/ui/components/ui/card";
 import {
   Accordion,
   AccordionContent,
