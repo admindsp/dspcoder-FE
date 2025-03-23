@@ -9,7 +9,11 @@
   "include": [
     "src",
     "@dspcoder/ui/components/ui/button.tsx",
-    "@dspcoder/ui/components/ui/carousel.tsx"
+    "@dspcoder/ui/components/ui/carousel.tsx",
+    "@dspcoder/ui/components/ui/card.tsx",
+    "@dspcoder/ui/components/ui/tabs.tsx",
+    "@dspcoder/ui/components/ui/badge.tsx",
+    "@dspcoder/ui/components/ui/accordion.tsx"
   ],
   "exclude": ["node_modules"]
 }
